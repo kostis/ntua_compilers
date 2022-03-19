@@ -1,0 +1,48 @@
+let mmult a b c =
+   if dim 2 a = dim 1 b && dim 1 c = dim 1 a && dim 2 c = dim 2 b then
+   begin
+       for i = 0 to dim 1 c - 1 do
+          for j = 0 to dim 2 c - 1 do
+             c[i, j] := 0;
+             for k = 0 to dim 2 a - 1 do
+                c[i, j] := !c[i, j] + !a[i, k] * !b[k, j]
+             done
+          done
+       done
+   end
+
+let mutable seed
+
+let init = seed := 65
+
+let minit m =
+   for i = 0 to dim 1 m - 1 do
+       for j = 0 to dim 2 m - 1 do
+          seed := (!seed * 137 + 2*i + j) mod 101;
+          m[i, j] := !seed
+       done
+   done
+
+let mprint m =
+   for i = 0 to dim 1 m - 1 do
+       for j = 0 to dim 2 m - 1 do
+          print_int !m[i, j];
+          print_string " "
+       done;
+       print_string "\n"
+   done
+
+let main =
+   let mutable x[3,4]
+   and mutable y[4,5]
+   and mutable z[3,5] in
+
+   minit x;
+   minit y;
+
+   mprint x;
+   print_string "\ntimes\n\n";
+   mprint y;
+   print_string "\nmakes\n\n";
+   mmult x y z;
+   mprint z

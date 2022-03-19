@@ -1,0 +1,17 @@
+let main =
+   let move source target =
+      print_string "Moving from: ";
+      print_string source;
+      print_string " to ";
+   print_string target;
+   print_string "\n" in
+let rec hanoi rings source target auxil =
+   if rings > 0 then
+   begin
+      hanoi (rings-1) source auxil target;
+      move source target;
+      hanoi (rings-1) auxil target source
+   end in
+print_string "Please, give the number of rings: ";
+let n = read_int () in
+hanoi n "left" "right" "middle"

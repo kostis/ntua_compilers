@@ -1,0 +1,44 @@
+let rec prime n =
+        if n < 0        then prime (-n)
+   else if n < 2        then false
+   else if n = 2        then true
+   else if n mod 2 = 0  then false
+   else let rec loop i  =
+            if i <= n / 2 then
+               if n mod i = 0 then false
+                              else loop (i+2)
+            else
+               true in
+        loop 3
+
+let main =
+   print_string "Please, give the upper limit: ";
+   let limit = read_int () in
+   print_string "Prime numbers between 0 and ";
+   print_int limit;
+   print_string "\n\n";
+   let mutable counter in
+   counter := 0;
+   if limit >= 2 then (incr counter; print_string "2\n");
+   if limit >= 3 then (incr counter; print_string "3\n");
+   let rec loop number =
+      if number <= limit then
+      begin
+         if prime (number - 1) then
+         begin
+             incr counter;
+             print_int (number - 1);
+             print_string "\n"
+         end;
+         if number <> limit && prime (number + 1) then
+         begin
+             incr counter;
+             print_int (number + 1);
+             print_string "\n"
+         end;
+         loop (number + 6)
+      end in
+   loop 6;
+   print_string "\n";
+   print_int !counter;
+   print_string " prime number(s) were found.\n"

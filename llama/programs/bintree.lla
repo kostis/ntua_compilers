@@ -1,0 +1,87 @@
+type tree = Nil | Node of int tree tree
+
+let rec treeInsert t n =
+   match t with
+      Nil          -> Node  n Nil Nil
+    | Node m t1 t2 ->       if n < m then Node m (treeInsert t1 n) t2
+                       else if n > m then Node m t1 (treeInsert t2 n)
+                       else t
+   end
+
+let rec treeMerge t1 t2 =
+   match t1 with
+      Nil            -> t2
+    | Node n t11 t12 -> Node n t11 (treeMerge t12 t2)
+   end
+
+let rec treeDelete t n =
+   match t with
+      Nil          -> t
+    | Node m t1 t2 -> if n < m then
+                          Node m (treeDelete t1 n) t2
+                      else if n > m then
+                          Node m t1 (treeDelete t2 n)
+                      else
+                          treeMerge t1 t2
+   end
+
+let rec treePrint t =
+   match t with
+      Nil          -> ()
+    | Node n t1 t2 -> print_int n;
+                      print_string "(";
+                      treePrint t1;
+                      print_string "|";
+                      treePrint t2;
+                      print_string ")"
+   end
+
+let rec treeCount t =
+   match t with
+      Nil          -> 0
+    | Node n t1 t2 -> 1 + treeCount t1 + treeCount t2
+   end
+
+let main =
+   let mutable seed in
+   let next u =
+       seed := (!seed * 4241 + 22) mod 9949;
+       !seed in
+   seed := 65;
+
+   let random max = next () mod max in
+
+   let mutable t in
+   t := Nil;
+
+   for i = 1 to 10 do
+      t := treeInsert !t (random 100)
+   done;
+
+   print_string "Initial tree: ";
+   treePrint !t;
+   print_string "\n";
+
+   let rec choose t =
+      match t with
+         Node n t1 t2 ->
+            let c1 = treeCount t1
+            and c2 = treeCount t2 in
+            let r = random (1 + c1 + c2) in
+            if r = 0 then
+               n
+            else if r <= c1 then
+               choose t1
+            else
+               choose t2
+      end in
+
+   for i = 1 to treeCount !t do
+      let n = choose !t in
+      print_string "Deleting ";
+      print_int n;
+      print_string ": ";
+      t := treeDelete !t n;
+      treePrint !t;
+      print_string "\n"
+   done
