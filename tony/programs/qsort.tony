@@ -1,0 +1,44 @@
+def main ():
+
+  def list[int] qsort (list[int] l):
+
+    def list[int] qsort_aux (list[int] l, rest):
+      int pivot, x
+      list[int] lt, ge
+
+      if nil?(l): return rest end
+      pivot := head(l)
+      l := tail(l)
+      for lt := nil, ge := nil; not nil?(l); l := tail(l):
+        x := head(l)
+        if x < pivot: lt := x # lt else: ge := x # ge end
+      end
+      return qsort_aux(lt, pivot # qsort_aux(ge, rest))
+    end
+
+    return qsort_aux(l, nil)
+  end
+
+  def writeList (char[] msg; list[int] l):
+    bool more
+
+    puts(msg)
+    for more := false; not nil?(l); l := tail(l), more := true:
+      if more: puts(”, ”) end
+      puti(head(l))
+    end
+    puts(”\n”)
+  end
+
+  int seed, i
+  list[int] l
+
+  seed := 65
+  for i := 0, l := nil; i < 16; i := i+1:
+    seed := (seed * 137 + 220 + i) mod 101
+    l := seed # l
+  end
+  writeList(”Initial list: ”, l)
+  l := qsort(l)
+  writeList(”Sorted list: ”, l)
+end

@@ -1,0 +1,16 @@
+def main ():
+
+  def char[] reverse (char[] s):
+    char[] t
+    int i, l
+
+    l := strlen(s)
+    t := new char[l+1]
+    for i := 0; i < l; i := i+1:  t[i] := s[l-i-1]  end
+    t[i] := ’\0’
+    return t
+  end
+
+  puts(reverse(”\n!dlrow olleH”))
+end
+

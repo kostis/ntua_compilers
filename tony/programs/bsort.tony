@@ -1,0 +1,49 @@
+def main ():
+
+  def bsort (int n; int[] x):
+
+    def swap (ref int x, y):
+      int t
+      t := x
+      x := y
+      y := t
+    end
+
+    int i
+    bool changed
+
+    for changed := true; changed; skip:
+      changed := false
+      for i := 0; i < n-1; i := i+1:
+        if x[i] > x[i+1]:
+          swap(x[i], x[i+1])
+          changed := true
+        end
+      end
+    end
+  end
+
+  def writeArray (char[] msg; int n; int[] x):
+    int i
+
+    puts(msg)
+    for i := 0; i < n; i := i+1:
+      if i > 0: puts(", ") end
+      puti(x[i])
+    end
+    puts("\n")
+  end
+
+  int seed, i
+  int[] x
+
+  x := new int[16]
+  seed := 65
+  for i := 0; i < 16; i := i + 1:
+    seed := (seed * 137 + 220 + i) mod 101
+    x[i] := seed
+  end
+  writeArray("Initial array: ", 16, x)
+  bsort(16, x)
+  writeArray("Sorted array: ", 16, x)
+end
