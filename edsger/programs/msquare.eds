@@ -1,0 +1,92 @@
+/*                    Magic Square Generator in Edsger   
+ *   Based on the Ex. 10 of the 5th Assignment of the "Progintro" class: 
+ *   https://courses.softlab.ntua.gr/progintro/2020b/exercises/exer05p.pdf 
+ *   
+ *   > If you are interested about the algorithm, check here:
+ *   https://courses.softlab.ntua.gr/progintro/2020b/slides-20201204.pdf (p. 179)
+ */
+
+#include "stdio.h"
+
+void main () {
+    int side_len;
+    
+    void magicSquare () {
+
+        void readInput () {        
+            writeString("Insert the side length of the magic square.\n(An odd integer between 3 and 19)\n");
+            side_len = readInteger();
+            
+            return;
+        }
+
+        bool validInput () {
+            return (side_len % 2 == 1) && (side_len >= 3) && (side_len <= 19); 
+        }
+
+        void generateSquare () {
+            int * a[19]; // "int * a[side_len]" Is such declaration allowed? (It is syntactically for sure).
+            int i, j, k, h, m;
+            
+            for (i = 0; i < side_len; i++){
+                a[i] = new int[side_len];
+            }
+
+            i = side_len/2; 
+            j = side_len; 
+            k = 0;
+           
+            for (h = 1; h <= side_len; h++) {
+                j -= 1; 
+                a[i][j] = (k++); 
+                for (m = 2; m <= side_len; m++) {
+                    j = (j + 1) % side_len; 
+                    i = (i + 1) % side_len;
+                    a[i][j] = (k++);
+                }
+            }
+            
+            for (i = 0; i < side_len; i++) {
+                 for (j = 0; j < side_len; j++){
+                    if (a[i][j] < 10) writeChar(' ');
+                    writeInteger(a[i][j]);
+                    writeChar(' ');
+                }
+                writeString("\n");
+            }
+            
+            writeString("\n);
+
+            for (i = 0; i < side_len; i++){
+                delete a[i];
+            }
+
+            return;
+        }
+
+        readInput();
+        if (validInput()){
+            generateSquare();
+        } 
+        else {
+            writeString("Invalid side length\n\n");
+        }
+
+        return;
+    }
+
+    char inp; 
+
+main_loop:
+    for ( ; ; ){
+        magicSquare();
+        for ( ; ; ) { 
+            writeString("Would you like to execute the program again? (Type y if yes & n if no): ");
+            inp = readChar();
+            if (inp == 'y') break;
+            else if (inp == 'n') break main_loop;
+        }
+    }
+
+    return;
+}
