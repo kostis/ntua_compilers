@@ -23,7 +23,7 @@ int partition(int *array, int left, int right){
 
 		for(;array[--j] > pivot;);
 
-		if(i < j) swap(array, i, j);
+		if(i < j) swap(i, j);
 		else return j;
 	}
 
@@ -38,29 +38,33 @@ int quick_select(int *array, int left, int right, int position){
 
 	pivot_index = partition(array, left, right);
 
-	if(position <= pivot_index){
-		return quick_select(array, left, pivot_index, position);
-	}else{
-		return quick_select(array, pivot_index+1, right, position);
-	}
+	return position <= pivot_index ?
+		quick_select(array, left, pivot_index, position) :
+		quick_select(array, pivot_index+1, right, position);
 
 }
 
 void main(){
 
-	int A[10];
-	int ans;
+	void printArray (char * msg, int * x, int n)
+	{
+		int i;
 
-	A[0] = 100;
-	A[1] = 42;
-	A[2] = 7;
-	A[3] = -3;
-	A[4] = 13;
-	A[5] = 43;
-	A[6] = 87;
-	A[7] = 29;
-	A[8] = 41;
-	A[9] = 67;
+		writeString(msg);
+		for (i = 0; i < n; i++) {
+			if (i > 0)
+				writeString(", ");
+			writeInteger(x[i]);
+		}
+		writeString("\n");
+	}
+
+	int i, A[10], seed, ans;
+
+	for (i = 0, seed = 123; i < 10; i++)
+		A[i] = seed = (seed * 672 + 2221 + i) % 101;
+
+	printArray("Array: ", A, 10);
 
 	ans = quick_select(A, 0, 9, 2);
 
@@ -68,7 +72,6 @@ void main(){
 	writeInteger(ans);
 	writeString("\n");
 
-	writeString("Expected value: 13\n");
 
 }
 
