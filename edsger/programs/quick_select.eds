@@ -1,0 +1,77 @@
+#include "stdio.h"
+
+
+int partition(int *array, int left, int right){
+
+	int pivot, i, j;
+
+	void swap(int i, int j){
+		int tmp;
+		tmp = array[i];
+		array[i] = array[j];
+		array[j] = tmp;
+	}
+
+	pivot = array[left];
+
+	i = left - 1;
+	j = right + 1;
+
+	for(;;){
+
+		for(;array[++i] < pivot;);
+
+		for(;array[--j] > pivot;);
+
+		if(i < j) swap(i, j);
+		else return j;
+	}
+
+}
+
+
+int quick_select(int *array, int left, int right, int position){
+
+	int pivot_index;
+
+	if(left == right) return array[left];
+
+	pivot_index = partition(array, left, right);
+
+	return position <= pivot_index ?
+		quick_select(array, left, pivot_index, position) :
+		quick_select(array, pivot_index+1, right, position);
+
+}
+
+void main(){
+
+	void printArray (char * msg, int * x, int n)
+	{
+		int i;
+
+		writeString(msg);
+		for (i = 0; i < n; i++) {
+			if (i > 0)
+				writeString(", ");
+			writeInteger(x[i]);
+		}
+		writeString("\n");
+	}
+
+	int i, A[10], seed, ans;
+
+	for (i = 0, seed = 123; i < 10; i++)
+		A[i] = seed = (seed * 672 + 2221 + i) % 101;
+
+	printArray("Array: ", A, 10);
+
+	ans = quick_select(A, 0, 9, 2);
+
+	writeString("Third smallest element in A[] is ");
+	writeInteger(ans);
+	writeString("\n");
+
+
+}
+
