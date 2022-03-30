@@ -1,0 +1,45 @@
+
+#include "stdio.h"
+
+
+int power(int base, int exponent)
+{    
+
+    if (exponent==0){
+        return 1;
+    }
+
+    if (exponent==1){
+        return base;
+    }
+    
+    int res=power(base, exponent/2);
+
+    if (exponent%2==0){
+        return res*res;
+    }
+    else 
+    return res*res*base;
+}
+
+void main()
+{
+
+    int base, exponent,res;
+
+    writeString("Give base: ");
+    base = readInteger();
+
+    writeString("Give exponent: ");
+    exponent = readInteger();
+
+    res = power(base,exponent);
+
+    writeInteger(base);
+    writeString("^");
+    writeInteger(exponent);  
+    writeString("="); 
+    writeInteger(res);   
+    writeString("\n");
+
+}
