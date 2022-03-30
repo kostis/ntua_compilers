@@ -1,0 +1,31 @@
+
+#include "stdio.h"
+
+void main()
+{
+    int n,c, f1 = 0, f2 = 1, fn;
+
+    writeString("Give how many numbers to print: ");
+    n = readInteger();
+
+    if (n == 0)
+    {
+        writeString("-");
+    }
+    else if (n == 1)
+    {
+        writeInteger(f1);
+    }
+
+    else
+    {
+        for (c = 0; c < n ; c++)
+        {
+            writeInteger(f1);
+            fn = f1 + f2;
+            f1 = f2;
+            f2 = fn;
+        }
+    } 
+
+}
