@@ -42,5 +42,5 @@ void main ()
       x[i] = seed = (seed * 137 + 221 + i) % 101;
    printArray("Initial array: ", x, 16);
    bsort(x, 16);
-   printArray("Sorted array: ", x, 16);
+   printArray("Sorted  array: ", x, 16);
 }
