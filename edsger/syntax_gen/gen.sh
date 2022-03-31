@@ -9,6 +9,8 @@
 ERL=/home/kostis/HiPE/otp/bin/erl
 export ERL_LIBS=/home/kostis/HiPE/proper
 
+${ERL}c -pa ${ERL_LIBS}/ebin +debug_info *.erl
+
 mkdir -p progs
 for i in $(seq 1 $1)
 do
