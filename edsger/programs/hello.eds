@@ -2,5 +2,5 @@
 
 void main ()
 {
-   writeString("Hello world!\n")
+   writeString("Hello world!\n");
 }

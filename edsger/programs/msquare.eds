@@ -55,7 +55,7 @@ void main () {
                 writeString("\n");
             }
             
-            writeString("\n);
+            writeString("\n");
 
             for (i = 0; i < side_len; i++){
                 delete a[i];
