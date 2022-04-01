@@ -1,9 +1,10 @@
-
 #include "stdio.h"
 
 void main()
 {
-    int n,c, f1 = 0, f2 = 1, fn;
+    int n, c, f1, f21, fn;
+
+    f1 = f2 = 0;
 
     writeString("Give how many numbers to print: ");
     n = readInteger();
