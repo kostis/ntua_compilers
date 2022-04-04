@@ -1,0 +1,29 @@
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
+
+void main()
+{
+    int i, l, ASCII, a, z;
+    char s[101], c;
+
+    a = ord('a'), z = ord('z');
+    s[100] = '\0'; // ensure null termination
+
+    writeString("Enter text: ");
+    
+    for (;;) {
+        readString(100, s);
+
+        for (i = 0, l = strlen(s); i < l; i++) {
+            ASCII = ord(s[i]);
+            c = ASCII >= a && ASCII <= z ?
+                chr(ASCII - 32) : s[i];
+            writeChar(c);
+        }
+
+        if (l < 100) break;
+    }
+
+    writeChar('\n');
+}
