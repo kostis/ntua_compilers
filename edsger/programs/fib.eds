@@ -4,7 +4,7 @@ void main()
 {
     int n, c, f1, f21, fn;
 
-    f1 = f2 = 0;
+    f1 = f2 = 1;
 
     writeString("Give how many numbers to print: ");
     n = readInteger();
@@ -23,10 +23,11 @@ void main()
         for (c = 0; c < n ; c++)
         {
             writeInteger(f1);
+            writeChar(' ');
             fn = f1 + f2;
             f1 = f2;
             f2 = fn;
         }
     } 
-
+    writeChar('\n');
 }
