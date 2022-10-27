@@ -14,20 +14,23 @@ void main () {
     void magicSquare () {
 
         void readInput () {        
-            writeString("Insert the side length of the magic square.\n(An odd integer between 3 and 19)\n");
+            writeString("Insert the side length of the magic square.\n(An odd integer between 3 and 33)\n");
             side_len = readInteger();
             
             return;
         }
 
         bool validInput () {
-            return (side_len % 2 == 1) && (side_len >= 3) && (side_len <= 19); 
+            return (side_len % 2 == 1) && (side_len >= 3) && (side_len <= 33); 
         }
 
         void generateSquare () {
-            int * a[19]; // "int * a[side_len]" Is such declaration allowed? (It is syntactically for sure).
+            int * a[33]; // "int * a[side_len]" Is such declaration allowed? (It is syntactically for sure).
             int i, j, k, h, m;
-            
+            int aux, order;
+
+            for (aux = side_len * side_len, order = 1; (bool) (aux /= 10) ; order *= 10);
+ 
             for (i = 0; i < side_len; i++){
                 a[i] = new int[side_len];
             }
@@ -47,9 +50,9 @@ void main () {
             }
             
             for (i = 0; i < side_len; i++) {
-                 for (j = 0; j < side_len; j++){
-                    if (a[i][j] < 10) writeChar(' ');
-                    writeInteger(a[i][j]);
+                for (j = 0; j < side_len; j++){
+		    for (aux = order; !(bool) (a[i][j] >= aux) && aux > 1; aux /= 10) writeChar(' ');
+		    writeInteger(a[i][j]);
                     writeChar(' ');
                 }
                 writeString("\n");
