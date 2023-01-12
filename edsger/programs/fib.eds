@@ -2,7 +2,7 @@
 
 void main()
 {
-    int n, c, f1, f21, fn;
+    int n, c, f1, f2, fn;
 
     f1 = f2 = 1;
 
@@ -17,7 +17,6 @@ void main()
     {
         writeInteger(f1);
     }
-
     else
     {
         for (c = 0; c < n ; c++)
