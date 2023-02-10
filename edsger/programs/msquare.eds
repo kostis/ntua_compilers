@@ -8,6 +8,10 @@
 
 #include "stdio.h"
 
+bool isspace(char c){
+	return c == ' ' || c == '\n' || c == '\t' || c == '\r';
+}
+
 void main () {
     int side_len;
     
@@ -85,8 +89,9 @@ main_loop:
         magicSquare();
         for ( ; ; ) { 
             writeString("Would you like to execute the program again? (Type y if yes & n if no): ");
-            inp = readChar();
-            if (inp == 'y') break;
+	    for (inp = readChar(); isspace(inp); inp = readChar()); // No need to keep printing the message above 
+								    // if the user inserted a whitespace.
+	    if (inp == 'y') break;
             else if (inp == 'n') break main_loop;
         }
     }

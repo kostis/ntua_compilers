@@ -1,0 +1,103 @@
+/*  Brainduck Interpreter ('d' is the new 'f')
+ *  A Brainduck Interpreter written in Edsger
+ */ 
+
+/* RESOURCES: (Make sure to substitute 'f' wherever needed)
+ * - Brainduck: https://en.wikipedia.org/wiki/Brainduck
+ *
+ * - Sierpiński Triangle Implementation: http://brainduck.org/sierpinski.b
+ * - Sierpiński Triangle: https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle
+ *
+ * - Collatz Conjecture Calculator Implementation: http://brainduck.org/collatz.b
+ * - Collatz Conjecture: https://en.wikipedia.org/wiki/Collatz_conjecture
+ *
+ * - ROT13 Implementation: https://en.wikipedia.org/wiki/Brainduck#ROT13
+ * - ROT13: https://en.wikipedia.org/wiki/ROT13
+ */
+
+#include "stdio.h"
+
+// We assume that a stack of length 30000 is enough to keep track 
+// of the all the nested "while-loop" jump destinations.
+
+char array[30000];
+
+void main (){
+	int stack[30000], aidx, pidx, sidx, loops;
+	char * program;
+	char cmd;
+
+	void increment_ptr(){
+		aidx = (aidx + 1) % 30000;
+	}
+	
+	void decrement_ptr(){
+		aidx = (30000 + aidx - 1) % 30000;
+	}
+
+	void increment_val(){
+		array[aidx] = (char) ((int) array[aidx] + 1);
+	}
+
+	void decrement_val(){
+		array[aidx] = (char) ((int) array[aidx] - 1);
+	}
+
+	void write_val(){
+		 writeChar(array[aidx]); 
+	}
+
+	void read_val(){
+		array[aidx] = readChar();
+	}
+
+	aidx = 0;
+
+	// Uncomment the program that you would like to test	
+
+	// Hello World
+	program = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.";
+
+	// Sierpiński Triangle
+	// program = "++++++++[>+>++++<<-]>++>>+<[-[>>+<<-]+>>]>+[-<<<[->[+[-]+>++>>>-<<]<[<]>>++++++[<<+++++>>-]+<<++.[-]<<]>.>+[>>]>+]"; 
+	
+	// Collatz Conjecture (Make sure to read the usage instructions from the relevant resources link)
+	// program = ">,[[----------[>>>[>>>>]+[[-]+<[->>>>++>>>>+[>>>>]++[->+<<<<<]]<<<]++++++[>------<-]>--[>>[->>>>]+>+[<<<<]>-],<]>]>>>++>+>>[<<[>>>>[-]+++++++++<[>-<-]+++++++++>[-[<->-]+[<<<<]]<[>+<-]>]>[>[>>>>]+[[-]<[+[->>>>]>+<]>[<+>[<<<<]]+<<<<]>>>[->>>>]+>+[<<<<]]>[[>+>>[<<<<+>>>>-]>]<<<<[-]>[-<<<<]]>>>>>>>]>>+[[-]++++++>>>>]<<<<[[<++++++++>-]<.[-]<[-]<[-]<]<,]";
+	
+	// ROT13
+	// program = "-,+[-[>>++++[>++++++++<-]<+<-[>+>+>-[>>>]<[[>+<-]>>+>]<<<<<-]]>>>[-]+;>--[-[<->+++[-]]]<[;;++++++++++++<[>-[>+>>];>[+[<+>-]>+>>]<<<<<-]>>[<+>-]>[-[-<<[-]>>]<<[<<->>-]>>]<<[<<+>>-]]<[-]<.[-]<-,+]";
+
+	for (pidx = 0, sidx = 0; program[pidx] != '\0'; ++pidx){
+		cmd = program[pidx];
+		if (cmd == '>') { increment_ptr(); continue; }
+		if (cmd == '<') { decrement_ptr(); continue; }
+		if (cmd == '+') { increment_val(); continue; }
+		if (cmd == '-') { decrement_val(); continue; }
+		if (cmd == '.') { write_val(); continue; }
+		if (cmd == ',') { read_val(); continue; }
+		if (cmd == '[') {
+			if ((bool) array[aidx]) { 
+				if (sidx == 30000) { writeString("Out of memory\n"); break; }
+				stack[sidx++] = pidx;
+			}
+			else {
+				// Ignore all the in-loop commands. 
+				++pidx; // Start checking for nested loops from the next command.
+				for (loops = 1; loops > 0 && program[pidx] != '\0'; ++pidx){
+					cmd = program[pidx];
+					if (cmd == ']') --loops;
+					if (cmd == '[') ++loops;
+				}
+				if (program[pidx] == '\0') return;
+				--pidx; // The outer for-loop will offset the pidx we wanted by 1.
+			}	
+			continue;
+		}
+		if (cmd == ']'){
+			if (sidx == 0) { writeString("Bad Control Flow\n"); break; }
+			--sidx; // Always pop the latest loop.
+			// Check if we must repeat the latest loop we popped.
+			if ((bool) array[aidx]) pidx = stack[sidx] - 1;  // The outer for-loop will offset the pidx we want by 1.		
+		}	
+	}
+}
