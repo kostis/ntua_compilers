@@ -1,0 +1,29 @@
+fun solve () : nothing
+
+   fun hanoi (rings : int; ref source, target, auxiliary : char[]) : nothing
+
+      fun move (ref source, target : char[]) : nothing
+      {
+         writeString("Move from ");
+         writeString(source);
+         writeString(" to ");
+         writeString(target);
+         writeString(".\n");
+      }
+
+   { $ hanoi
+      if rings >= 1 then {
+         hanoi(rings-1, source, auxiliary, target);
+         move(source, target);
+         hanoi(rings-1, auxiliary, target, source);
+      }
+   } $ hanoi
+
+   var NumberOfRings : int;
+
+{ $ solve
+   writeString("Please, give me the number of rings: ");
+   NumberOfRings <- readInteger();
+   writeString("\nHere is the solution:\n\n");
+   hanoi(NumberOfRings, "left", "right", "middle");
+} $ solve
