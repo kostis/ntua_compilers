@@ -17,22 +17,34 @@
 
 #include "stdio.h"
 
-// We assume that a stack of length 30000 is enough to keep track 
-// of the all the nested "while-loop" jump destinations.
+// We assume that a stack of length 30000 is enough to keep
+// track of all the nested "while-loop" jump destinations.
 
-char array[30000];
+char array[30000]; // Memory Tape
+int stack[30000];  // While-loop trace stack 
+
 
 void main (){
-	int stack[30000], aidx, pidx, sidx, loops;
+	int aidx, pidx, sidx, loops;
 	char * program;
 	char cmd;
 
 	void increment_ptr(){
 		aidx = (aidx + 1) % 30000;
 	}
-	
+
+	/* In most brainduck implementations, we are usually given a memory tape of length 30000. 
+	 * We access this tape with a pointer that we can increment or decrement. If we increment
+	 * this pointer above 29999 or below 0, the pointer is "shifted" to the other end of the
+	 * tape. In edsger, integers are 2 bytes long and singed, meaning that the largest offset
+	 * we can store is around 33k. If we naively implement the circular decrementing of `aidx`
+	 * as `aidx = (30000 + aidx - 1) % 30000`, we risk of overflowing `aidx` for `aidx` values
+	 * much lower than 30k. Thus we implement the "pointer" decrementing, with the following 
+	 * `if-else` statement.
+	 */
 	void decrement_ptr(){
-		aidx = (30000 + aidx - 1) % 30000;
+		if (aidx == 0) aidx = 29999;
+		else aidx = (aidx - 1) % 30000;
 	}
 
 	void increment_val(){
@@ -51,8 +63,6 @@ void main (){
 		array[aidx] = readChar();
 	}
 
-	aidx = 0;
-
 	// Uncomment the program that you would like to test	
 
 	// Hello World
@@ -67,7 +77,7 @@ void main (){
 	// ROT13
 	// program = "-,+[-[>>++++[>++++++++<-]<+<-[>+>+>-[>>>]<[[>+<-]>>+>]<<<<<-]]>>>[-]+;>--[-[<->+++[-]]]<[;;++++++++++++<[>-[>+>>];>[+[<+>-]>+>>]<<<<<-]>>[<+>-]>[-[-<<[-]>>]<<[<<->>-]>>]<<[<<+>>-]]<[-]<.[-]<-,+]";
 
-	for (pidx = 0, sidx = 0; program[pidx] != '\0'; ++pidx){
+	for (aidx = 0, pidx = 0, sidx = 0; program[pidx] != '\0'; ++pidx){
 		cmd = program[pidx];
 		if (cmd == '>') { increment_ptr(); continue; }
 		if (cmd == '<') { decrement_ptr(); continue; }
@@ -77,7 +87,7 @@ void main (){
 		if (cmd == ',') { read_val(); continue; }
 		if (cmd == '[') {
 			if ((bool) array[aidx]) { 
-				if (sidx == 30000) { writeString("Out of memory\n"); break; }
+				if (sidx == 30000) { writeString("[Error] Out of memory\n"); return; }
 				stack[sidx++] = pidx;
 			}
 			else {
@@ -94,7 +104,7 @@ void main (){
 			continue;
 		}
 		if (cmd == ']'){
-			if (sidx == 0) { writeString("Bad Control Flow\n"); break; }
+			if (sidx == 0) { writeString("[Error] Bad Control Flow\n"); return; }
 			--sidx; // Always pop the latest loop.
 			// Check if we must repeat the latest loop we popped.
 			if ((bool) array[aidx]) pidx = stack[sidx] - 1;  // The outer for-loop will offset the pidx we want by 1.		
