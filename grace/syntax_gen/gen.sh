@@ -14,5 +14,5 @@ ${ERL}c -pa ${ERL_LIBS}/ebin +debug_info *.erl
 mkdir -p progs
 for i in $(seq 1 $1)
 do
-  $ERL -noshell -noinput -s grace_pp p -s erlang halt > progs/p$i.eds
+  $ERL -noshell -noinput -s grace_pp p -s erlang halt > progs/p$i.grc
 done

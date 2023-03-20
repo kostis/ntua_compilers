@@ -24,15 +24,15 @@
 
 gen(0) -> ok;
 gen(N) ->
-  FN = "programs/p"++integer_to_list(N)++".eds",
-  {ok, P} = proper_gen:pick(edsger_syntax_gen:program()),
+  FN = "programs/p"++integer_to_list(N)++".grc",
+  {ok, P} = proper_gen:pick(grace_syntax_gen:program()),
   ok = file:write_file(FN, pp(P)),
   gen(N - 1).
 
 -spec p() -> 'ok'.
 
 p() ->
-  {ok, P} = proper_gen:pick(edsger_syntax_gen:program()),
+  {ok, P} = proper_gen:pick(grace_syntax_gen:program()),
   io:format(pp(P)).
 
 -spec pp(_) -> iolist().  % XXX: define a type for Grace abstract syntax
