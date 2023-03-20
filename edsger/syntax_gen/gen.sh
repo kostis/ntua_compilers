@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 # Generates N Edsger programs in the 'progs' dir.
 #   (N is a command-line argument.)
@@ -6,7 +6,7 @@
 # To use it, you need to first declare the dirs
 # where Erlang/OTP and PropEr are in your system.
 
-ERL=/home/kostis/HiPE/otp/bin/erl
+readonly ERL=/home/kostis/HiPE/otp/bin/erl
 export ERL_LIBS=/home/kostis/HiPE/proper
 
 ${ERL}c -pa ${ERL_LIBS}/ebin +debug_info *.erl
