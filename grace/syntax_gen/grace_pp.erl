@@ -39,48 +39,57 @@ p() ->
 
 pp([]) -> "";
 pp([H|T]) -> ?F("~s~n~s", [pp(H), pp(T)]);
-pp({'vardecl', Type, Decls}) -> ?F("~s ~s;", [pp(Type), pp_decls(Decls)]);
-pp({'fundecl', RT, I,  Params}) ->
-  ?F("~s ~s(~s);", [pp(RT), I, pp_params(Params)]);
-pp({'fundef', RT, I,  Params, Decls, Stmts}) ->
-  ?F("~s ~s(~s) {~n~s~n~s}",
-     [pp(RT), I, pp_params(Params), pp(Decls), pp(Stmts)]);
-pp({'type', Type, Stars}) -> ?F("~s~s", [Type, Stars]);
-pp({'stmt', {'blck', Stmts}}) -> ?F("{~n ~s~n}", [pp(Stmts)]);
-pp({'stmt', {'if', Expr, Stmt1, Stmt2}}) ->
-  ?F("if (~s) ~s~s", [pp(Expr), pp(Stmt1), pp_opt_else(Stmt2)]);
-pp({'stmt', {'for', I, Expr1, Expr2, Expr3, Stmt}}) ->
-  ?F("~sfor (~s; ~s; ~s) ~s",
-     [pp_opt_lbl(I), pp(Expr1), pp(Expr2), pp(Expr3), pp(Stmt)]);
+%% fun stuff
+pp({'fun', I,  FParDefs, RT}) ->
+  ?F("fun ~s(~s) : ~s", [I, pp_fpars(FParDefs), pp(RT)]);
+pp({'fundef', Header,  LocalDefs, Block}) ->
+  ?F("~s~n~s~n~s~n", [pp(Header), pp(LocalDefs), pp(Block)]);
+pp({'fundecl', Header}) -> ?F("~s;", [pp(Header)]);
+pp({'type', Type, Brackets}) -> ?F("~s~s", [Type, pp_brackets(Brackets)]);
+pp({'fpar_type', Type, Opt, Brackets}) ->
+  ?F("~s~s~s", [Type, Opt, pp_brackets(Brackets)]);
+%% statements
+pp({'blck', Stmts}) -> ?F("{~n~s~n}", [pp_block(Stmts)]);
+pp({'stmt', {'if', Cond, Stmt1, Stmt2}}) ->
+  ?F("if ~s then ~s~s", [pp(Cond), pp(Stmt1), pp_opt_else(Stmt2)]);
+pp({'stmt', {'while', Cond, Stmt}}) ->
+  ?F("while ~s do ~s", [pp(Cond), pp(Stmt)]);
 pp({'stmt', Stmt}) -> ?F("~s;", [pp(Stmt)]);  % all other statements need ;
-pp({'cnt', I}) -> ?F("continue~s", [pp_opt(I)]);
-pp({'brk', I}) -> ?F("break~s", [pp_opt(I)]);
+pp({'<-', LVal, Expr}) -> ?F("~s <- ~s", [pp(LVal), pp(Expr)]);
 pp({'ret', Expr}) -> ?F("return~s", [pp_opt(Expr)]);
+%% conds
+pp({'not', Cond}) -> ?F("not ~s", [pp(Cond)]);
+pp({'and', Cond1, Cond2}) -> ?F("~s and ~s", [pp(Cond1), pp(Cond2)]);
+pp({'or',  Cond1, Cond2}) -> ?F("~s or ~s", [pp(Cond1), pp(Cond2)]);
+pp({'cmp', CompOp, E1, E2}) -> ?F("~s ~s ~s", [pp(E1), pp(CompOp), pp(E2)]);
+%% exprs
+pp({'uop', UnOp, E}) -> ?F("~s ~s", [pp(UnOp), pp_pe(E)]);
+pp({'bop', BOp, E1, E2}) -> ?F("(~s ~s ~s)", [pp_pe(E1), pp(BOp), pp_pe(E2)]);
+%% misc
 pp({'prn', E}) -> ?F("(~s)", [pp(E)]);
-pp({'cll', I, Es}) -> ?F("~s(~s)", [pp(I), pp_exprs(Es)]);
-pp({'arr', E1, E2}) -> ?F("~s[~s]", [pp(E1), pp(E2)]);
-pp({'uop', Op, E}) -> ?F("~s ~s", [pp(Op), pp_pe(E)]);
-pp({'bop', Op, E1, E2}) -> ?F("(~s ~s ~s)", [pp_pe(E1), pp(Op), pp_pe(E2)]);
-pp({'uas', As, E, 'pre'}) -> ?F("~s~s", [pp(As), pp_pe(E)]);
-pp({'uas', As, E, 'post'}) -> ?F("~s~s", [pp_pe(E), pp(As)]);
-pp({'bas', As, E1, E2}) -> ?F("(~s ~s ~s)", [pp_pe(E1), pp(As), pp_pe(E2)]);
-pp({'cst', Type, E}) -> ?F("(~s)~s", [pp(Type), pp_pe(E)]);
-pp({'cnd', E1, E2, E3}) ->
-  ?F("~s ? ~s : ~s", [pp_pe(E1), pp_pe(E2), pp_pe(E3)]);
-pp({'new', T, Expr}) -> ?F("new ~s~s", [pp(T), pp_opt_arrexpr(Expr)]);
-pp({'del', Expr}) -> ?F("delete ~s", [pp(Expr)]);
+pp({'lval', LVal, Expr}) -> ?F("~s[~s]", [pp(LVal), pp(Expr)]);
+pp({'cll', ID, Es}) -> ?F("~s(~s)", [pp(ID), pp_exprs(Es)]);
+%% basic elements
+pp({'var', IDs, Type}) -> ?F("var ~s : ~s;", [pp_ids(IDs), pp(Type)]);
 pp({'string', S}) -> ?F("~p", [S]);
 pp({'char', C}) -> pp_char(C);
-pp(N) when is_number(N) -> ?F("~p", [N]);
+pp(I) when is_integer(I) -> ?F("~p", [I]);
 pp(A) when is_atom(A) -> ?F("~s", [A]).
 
+pp_block([]) -> "";
+pp_block([S]) -> ?F("  ~s", [pp(S)]);
+pp_block([S|Ss]) -> ?F("~s~n~s", [pp_block([S]), pp_block(Ss)]).
+
+pp_brackets('') -> "";
+pp_brackets(I) when is_integer(I) -> ?F("[~p]", [I]);
+pp_brackets({I1, I2}) -> ?F("[~p][~p]", [I1, I2]).
+
+pp_ids([ID]) -> ?F("~s", [pp(ID)]);
+pp_ids([ID|IDs]) -> ?F("~s, ~s", [pp(ID), pp_ids(IDs)]).
+
+pp_exprs([]) -> "";
 pp_exprs([E]) -> ?F("~s", [pp(E)]);
 pp_exprs([E|Es]) -> ?F("~s, ~s", [pp(E), pp_exprs(Es)]).
-
-pp_decls([D]) -> ?F("~s", [pp_decl(D)]);
-pp_decls([D|Ds]) -> ?F("~s, ~s", [pp_decl(D), pp_decls(Ds)]).
-
-pp_decl({'decl', I, Expr}) -> ?F("~s~s", [I, pp_opt_arrexpr(Expr)]).
 
 pp_opt('') -> "";
 pp_opt(X) -> ?F(" ~s", [pp(X)]).
@@ -88,17 +97,14 @@ pp_opt(X) -> ?F(" ~s", [pp(X)]).
 pp_opt_else('') -> "";
 pp_opt_else(Stmt) -> ?F(" else ~s", [pp(Stmt)]).
 
-pp_opt_lbl('') -> "";
-pp_opt_lbl(I) -> ?F("~s: ", [pp(I)]).
+pp_opt_ref('') -> "";
+pp_opt_ref(ref) -> ?F("ref ", []).
 
-pp_opt_arrexpr('') -> "";
-pp_opt_arrexpr(Expr) -> ?F("[~s]", [pp(Expr)]).
+pp_fpars([FP]) -> ?F("~s", [pp_fpar(FP)]);
+pp_fpars([FP1|FPs]) -> ?F("~s, ~s", [pp_fpar(FP1), pp_fpars(FPs)]).
 
-%% pp_params([]) -> "";
-pp_params([P]) -> ?F("~s", [pp_param(P)]);
-pp_params([P1|Ps]) -> ?F("~s, ~s", [pp_param(P1), pp_params(Ps)]).
-
-pp_param({'param', P, Type, I}) -> ?F("~s~s ~s", [P, pp(Type), I]).
+pp_fpar({'fpar_def', Ref, IDs, Type}) ->
+  ?F("~s~s : ~s", [pp_opt_ref(Ref), pp_ids(IDs), pp(Type)]).
 
 
 %%
@@ -107,7 +113,7 @@ pp_param({'param', P, Type, I}) -> ?F("~s~s ~s", [P, pp(Type), I]).
 %%
 pp_pe({'string', _}=E) -> pp(E);
 pp_pe({'char', _}=E) -> pp(E);
-pp_pe(N) when is_number(N) -> pp(N);
+pp_pe(I) when is_integer(I) -> pp(I);
 pp_pe(A) when is_atom(A) -> pp(A);
 pp_pe(E) -> ?F("(~s)", [pp(E)]).
 

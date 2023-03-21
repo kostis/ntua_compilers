@@ -33,102 +33,103 @@ prop_gen() ->
 %% Arbitrary limits
 %%
 -define(MAX_DECLS,   5).
--define(MAX_PARAMS,  4).
+-define(MAX_PARAMS,  3).
 -define(MAX_STMTS,   5).
 
 program() ->
-  M = 3 + rand:uniform(8),  % M ranges in 4..11
-  frequency([{1, vector(1, decl())},
-	     {2, vector(2, decl())},
-	     {3, vector(3, decl())},
-	     {4, vector(M, decl())}]).
+  func_def().
 
-decl() ->
-  frequency([{1, var_decl()}, {1, fun_decl()}, {3, fun_def()}]).
+func_def() ->
+  {'fundef', header(), ?STAR(?MAX_PARAMS, local_def()), block()}.
 
-var_decl() ->
-  {'vardecl', type(), declarators()}.
+header() ->
+  {'fun', 'I'(), ?PLUS(?MAX_DECLS, fpar_def()), ret_type()}.
+
+fpar_def() ->
+  {'fpar_def', ?OPT('ref'), ?PLUS(?MAX_PARAMS, 'I'()), fpar_type()}.
 
 type() ->
-  {'type', basic_type(), stars()}.
+  {'type', data_type(), brackets()}.
 
-basic_type() ->
-  union(['int', 'char', 'bool', 'double']).
+data_type() ->
+  union(['int', 'char']).
 
-stars() ->
-  frequency([{6,''}, {4,'*'}, {2,'**'}, {1,'***'}]).
+brackets() ->
+  frequency([{6, ''}, {3, int_const()}, {1, {int_const(), int_const()}}]).
 
-declarators() ->
-  ?PLUS(?MAX_DECLS, declarator()).
+ret_type() ->
+  union([data_type(), 'nothing']).
 
-declarator() ->
-  frequency([{9, {'decl','I'(),''}}, {1, {'decl','I'(),const_expr()}}]).
+fpar_type() ->
+  {'fpar_type', data_type(), ?OPT('[]'), brackets()}.
 
-fun_decl() ->
-  {'fundecl', res_type(), 'I'(), param_list()}.
+local_def() ->
+  frequency([{3, func_def()}, {1, func_decl()}, {1, var_def()}]).
 
-res_type() ->
-  frequency([{5, type()}, {1, {'type','void',''}}]).
+func_decl() ->
+  {'fundecl', header()}.
 
-param_list() ->
-  ?PLUS(?MAX_PARAMS, param()).
+var_def() ->
+  {'var', ?PLUS(3, 'I'()), type()}.
 
-param() ->
-  {'param', ?OPT('byref '), type(), 'I'()}.
-
-fun_def() ->
-  {'fundef', res_type(), 'I'(), param_list(),
-   ?STAR(?MAX_DECLS div 2, decl()), ?STAR(?MAX_STMTS, stmt())}.
-
-stmt() ->
-  ?SIZED(Size, stmt(Size)).
+%% stmt() ->
+%%   ?SIZED(Size, stmt(Size)).
 
 stmt(Sz) ->
-  Sz2 = Sz div 2,
-  S = union(['', expr(Sz),
-	     {'blck', ?STAR(?MAX_STMTS div 2, ?LAZY(stmt(Sz2)))},
-	     {'if', expr(1), ?LAZY(stmt(Sz2)), ?OPT(?LAZY(stmt(Sz2)))},
-	     {'for', ?OPT('I'()), ?OPT(expr(1)), ?OPT(expr(1)), ?OPT(expr(1)),
-	      ?LAZY(stmt(Sz2))},
-	     {'cnt', ?OPT('I'())}, {'brk', ?OPT('I'())},
-	     {'ret', ?OPT(expr(1))}]),
+  Sz2 = Sz div 2, Sz4 = Sz div 4,
+  S = union(['',
+	     {'<-', ?LAZY(lvalue(Sz4)), ?LAZY(expr(Sz2))},
+	     block(),
+	     func_call(Sz),
+	     {'if', ?LAZY(cnd(Sz4)), ?LAZY(stmt(Sz2)), ?OPT(?LAZY(stmt(Sz2)))},
+	     {'while', ?LAZY(cnd(Sz4)), ?LAZY(stmt(Sz2))},
+	     {'ret', ?OPT(expr(Sz2))}]),
   {'stmt', S}.
 
+block() ->
+  ?SIZED(Size, block(Size)).
+
+block(Sz) ->
+  Sz2 = Sz div 2,
+  {'blck', ?STAR(?MAX_STMTS, ?LAZY(stmt(Sz2)))}.
+
+func_call(Sz) ->
+  {'cll', 'I'(), ?STAR(?MAX_PARAMS, ?LAZY(expr(Sz)))}.  % XXX: 1
+
+lvalue(Sz) ->
+  Sz2 = Sz div 2,
+  frequency([{5, 'I'()},
+	     {1, string_literal()},
+	     {1, {lval, ?LAZY(lvalue(Sz2)), ?LAZY(expr(Sz2))}}]). 
+
 expr(Size) when Size =< 1 ->
-  union(['I'(), 'true', 'false', 'NULL',
-	 int_const(), char_const(), double_const(), string_literal()]);
+  union([int_const(), char_const()]);
 expr(Sz) ->
-  Sz1 = Sz - 1, Sz2 = Sz div 2, Sz4 = Sz div 4,
-  union([{'prn', ?LAZY(expr(Sz1))},
-	 {'cll', 'I'(), exprs(Sz1, 1, ?MAX_PARAMS)},
-	 {'arr', ?LAZY(expr(Sz4)), ?LAZY(expr(Sz4))},
+  Sz1 = Sz - 1, Sz2 = Sz div 2,
+  union([{'prn', ?LAZY(expr(Sz2))},
+	 ?LAZY(lvalue(Sz)),
+	 func_call(Sz),
 	 {'uop', un_op(), ?LAZY(expr(Sz1))},
-	 {'bop', bin_op(), ?LAZY(expr(Sz2)), ?LAZY(expr(Sz2))},
-	 {'uas', un_asgn(), ?LAZY(expr(Sz4)), oneof(['pre', 'post'])},
-	 {'bas', bin_asgn(), ?LAZY(expr(Sz2)), ?LAZY(expr(Sz2))},
-	 {'cst', type(), ?LAZY(expr(Sz1))},
-	 {'cnd', ?LAZY(expr(Sz2)), ?LAZY(expr(Sz2)), ?LAZY(expr(Sz2))},
-	 {'new', type(), ?OPT(?LAZY(expr(Sz2)))},
- 	 {'del', ?LAZY(expr(Sz2))}]).
+	 {'bop', bin_op(), ?LAZY(expr(Sz2)), ?LAZY(expr(Sz2))}]).
 
-exprs(Sz, Min, Max) ->
-  ?LET(N, integer(Min, Max), vector(N, expr(Sz))).
-
-const_expr() ->
-  expr(1).
+cnd(Sz) when Sz =< 1 -> % Base case without self-recursion
+  {'cmp', cmp_op(), expr(Sz), expr(Sz)};
+cnd(Sz) ->
+  Sz2 = Sz div 2,
+  union([{'prn', ?LAZY(cnd(Sz2))},
+	 {'not', ?LAZY(cnd(Sz2))},
+	 {'and', ?LAZY(cnd(Sz2)), ?LAZY(cnd(Sz2))},
+	 {'or',  ?LAZY(cnd(Sz2)), ?LAZY(cnd(Sz2))},
+	 {'cmp', cmp_op(), ?LAZY(expr(Sz2)), ?LAZY(expr(Sz2))}]).
 
 un_op() ->
-  union(['&', '*', '+', '-', '!']).
+  union(['+', '-']).
 
 bin_op() ->
-  union(['*', '/', '%', '+', '-', '<', '>', '<=', '>=', '==', '!=',
-	 '&&', '||', ',']).
+  union(['+', '-',  '*', 'div', 'mod']).
 
-un_asgn() ->
-  union(['++', '--']).
-
-bin_asgn() ->
-  union(['=', '*=', '/=', '%=', '+=', '-=']).
+cmp_op() ->
+  union(['=', '#', '<', '>', '<=', '>=']).
 
 %% Lexical terminals below -- they can be extended at will
 
@@ -138,9 +139,6 @@ bin_asgn() ->
 
 int_const() ->
   integer(0, 42).
-
-double_const() ->
-  union([0.0, 2.56, 3.14, 0.420e+2, 42000.0e-3]).
 
 char_const() ->  % These are special-cased in grace_pp!
   {'char', union(['a', '7', '\n', '\''])}.
