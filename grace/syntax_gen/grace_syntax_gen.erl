@@ -43,7 +43,7 @@ func_def() ->
   {'fundef', header(), ?STAR(?MAX_PARAMS, local_def()), block()}.
 
 header() ->
-  {'fun', 'I'(), ?PLUS(?MAX_DECLS, fpar_def()), ret_type()}.
+  {'fun', 'I'(), ?STAR(?MAX_DECLS, fpar_def()), ret_type()}.
 
 fpar_def() ->
   {'fpar_def', ?OPT('ref'), ?PLUS(?MAX_PARAMS, 'I'()), fpar_type()}.

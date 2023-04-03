@@ -100,8 +100,9 @@ pp_opt_else(Stmt) -> ?F(" else ~s", [pp(Stmt)]).
 pp_opt_ref('') -> "";
 pp_opt_ref(ref) -> ?F("ref ", []).
 
+pp_fpars([]) -> "";
 pp_fpars([FP]) -> ?F("~s", [pp_fpar(FP)]);
-pp_fpars([FP1|FPs]) -> ?F("~s, ~s", [pp_fpar(FP1), pp_fpars(FPs)]).
+pp_fpars([FP1|FPs]) -> ?F("~s; ~s", [pp_fpar(FP1), pp_fpars(FPs)]).
 
 pp_fpar({'fpar_def', Ref, IDs, Type}) ->
   ?F("~s~s : ~s", [pp_opt_ref(Ref), pp_ids(IDs), pp(Type)]).
