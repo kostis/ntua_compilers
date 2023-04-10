@@ -77,14 +77,13 @@ var_def() ->
 
 stmt(Sz) ->
   Sz2 = Sz div 2, Sz4 = Sz div 4,
-  S = union(['',
-	     {'<-', ?LAZY(lvalue(Sz4)), ?LAZY(expr(Sz2))},
-	     block(),
-	     func_call(Sz),
-	     {'if', ?LAZY(cnd(Sz4)), ?LAZY(stmt(Sz2)), ?OPT(?LAZY(stmt(Sz2)))},
-	     {'while', ?LAZY(cnd(Sz4)), ?LAZY(stmt(Sz2))},
-	     {'ret', ?OPT(expr(Sz2))}]),
-  {'stmt', S}.
+  union([';',
+	 {'<-', ?LAZY(lvalue(Sz4)), ?LAZY(expr(Sz2))},
+	 block(),
+	 {'stmt', func_call(Sz)},  % 'stmt' tag disambiguates stmts from exprs
+	 {'if', ?LAZY(cnd(Sz4)), ?LAZY(stmt(Sz2)), ?OPT(?LAZY(stmt(Sz2)))},
+	 {'while', ?LAZY(cnd(Sz4)), ?LAZY(stmt(Sz2))},
+	 {'ret', ?OPT(expr(Sz2))}]).
 
 block() ->
   ?SIZED(Size, block(Size)).

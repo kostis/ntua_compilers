@@ -49,14 +49,14 @@ pp({'type', Type, Brackets}) -> ?F("~s~s", [Type, pp_brackets(Brackets)]);
 pp({'fpar_type', Type, Opt, Brackets}) ->
   ?F("~s~s~s", [Type, Opt, pp_brackets(Brackets)]);
 %% statements
+pp(';') -> ?F(";", []);  % although it is captured by atom rule below
+pp({'<-', LVal, Expr}) -> ?F("~s <- ~s;", [pp(LVal), pp(Expr)]);
 pp({'blck', Stmts}) -> ?F("{~n~s~n}", [pp_block(Stmts)]);
-pp({'stmt', {'if', Cond, Stmt1, Stmt2}}) ->
+pp({'stmt', FuncCall}) -> ?F("~s;", [pp(FuncCall)]);
+pp({'if', Cond, Stmt1, Stmt2}) ->
   ?F("if ~s then ~s~s", [pp(Cond), pp(Stmt1), pp_opt_else(Stmt2)]);
-pp({'stmt', {'while', Cond, Stmt}}) ->
-  ?F("while ~s do ~s", [pp(Cond), pp(Stmt)]);
-pp({'stmt', Stmt}) -> ?F("~s;", [pp(Stmt)]);  % all other statements need ;
-pp({'<-', LVal, Expr}) -> ?F("~s <- ~s", [pp(LVal), pp(Expr)]);
-pp({'ret', Expr}) -> ?F("return~s", [pp_opt(Expr)]);
+pp({'while', Cond, Stmt}) -> ?F("while ~s do ~s", [pp(Cond), pp(Stmt)]);
+pp({'ret', Expr}) -> ?F("return~s;", [pp_opt(Expr)]);
 %% conds
 pp({'not', Cond}) -> ?F("not ~s", [pp(Cond)]);
 pp({'and', Cond1, Cond2}) -> ?F("~s and ~s", [pp(Cond1), pp(Cond2)]);
