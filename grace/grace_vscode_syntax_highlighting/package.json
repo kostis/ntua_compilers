@@ -1,0 +1,25 @@
+{
+  "name": "grc",
+  "displayName": "Grace",
+  "description": "Grace Programming Language",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.76.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "grace",
+      "aliases": ["Grace Programming Language", "grace"],
+      "extensions": [".grc"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "grace",
+      "scopeName": "source.grc",
+      "path": "./syntaxes/grace.tmLanguage.json"
+    }]
+  }
+}

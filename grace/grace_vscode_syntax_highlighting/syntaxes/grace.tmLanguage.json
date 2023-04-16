@@ -1,0 +1,93 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Grace Programming Language",
+	"patterns": [
+		{
+			"include": "#control-keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#multi-comments"
+		},
+		{
+			"include": "#single-comments"
+		},
+		{
+			"include": "#op-keywords"
+		},
+		{
+			"include": "#constant-numbers"
+		},
+		{
+			"include": "#special-operators"
+		},
+		{
+			"include": "#function-names"
+		}
+	],
+	"repository": {
+		"control-keywords": {
+			"patterns": [{
+				"name": "keyword.control.grace",
+				"match": "\\b(if|else|do|then|while|return)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.grace",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.grace",
+					"match": "\\\\."
+				}
+			]
+		},
+		"multi-comments": {
+			"name": "comment.multi-line.grace",
+			"begin": "\\$\\$",
+			"end": "\\$\\$",
+			"patterns": [
+			  {
+				"match": "\\$\\$",
+				"name": "punctuation.definition.comment.grace"
+			  }
+			]
+		},
+		"single-comments": {
+			"patterns": [
+			  {
+				"match": "\\$.*$",
+				"name": "comment.line.grace"
+			  }
+			]		  
+		},
+		"op-keywords": {
+			"patterns": [{
+				"name": "keyword.operator.new.grace",
+				"match": "\\b(and|or|not|div|mod|nothing|var|fun|ref|int|char)\\b"
+			}]
+		},
+		"constant-numbers": {
+			"patterns": [{
+				"name": "constant.numeric.grace",
+				"match": "\\b\\d+\\b"
+			}]
+		},
+		"special-operators": {
+			"patterns": [{
+				"name": "variable.other.grace",
+				"match": "(<-)|(:)"
+			}]
+		},
+		"function-names": {
+			"patterns": [{
+				"name": "variable.other.grace",
+				"match": "\\bfun\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\("
+			}]
+		}
+	},
+	"scopeName": "source.grc"
+}
