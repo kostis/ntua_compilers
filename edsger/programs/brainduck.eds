@@ -36,7 +36,7 @@ void main (){
 	/* In most brainduck implementations, we are usually given a memory tape of length 30000. 
 	 * We access this tape with a pointer that we can increment or decrement. If we increment
 	 * this pointer above 29999 or below 0, the pointer is "shifted" to the other end of the
-	 * tape. In edsger, integers are 2 bytes long and singed, meaning that the largest offset
+	 * tape. In edsger, integers are 2 bytes long and signed, meaning that the largest offset
 	 * we can store is around 33k. If we naively implement the circular decrementing of `aidx`
 	 * as `aidx = (30000 + aidx - 1) % 30000`, we risk of overflowing `aidx` for `aidx` values
 	 * much lower than 30k. Thus we implement the "pointer" decrementing, with the following 
