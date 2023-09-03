@@ -29,6 +29,27 @@ $ A limit is used to ensure a visually pleasing display on terminals with limite
 $
 $ Algorithm reference: https://rosettacode.org/wiki/Sierpinski_triangle#Automaton
 $
+$
+$ Example: Pattern with depth 4
+$ Input: n = 4
+$ Expected output:
+$                 *               
+$                * *              
+$               *   *             
+$              * * * *            
+$             *       *           
+$            * *     * *          
+$           *   *   *   *         
+$          * * * * * * * *         
+$         *               *       
+$        * *             * *      
+$       *   *           *   *     
+$      * * * *         * * * *    
+$     *       *       *       *   
+$    * *     * *     * *     * *  
+$   *   *   *   *   *   *   *   * 
+$  * * * * * * * * * * * * * * * *
+$
 $$
 
 fun main(): nothing
