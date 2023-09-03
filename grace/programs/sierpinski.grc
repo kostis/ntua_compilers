@@ -1,0 +1,178 @@
+$$
+$
+$ This Grace program generates a Sierpinski's Triangle pattern using the Rule 90 cellular automaton.
+$ The depth of the triangle pattern to be generated is determined by an input integer in the beginning of the program.
+$
+$ The program then uses the given integer to iteratively apply Rule 90 to an initial row of characters.
+$ Rule 90 transforms the row by checking neighboring cells and replacing them based on a set of rules.
+$ The result of each iteration is printed as a row, creating a pattern resembling Sierpinski's Triangle.
+$
+$ 
+$ Sierpinski's Triangle is a fractal pattern composed of equilateral triangles arranged in a self-replicating manner.
+$ It starts with a single triangle, and in each iteration, smaller triangles are removed from its center, creating a recursive and intricate pattern.
+$ It is named after the Polish mathematician Wacław Sierpiński and is a classic example of a fractal in mathematics and computer science.
+$
+$ Read more: https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle
+$
+$
+$ Rule 90 is a one-dimensional cellular automaton rule based on the exclusive-OR function that generates patterns by applying a simple set of local rules to a row of cells, typically represented as 0s and 1s. 
+$ In each step, it examines the neighboring cells and updates the current cell based on specific conditions. 
+$ Rule 90 is known for its ability to generate patterns that resemble Sierpinski's Triangle when applied iteratively.
+$ It is an elementary cellular automaton with applications in generating pseudo-random sequences and demonstrating the principles of cellular automata.
+$
+$ Read more: https://en.wikipedia.org/wiki/Rule_90
+$
+$
+$ This program makes use of several of Grace's core functionalities (i.e nested functions, recursion, while-loops, etc...) making it a great tool for testing.
+$ The user is prompted for an integer input, which determines the level of detail and complexity in the Sierpinski's Triangle pattern.
+$ A limit is used to ensure a visually pleasing display on terminals with limited screen resolutions.
+$
+$ Algorithm reference: https://rosettacode.org/wiki/Sierpinski_triangle#Automaton
+$
+$
+$ Example: Pattern with depth 4
+$ Input: n = 4
+$ Expected output:
+$                 *               
+$                * *              
+$               *   *             
+$              * * * *            
+$             *       *           
+$            * *     * *          
+$           *   *   *   *         
+$          * * * * * * * *         
+$         *               *       
+$        * *             * *      
+$       *   *           *   *     
+$      * * * *         * * * *    
+$     *       *       *       *   
+$    * *     * *     * *     * *  
+$   *   *   *   *   *   *   *   * 
+$  * * * * * * * * * * * * * * * *
+$
+$$
+
+fun main(): nothing
+
+  $$
+  $ Function to generate and print the Sierpinski's Triangle pattern.
+  $ The input value of 'n' is used to calculate the number of iterations needed to generate the pattern.
+  $ Specifically, it determines the number of times the rule_90() function is applied to the initial row to create each row of the pattern.
+  $ The larger the value of n, the more intricate and detailed the Sierpinski's Triangle pattern will be because it will have more rows.
+  $$
+  fun triangle(n: int): nothing
+
+    $$
+    $ Function to apply Rule 90 cellular automaton to a row of characters.
+    $$
+    fun rule_90(ref ev: char[]): nothing
+
+      $$
+      $ Helper function to check if the input character is '*'.
+      $$
+      fun is_star(c: char): int
+      { $is_star
+        if c = '*' then
+          return 1;
+        else
+          return 0;
+      } $is_star
+
+      $$
+      $ Helper function that simulates the XOR (exclusive OR) operation
+      $$
+      fun xor(x, y: int): int
+      { $ xor
+        if x = 1 and y = 0 or x = 0 and y = 1 then
+          return 1;
+        else 
+          return 0;
+      } $ xor
+
+      var l, i: int;
+      var s: int[2];
+      var cp: char[129];
+
+    { $ rule_90
+      i <- 0;
+      l <- strlen(ev);
+      strcpy(cp, ev);
+
+      while i < l do {
+        if i - 1 < 0 then
+          s[0] <- 0;
+        else
+          s[0] <- is_star(cp[i-1]);
+
+        if i + 1 < l then
+          s[1] <- is_star(cp[i+1]);
+        else
+          s[1] <- 0;
+
+        if xor(s[0], s[1]) = 1 then
+          ev[i] <- '*';
+        else
+          ev[i] <- ' ';
+
+        i <- i + 1;
+      }
+    } $ rule_90
+
+    $$
+    $ Helper function to calculate integer exponentiation using recursion.
+    $$
+    fun ipow(x, n: int): int
+    { $ ipow
+      if n <= 0 then
+        return 1;
+      else
+        return x * ipow(x, n-1);
+    } $ ipow
+
+    $$
+    $ Helper function that divides a given integer in half and rounds it to the nearest even number, as if it was float.
+    $$
+    fun round2(n: int): int
+    { $round2
+      if n mod 2 = 1 then 
+        return n div 2 + 1;
+      else 
+        return n div 2;
+    } $round2
+  
+    var i, l: int;
+    var row: char[129];
+    
+  { $triangle
+    i <- 0;
+    l <- ipow(2, n+1); $ length of the rows
+
+    while i < l do {
+      row[i] <- ' ';
+      i <- i + 1;
+    }
+    row[l] <- '\0';
+
+    row[round2(l)] <- '*';
+    writeString(row);
+    writeChar('\n');
+
+    i <- 0;
+    while i < l div 2 - 1 do {
+      rule_90(row);
+      writeString(row);
+      writeChar('\n');
+      i <- i + 1;
+    }
+  } $triangle
+
+  var n: int;
+
+{ $ main
+  writeString("Please, give an integer (limit 6): ");
+  n <- readInteger();
+
+  if n > 6 then n <- 6;
+
+  triangle(n);
+} $ main
