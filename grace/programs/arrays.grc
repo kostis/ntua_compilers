@@ -1,0 +1,90 @@
+$$
+  This grace program tests the utilization of array structures with multiple
+  dimensions as arguments, parameters, variables, l-values and r-values. It also
+  includes mildly complex arguments given to function calls and nested while
+  loops without blocks.
+$$
+
+fun main () : nothing
+
+  var foo : int[11];
+  var bar : char[2][4][17];
+  var zen : int[5][10];
+
+    fun arrayProc (ref x : int[]; y : char[13]; z : int[][10]) : nothing
+
+      var a : int [15];
+      var b : char [2][10][13];
+      var i, j, k : int;
+      var s : int;
+
+      fun initializeArrays (ref a : int []; ref b : char [][10][13]) : int
+
+      { $ initializeArrays
+        i <- 0;
+        while i < 15 do {
+          a[i] <- i * 4 + 3 mod 5;
+          i <- i + 1;
+        }
+
+        i <- 0;
+        j <- 0;
+        k <- 0;
+        while i < 2 do
+          while j < 10 do
+            while k < 13 do
+              b[i][j][k] <- chr((i + j + k) mod 26 + ascii('A'));
+
+        return 0;
+      }
+
+    { $ arrayProc
+
+      if initializeArrays(a, b) # 0 then {
+        writeString("Error occurred!\n");
+        return;
+      }
+
+      i <- 0;
+      s <- 11;
+      while i < s do {
+        x[i] <- a[i];
+
+        i <- i + 1;
+      }
+
+      i <- 0;
+      while i < 5 do {
+        z[i][9] <- 0;
+        j <- 0;
+        while j < 9 do {
+          z[i][j] <- 1;
+          j <- j + 1;
+        }
+        i <- i + 1;
+      }
+      i <- 0;
+      j <- 0;
+      s <- 10;
+      while i < 10 do {
+        while (z[j][i] # 0) do {
+          z[j][i] <- a[i];
+          j <- j + 1;
+        }
+        i <- i + 1;
+      }
+
+      i <- 0;
+      j <- 0;
+      k <- 0;
+      while i < 2 do
+        while j < 4 do
+          while k < 13 do
+            if ascii(b[i][j][k]) >= 65 then
+              y[i][j][k] <- b[i][j][k];
+    }
+
+{ $ main
+  arrayProc(foo, bar, zen);
+  writeString("Everything went OK!\n");
+}
