@@ -1,0 +1,24 @@
+$$
+  In this erroneous grace program the main function takes arguments.
+  It is not permitted for the main function to take arguments.
+
+  The main function 'isSorted' takes two arguments, an array and the array's size.
+$$
+
+fun isSorted(ref a : int[]; size : int) : nothing
+  var i, result : int;
+
+{ $ isSorted
+
+  result <- 1;
+  i <- 0;
+  while i < size - 2 do {
+    if a[i] > a[i+1] then
+      result <- 0;
+    i <- i + 1;
+  }
+
+  writeString("The given array is ");
+  if result = 1 then writeString("sorted.\n");
+  else writeString("not sorted.\n");
+}
