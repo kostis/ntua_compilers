@@ -1,5 +1,5 @@
 $$
-  This grace program will check if the evaluation of the result of the
+  This grace program checks whether the evaluation of the result of the
   logical operators "and" and "or" uses short-circuiting.
 
   The program below has 3 functions that return 1 for true and 0 for false.
