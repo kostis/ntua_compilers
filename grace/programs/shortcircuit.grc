@@ -1,0 +1,103 @@
+$$
+  This grace program checks whether the evaluation of the result of the
+  logical operators "and" and "or" uses short-circuiting.
+
+  The program below has 3 functions that return 1 for true and 0 for false.
+  In the main function there are some if-then-else and while-do statements
+  the conditions of which use the said logical operators with two function
+  calls as arguments and that can be short-circuited.
+$$
+
+fun main () : nothing
+
+  var x, y : int;
+  var k, l : char;
+
+  fun isOne (a : int) : int
+
+  { $ isOne
+
+    writeString("Checking if ");
+    writeInteger(a);
+    writeString(" is equal to 1.\n");
+    if a = 1 then
+      return 1;
+    else
+      return 0;
+
+  }
+
+  fun isUpperCase (c : char) : int
+
+    var asciiNum : int;
+
+  { $ isUpperCase
+
+    writeString("Checking if ");
+    writeCharacter(c);
+    writeCharacter(" is a capital letter.\n");
+    asciiNum <- ascii(c);
+    if asciiNum >= 65 and asciiNum <= 91 then
+      return 1;
+    else
+      return 0;
+
+  }
+
+  fun isWithinLimit (value, lowLimit, highLimit : int) : int
+
+  { $ isWithinLimit
+
+    writeString("Checking if ");
+    writeInteger(value);
+    writeString(" is between ");
+    writeInteger(lowLimit);
+    writeString(" and ");
+    writeInteger(highLimit);
+    writeString(".\n");
+    if value > lowLimit and value < highLimit then
+      return 1;
+    else
+      return 0;
+
+  }
+
+{ $ main
+
+  x <- 1;
+  y <- 42;
+  if isOne(x) = 1 or isOne(y) = 1 then
+    writeString("'isOne' function called only for variable 'x'.\n");
+  else
+    writeString("This message will never be printed.\n");
+
+  writeChar('\n');
+
+  k <- 'n';
+  l <- 'S';
+  if isUpperCase(k) = 1 and isUpperCase(l) = 1 then
+    writeString("This message will never be printed.\n");
+  else
+    writeString("'isUpperCase' function call should only happen for variable 'k'.\n");
+
+  writeChar('\n');
+
+  $ The 2nd repetition of this while loop is the only occasion in this program where there can't be short-circuiting.
+  i <- 41;
+  while isWithinLimit(i, 17, 42) = 1 or isOne(i) = 1 do {
+    writeString("Only 'isWithinLimit' function call should happen here.\n");
+    i <- i + 1;
+  }
+  writeString("'isOne' function call should only happen once here.\n");
+
+  writeChar('\n');
+
+  i <- 0;
+  while isOne(i) = 1 and isWithinLimit(i, -1, 1) = 1 do {
+    writeString("This messaged will never be printed.\n");
+    i <- i + 1;
+  }
+  writeString("'isOne' function call should only happen once here.\n");
+  writeString("'isWithinLimit' function call should never happen here.\n");
+
+}
