@@ -9,5 +9,6 @@ the compiler writing project of the course.
 
 Each of these directories contains:
  - Sample valid programs of the language (sub-directory `programs`).
- - Expected results of running the sample programs on various inputs (TBA).
+ - Expected results of running the valid programs on various inputs (TBA).
  - Generator of random syntactically correct programs (sub-directory `syntax_gen`).
+ - Sample erroneous programs of the language (sub-directory `programs-erroneous`).
