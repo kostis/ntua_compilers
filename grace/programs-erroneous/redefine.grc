@@ -1,0 +1,27 @@
+$$
+  In this erroneous grace program a function is defined twice.
+
+  The function 'print' is defined twice having the same header, but different
+  block.
+$$
+
+fun func_redefinition() : nothing
+  var msg : char[64];
+
+  fun print(ref c : char[]) : nothing {
+    writeString(c);
+    $ Print new line
+    writeChar('\n');
+  }
+
+  fun print(ref a : char[]) : nothing {
+    $ Declare action
+    writeString("Printing: ");
+    writeString(a);
+  }
+
+{ $ func_redefinition
+  strcpy(msg, "Which print will be called? :)\n");
+  print(msg);
+  writeString("This will never be printed :(\n");
+}

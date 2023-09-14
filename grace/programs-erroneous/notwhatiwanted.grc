@@ -1,0 +1,25 @@
+$$
+  In this erroneous grace program a function returns a value of a type
+  that does not match the type of its header.
+
+  The function 'isZero' should return character type, but instead returns an
+  integer.
+$$
+
+fun main() : nothing
+  var number : int;
+  var answer : char;
+
+  fun isZero(x : int) : char {
+    if x = 0 then return 1; else return 0;
+    $ should return 'y' or 'n'
+  }
+
+{
+  number <- -4;
+  answer <- isZero(number);
+  if answer = 'y' then writeString("Number is zero.\n");
+  else                 writeString("Number is non-zero.\n");
+
+  return;
+}

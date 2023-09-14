@@ -1,0 +1,19 @@
+$$
+  In this erroneous grace program a function is used as a variable.
+  An assignment statement has the name of the function as an l-value.
+
+  Function 'storage' is used as an l-value in the block of the 'main' function.
+$$
+
+fun main() : nothing
+  var n : int;
+
+  fun storage() : nothing {
+    writeString("To be honest, I can\'t store any value...\n");
+  }
+
+{ $ main
+  n <- 4;
+  storage <- n;
+  writeString("Hopefully this got stored...\n");
+}

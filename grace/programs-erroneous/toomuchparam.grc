@@ -1,0 +1,18 @@
+$$
+  In this erroneous grace program a function is called with more arguments than
+  expected.
+
+  Function 'sum' takes three integer parameters, but when called it is given
+  five arguments.
+$$
+
+fun main() : nothing
+  var result : int;
+  fun sum(a, b, c : int) : int { return a + b + c; }
+
+{ $ main
+  writeString("Sum of numbers from 1 to 5 is ");
+  result <- sum(1, 2, 3, 4, 5);
+  writeInteger(result);
+  writeString(".\n");
+} $ main

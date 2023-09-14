@@ -1,0 +1,19 @@
+$$
+  In this erroneous grace program an assignment to a type of array happens.
+
+  Variable 'str' is an array of characters and it is tried to assign a string to
+  it.
+$$
+
+fun main () : nothing
+  var str : char[20];
+
+{ $ main
+  str <- "Hello world!\n";
+  $ This should be done like this:
+  $ strcpy(str, "Hello world!\n");
+
+  writeString(str);
+
+  return;
+}

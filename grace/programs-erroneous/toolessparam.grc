@@ -1,0 +1,21 @@
+$$
+  In this erroneous grace program a function is called with less arguments than
+  expected.
+
+  Function 'median' takes two integer parameters, but when called it is given
+  only one argument.
+$$
+
+fun main() : nothing
+  var result : int;
+
+  fun median(a, b : int) : int {
+    return (a + b) div 2;
+  }
+
+{ $ main
+  writeString("The median of one number exists and it is ");
+  result <- median(4);
+  writeInteger(result);
+  writeString(".\n");
+} $ main

@@ -1,0 +1,34 @@
+$$
+  In this erroneous grace program an undeclared function is called.
+
+  The function 'isDividedBy3' is not declared in any scope and it is
+  called in the function 'isDividedBy6'.
+$$
+
+fun main() : nothing
+
+  fun isDividedBy2(a : int) : int {
+    if a mod 2 = 0 then return 1;
+    return 0;
+  }
+
+  fun isDividedBy6(a : int) : int {
+    if isDividedBy2(a) + isDividedBy3(a) = 2 then
+      return 1;
+
+    writeString("Have the function \'isDividedBy3\' existed,");
+    writeString(" this would work just fine.\n");
+    return 0;
+  }
+
+{ $main
+  writeString("36 is ");
+  if isDividedBy6(36) = 0 then
+    writeString("not ");
+  else
+    writeString("");
+  writeString(str);
+  writeString("divided by 6.\n");
+
+  writeString("(I guess we\'ll never know...)\n");
+}
