@@ -1,0 +1,42 @@
+$$
+  In this erroneous grace program a function is declared with a set of
+  parameters A but then later defined with a header that has a set of parameters
+  of which the types don't match.
+
+  The function 'compare' is declared to have two parameters of character type,
+  but then later defined as a function that has two parameters of integer type.
+$$
+
+fun param_type_mis_match() : nothing
+  var i1, i2 : int;
+  var c1, c2 : char;
+
+  fun compare(x, y : char) : int;
+
+  fun notCompare(x, y : int) : nothing {
+    writeString("This function won\'t compare :).\n");
+  }
+
+  fun compare(x, y : int) : int {
+    if x = y then
+      return 1;
+    else
+      return 0;
+  }
+
+{ $ param_type_mis_match
+  i1 <- 17;
+  i2 <- 24;
+  c1 <- 'h';
+  c2 <- 'H';
+
+  if compare(i1, i2) = 1 then
+    writeString("The numbers are equal.\n");
+  else
+    writeString("The numbers are not equal.\n");
+
+  if compare(c1, c2) = 1 then
+    writeString("The characters are equal.\n");
+  else
+    writeString("The characters are not equal.\n");
+}

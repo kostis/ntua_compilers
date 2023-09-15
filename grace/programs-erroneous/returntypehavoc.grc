@@ -1,0 +1,31 @@
+$$
+  In this erroneous grace program a function is defined twice, but it has a
+  different return type in each definition.
+
+  Function 'isLowerCase' has two definitions; in the first it returns an integer
+  and in the second one it returns nothing.
+$$
+
+fun return_type_mis_match() : nothing
+  var x : char;
+
+  fun isLowerCase(c : char) : int {
+    if ascii(c) >= ascii('a') and ascii(c) <= ascii('z') then
+      return 1;
+    else
+      return 0;
+  }
+
+  fun isLowerCase(c : char) : nothing {
+    writeChar('\''); writeChar(c); writeChar('\'');
+    if ascii(c) >= ascii('a') and ascii(c) <= ascii('z') then
+      writeString(" is a lower case letter.\n");
+    else
+      writeString(" is not a lower case letter.\n");
+  }
+
+{ $ return_type_mis_match
+  x <- 'L';
+  isLowerCase(x);
+  writeString("Unfortunately, we will never know.\n");
+}
