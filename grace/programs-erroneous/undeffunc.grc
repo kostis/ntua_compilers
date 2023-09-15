@@ -7,6 +7,7 @@ $$
 
 fun main() : nothing
   var airplaneLanded : int;
+  var travelerGuy, carGuy : char[10];
 
   fun friendShowedUp(ref name : char[]) : int;
 
@@ -17,8 +18,11 @@ fun main() : nothing
   }
 
 { $ main
+  strcpy(travelerGuy, "John");
+  strcpy(carGuy, "Kyle");
+
   airplaneLanded <- 1;
-  comePickMeUp();
-  friendShowedUp();
-  writeString("\nEveryone went home that night.\n");
+  comePickMeUp(travelerGuy);
+  if friendShowedUp(carGuy) = 1 then
+    writeString("\nEveryone went home that night.\n");
 } $ main
