@@ -1,0 +1,24 @@
+$$
+  In this erroneous grace program a function is called with a set of arguments
+  whose types are different than the ones expected from the function's
+  definition.
+
+  The function 'introducePerson' takes a string and an integer, but in the main
+  function it is given an integer and then a string.
+$$
+
+fun main() : nothing
+  var name : char[20];
+  var age : int;
+  fun introducePerson(ref name : char[]; age : int) : nothing {
+    writeString("I\'m ");
+    writeString(name);
+    writeString(" and I\'m ");
+    writeInteger(age);
+    writeString(" years old.\n");
+  }
+{ $ main
+  strcpy(name, "Michael");
+  age <- 27;
+  introducePerson(age, name);
+} $ main

@@ -1,0 +1,21 @@
+$$
+  This erroneous grace program contains a statement using an undefined variable.
+
+  Variable 'mistakes' in main function is undefined.
+$$
+
+fun main() : nothing
+  var answer : int;
+  fun takeInput(ref a : int) : nothing {
+    writeString("Give an even number: ");
+    a <- readInteger();
+  }
+
+{ $ main
+  takeInput(answer);
+  while answer mod 2 = 1 do {
+    mistakes <- mistakes + 1;
+    takeInput(answer);
+  }
+  writeString("Thanks!\n");
+} $ main

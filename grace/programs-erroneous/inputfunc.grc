@@ -1,0 +1,21 @@
+$$
+  In this erroneous grace program a procedure is used as an expression.
+  Note: a procedure is defined as a function that returns type of 'nothing'.
+
+  Function 'takeInput' returns nothing, yet it is used as the function
+  of the standard Grace library 'readInteger'.
+$$
+
+fun main() : nothing
+  var x : int;
+  fun takeInput() : nothing {
+    writeString("Give number: ");
+    x <- readInteger();
+  }
+
+{ $ main
+  x <- takeInput();
+  writeString("You entered ");
+  writeInteger(x);
+  writeString(".\n");
+} $ main

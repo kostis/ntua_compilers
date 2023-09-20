@@ -2,7 +2,7 @@ $$
   In this erroneous grace program a function takes a parameter of type array
   by value. All arrays must be passed by reference.
 
-  The function 'product' takes a parameter a of type array of int by value.
+  The function 'product' takes a parameter 'a' of type integer array by value.
 $$
 
 fun main() : nothing
