@@ -1,0 +1,20 @@
+$$
+  In this erroneous grace program a variable with type integer will be used as
+  an array.
+
+  Variable 'myArray' has been declared as an integer, but it is used as an array
+  of integers.
+$$
+
+fun main() : nothing
+  var i, initialVal : int;
+  var myArray : int;
+
+{ $ main
+  writeString("Give initial value: ");
+  initialVal <- readInteger();
+  i <- 0;
+  while i < 10 do
+    myArray[i] <- initialVal;
+  writeString("Array was initialized successfully!\n");
+} $ main

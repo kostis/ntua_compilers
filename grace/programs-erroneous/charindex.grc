@@ -1,0 +1,21 @@
+$$
+  In this erroneous grace program the index of an element of a character
+  (written in brackets) will be of type char.
+
+  During initialization of 'my_array' the index j used for iteration has
+  character type.
+$$
+
+fun main(): nothing
+  var i : int;
+  var j : char;
+  var my_array : int[16];
+
+{ $ main
+  i <- 0;
+  j <- 'a';
+  while i < 16 do {
+    my_array[j] <- ascii(j);
+    i <- i + 1;
+  }
+} $ main

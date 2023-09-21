@@ -1,0 +1,21 @@
+$$
+  In this erroneous grace program a sign operator will be applied to a
+  character expression.
+
+  Variable 'c' of type character is tried to become negative in the block
+  of the while-do statement.
+$$
+
+fun main() : nothing
+  var i : int;
+  var c : char;
+  var a : int[8];
+
+{ $ main
+  i <- 0;
+  c <- 'a';
+  while i < 8 do {
+    c <- -c + ascii('c');
+    i <- i + 1;
+  }
+} $ main

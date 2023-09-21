@@ -1,0 +1,18 @@
+$$
+  In this erroneous grace program an r-value is passed as a parameter by
+  reference.
+
+  Function 'double' takes an argument passed by reference and doubles its value.
+  The argument given in the main function is an arithmetic expression, so an
+  r-value.
+$$
+
+fun main() : nothing
+  var a, b : int;
+  fun double(ref x : int) : nothing { x <- x * 2; }
+
+{ $ main
+  a <- 4;
+  b <- 7;
+  double(a + b);
+} $ main

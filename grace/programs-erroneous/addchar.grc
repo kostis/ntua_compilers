@@ -1,0 +1,24 @@
+$$
+  In this erroneous grace program an integer is added to a character with the
+  simple plus operator.
+
+  In the block of the while-do statement, the addition of c and 1 is not allowed.
+$$
+
+fun main() : nothing
+  var i : int;
+  var c : char;
+  var result : int;
+
+{ $ main
+  $ Will compute the ascii code of 'f'
+  result <- 0;
+  c <- 'a';
+  while c # 'f' do {
+    c <- c + 1;
+    result <- result + 1;
+  }
+  writeString("The ascii code of \'f\' is ");
+  writeInteger(result);
+  writeString(".\n");
+} $ main

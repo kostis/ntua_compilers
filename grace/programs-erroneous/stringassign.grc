@@ -2,7 +2,7 @@ $$
   In this erroneous grace program an assignment to a type of array happens.
 
   Variable 'str' is an array of characters and it is tried to assign a string to
-  it.
+  it with the '<-' operator.
 $$
 
 fun main () : nothing
