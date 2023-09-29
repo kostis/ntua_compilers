@@ -11,7 +11,7 @@ fun main () : nothing
   var bar : char[2][4][17];
   var zen : int[5][10];
 
-    fun arrayProc (ref x : int[]; y : char[13]; z : int[][10]) : nothing
+    fun arrayProc (ref x : int[]; ref y : char[][5][13]; ref z : int[][10]) : nothing
 
       var a : int [15];
       var b : char [2][10][13];
