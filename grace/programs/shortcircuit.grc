@@ -10,6 +10,7 @@ $$
 
 fun main () : nothing
 
+  var i : int;
   var x, y : int;
   var k, l : char;
 
@@ -34,8 +35,8 @@ fun main () : nothing
   { $ isUpperCase
 
     writeString("Checking if ");
-    writeCharacter(c);
-    writeCharacter(" is a capital letter.\n");
+    writeChar(c);
+    writeString(" is a capital letter.\n");
     asciiNum <- ascii(c);
     if asciiNum >= 65 and asciiNum <= 91 then
       return 1;
@@ -67,7 +68,7 @@ fun main () : nothing
   x <- 1;
   y <- 42;
   if isOne(x) = 1 or isOne(y) = 1 then
-    writeString("'isOne' function called only for variable 'x'.\n");
+    writeString("\'isOne\' function called only for variable \'x\'.\n");
   else
     writeString("This message will never be printed.\n");
 
@@ -78,17 +79,17 @@ fun main () : nothing
   if isUpperCase(k) = 1 and isUpperCase(l) = 1 then
     writeString("This message will never be printed.\n");
   else
-    writeString("'isUpperCase' function call should only happen for variable 'k'.\n");
+    writeString("\'isUpperCase\' function call should only happen for variable \'k\'.\n");
 
   writeChar('\n');
 
   $ The 2nd repetition of this while loop is the only occasion in this program where there can't be short-circuiting.
   i <- 41;
   while isWithinLimit(i, 17, 42) = 1 or isOne(i) = 1 do {
-    writeString("Only 'isWithinLimit' function call should happen here.\n");
+    writeString("Only \'isWithinLimit\' function call should happen here.\n");
     i <- i + 1;
   }
-  writeString("'isOne' function call should only happen once here.\n");
+  writeString("\'isOne\' function call should only happen once here.\n");
 
   writeChar('\n');
 
@@ -97,7 +98,7 @@ fun main () : nothing
     writeString("This messaged will never be printed.\n");
     i <- i + 1;
   }
-  writeString("'isOne' function call should only happen once here.\n");
-  writeString("'isWithinLimit' function call should never happen here.\n");
+  writeString("\'isOne\' function call should only happen once here.\n");
+  writeString("\'isWithinLimit\' function call should never happen here.\n");
 
 }
