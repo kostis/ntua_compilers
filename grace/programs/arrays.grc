@@ -8,7 +8,7 @@ $$
 fun main () : nothing
 
   var foo : int[11];
-  var bar : char[2][5][17];
+  var bar : char[2][5][13];
   var zen : int[5][10];
 
     fun arrayProc (ref x : int[]; ref y : char[][5][13]; ref z : int[][10]) : nothing
