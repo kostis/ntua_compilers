@@ -84,7 +84,7 @@ fun main () : nothing
       k <- 0;
       while i < 2 do {
         while j < 4 do {
-          while k < 1 do {
+          while k < 13 do {
             if ascii(b[i][j][k]) >= 65 then
               y[i][j][k] <- b[i][j][k];
             k <- k + 1;
