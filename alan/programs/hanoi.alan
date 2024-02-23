@@ -1,0 +1,29 @@
+solve () : proc
+
+   hanoi (rings : int, source : reference byte [],
+          target : reference byte [], auxiliary : reference byte []) : proc
+
+      move (source : reference byte [], target : reference byte[]) : proc
+      {
+         writeString("Moving from ");
+         writeString(source);
+         writeString(" to ");
+         writeString(target);
+         writeString(".\n");
+      }
+
+   { -- hanoi
+      if (rings >= 1) {
+         hanoi(rings-1, source, auxiliary, target);
+         move(source, target);
+         hanoi(rings-1, auxiliary, target, source);
+      }
+   } -- hanoi
+
+   NumberOfRings : int;
+
+{ -- solve
+   writeString("Rings: ");
+   NumberOfRings = readInteger();
+   hanoi(NumberOfRings, "left", "right", "middle");
+} -- solve

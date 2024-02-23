@@ -1,0 +1,59 @@
+main () : proc
+
+   bsort (n : int, x : reference int []) : proc
+   
+      swap (x : reference int, y : reference int) : proc
+         t : int;
+      {
+         t = x;
+         x = y;
+         y = t;
+      }
+   
+      changed : byte;
+      i : int;
+      
+   { -- bsort
+      changed = 'y';
+      while (changed == 'y') {
+         changed = 'n';
+         i = 0;
+         while (i < n-1) {
+            if (x[i] > x[i+1]) {
+               swap(x[i], x[i+1]);
+               changed = 'y';
+            }
+            i = i+1;
+         }
+      }
+   } -- bsort
+
+   writeArray (msg : reference byte [], n : int, x : reference int []) : proc
+      i : int;
+   {
+      writeString(msg);
+      i = 0;
+      while (i < n) {
+         if (i > 0) writeString(", ");
+         writeInteger(x[i]);
+         i = i+1;
+      }
+      writeString("\n");
+   }
+   
+   seed : int;
+   x    : int [16];
+   i    : int;
+   
+{ -- main
+   seed = 65;
+   i = 0;
+   while (i < 16) {
+      seed = (seed * 137 + 220 + i) % 101;
+      x[i] = seed;
+      i = i+1;
+   }
+   writeArray("Initial array: ", 16, x);
+   bsort(16, x);
+   writeArray("Sorted array: ", 16, x);
+} -- main

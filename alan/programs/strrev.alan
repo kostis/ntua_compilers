@@ -1,0 +1,21 @@
+main () : proc
+
+   r : byte [32];
+
+   reverse (s : reference byte []) : proc
+      i : int;
+      l : int;
+   {
+      l = strlen(s);
+      i = 0;
+      while (i < l) {
+         r[i] = s[l-i-1];
+         i = i+1;
+      }
+      r[i] = '\0';
+   }
+
+{ -- main
+   reverse("\n!dlrow olleH");
+   writeString(r);
+} -- main
