@@ -1,0 +1,52 @@
+$$
+
+A solution to https://leetcode.com/problems/palindrome-number/description/
+
+Given an integer x, return true if x is a palindrome , and false otherwise.
+
+$$
+
+fun main(): nothing
+
+    fun isPalindrome(x: int): int;
+    $ returns 1 if x is palindrome, 0 otherwise    
+
+    fun assert(n, res: int): nothing
+    {
+        if isPalindrome(n) = res then 
+            writeString("PASS\n");
+        else 
+            writeString("FAIL\n");
+    }
+
+    fun isPalindrome(x: int): int
+        var reversed, temp, digit: int;
+    { $ isPalindrome
+
+        if x < 0 then return 0;
+        temp <- x;
+        reversed <- 0;
+
+        while (temp # 0) do 
+        {
+            digit <- temp mod 10;
+            reversed <- reversed * 10 + digit;
+            temp  <- temp div 10;
+        }
+        if reversed = x then 
+            return 1;
+        return 0;
+
+    } $ isPalindrome
+
+{ $ main
+
+    $ writeString("Checking 121...\n");
+    assert(121, 1);
+    $ writeString("Checking -121...\n");
+    assert(-121, 0);
+    $ writeString("Checking 100...\n");
+    assert(100, 0);
+    $ writeString("Checking 1221...\n");
+    assert(1221, 1);
+} $ main

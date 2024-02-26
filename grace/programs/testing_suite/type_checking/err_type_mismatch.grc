@@ -1,0 +1,5 @@
+fun main() : nothing 
+var i : int;
+{
+    i <- 'a';
+}

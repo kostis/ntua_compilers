@@ -1,0 +1,4 @@
+fun main(): nothing
+    var a: int[10+10];
+{
+}

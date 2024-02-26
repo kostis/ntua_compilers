@@ -1,0 +1,11 @@
+fun main(): nothing
+
+    fun writeString(ref s : char[]): nothing
+    {
+        writeInteger(1);
+    }
+
+{ $ main
+    $ This should call the user defined writeString above
+    writeString("Hello");
+} $ main

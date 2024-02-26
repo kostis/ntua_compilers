@@ -1,0 +1,5 @@
+fun main(): nothing
+{ $ main
+    if 'a' < 1000 then
+        ;
+} $ main

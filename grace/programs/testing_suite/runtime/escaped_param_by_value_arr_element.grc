@@ -1,0 +1,42 @@
+fun p(): nothing
+    var a : int[100][100];
+
+    fun h(x : int) : nothing
+        fun f() : nothing
+            fun g() : nothing
+            {
+                writeInteger(x);
+                writeChar('\n');
+                x <- 99;
+                writeInteger(x);
+                writeChar('\n');
+            }     
+        {
+            writeInteger(x);
+            writeChar('\n');
+            x <- 77;
+            g();
+            writeInteger(x);
+            writeChar('\n');
+        } 
+    {
+        writeInteger(x);
+        writeChar('\n');
+        f();
+        writeInteger(x);
+        writeChar('\n');
+    }
+{
+    a[42][42] <- 10;   
+    h(a[42][42]);
+    writeInteger(a[42][42]);
+    writeChar('\n');
+}
+
+$ 10
+$ 10
+$ 77
+$ 99
+$ 99
+$ 99
+$ 10

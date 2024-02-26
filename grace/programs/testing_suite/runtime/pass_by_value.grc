@@ -1,0 +1,14 @@
+fun main(): nothing
+    var x: int;
+    
+    fun f(x : int): nothing
+    {
+        x <- 2;    
+    }
+
+{
+    x <- 1;
+    f(x);
+    $ Should print 1
+    writeInteger(x);
+}

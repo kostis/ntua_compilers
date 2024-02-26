@@ -1,0 +1,25 @@
+$ Same test as scope/nested_functions_2.grc but with same signature -> Requires runtime to see the expected result
+
+fun main(): nothing
+    fun f(): nothing
+    
+        fun f(): nothing
+            { $ f
+                writeString("New f");
+            } $ f
+    
+        fun g(): nothing
+        { $ g
+            f();
+        } $ g
+    
+    { $ f
+        $ This calls inner f
+        f();
+    } $ f
+
+{ $ main
+    $ This calls outer f
+    $ outer f -> inner f -> g -> inner f
+    f();
+} $ main

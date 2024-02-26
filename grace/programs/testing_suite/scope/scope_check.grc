@@ -1,0 +1,18 @@
+fun main(): nothing
+
+    var x: int;
+
+    fun f(): nothing
+    { $ f
+        $ x is defined in outter scope
+        $ Expected to print 42
+        writeInteger(x);
+        x <- 17;
+    } $ f
+
+{ $ main
+    x <- 42;
+    f();
+    $ Expected to print 17
+    writeInteger(x);
+} $ main

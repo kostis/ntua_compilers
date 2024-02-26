@@ -1,0 +1,7 @@
+fun main(): nothing
+    var c: int;
+    $ Invalid, can't have the same identifier twice in the same scope
+    fun c(): nothing
+    {}
+
+{}  

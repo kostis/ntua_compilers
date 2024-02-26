@@ -1,0 +1,25 @@
+fun main(): nothing
+    fun f(): nothing
+    
+        fun f(x: int): nothing
+            { $ f
+                writeString("New f");
+            } $ f
+    
+        fun g(): nothing
+        { $ g
+            $ This should call inner f, the different signature is used so the test can work without needing a runtime env
+            $ Note: We are expecting a same test in runtime to have the same resut
+            f(1);
+        } $ g
+    
+    { $ f
+        $ This calls inner f
+        f(1);
+    } $ f
+
+{ $ main
+    $ This calls outer f
+    $ outer f -> inner f -> g -> inner f
+    f();
+} $ main

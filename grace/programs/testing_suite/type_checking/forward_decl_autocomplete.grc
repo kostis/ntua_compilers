@@ -1,0 +1,9 @@
+fun main(): nothing
+    var a: int[5];
+    fun f(ref a: int[]): nothing;
+
+    fun f(ref a :int[]): nothing
+    {}
+{
+    f(a);
+}

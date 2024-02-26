@@ -1,0 +1,7 @@
+fun main(): nothing
+    fun f(): int
+    {
+        writeInteger(1);
+    }
+{
+}

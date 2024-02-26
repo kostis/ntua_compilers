@@ -1,0 +1,5 @@
+fun hello () : nothing
+{
+   writeString("Hello \n \
+   world!\n");
+}

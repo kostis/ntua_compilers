@@ -1,0 +1,16 @@
+fun main(): nothing
+
+    fun f(g: int): nothing
+    {
+    }
+    
+    fun g(): int
+    {
+        return 1;
+    }
+
+{
+    f(
+        g
+    );
+}

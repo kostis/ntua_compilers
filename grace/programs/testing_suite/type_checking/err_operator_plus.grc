@@ -1,0 +1,7 @@
+fun main () : nothing
+
+var i: int;
+
+{ $ main
+    i <- 'a' + 1;
+} $ main

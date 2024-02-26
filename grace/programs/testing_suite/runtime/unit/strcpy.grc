@@ -1,0 +1,10 @@
+fun main(): nothing
+    var a: char[10];
+{
+    a[0] <- 'x';
+    strcpy(a, "hello");
+    if strcmp(a, "hello") = 0 then
+        writeString("PASS");
+}
+
+$ PASS

@@ -1,0 +1,8 @@
+fun main () : nothing
+    
+    fun f (s : char[]) : char[10]
+    {}
+
+{ $ main
+   r[0] <- 1;
+} $ main

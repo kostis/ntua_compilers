@@ -1,0 +1,13 @@
+fun main () : nothing
+
+   var r : char[20];
+
+   $ The following is a semantic error because arrays must be passed by reference
+   fun reverse (s : char[]) : nothing 
+   {
+      
+   }
+
+{ $ main
+   reverse("\n!dlrow olleH");
+} $ main

@@ -1,0 +1,13 @@
+fun main() : nothing
+    var i: int;
+    
+    fun f(): int
+    {
+        return 1;
+        $ This must not be printed because return stmt terminates current function
+        writeString("Must not be printed");
+    }
+
+{
+    i <- f();
+}

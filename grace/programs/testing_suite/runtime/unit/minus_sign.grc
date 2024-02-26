@@ -1,0 +1,6 @@
+fun main(): nothing
+{ $ main
+    writeInteger(-2);
+} $ main
+
+$ -2

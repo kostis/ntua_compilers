@@ -1,0 +1,9 @@
+fun main() : nothing
+
+var i: int;
+
+{ $ main
+    i <- 1; 
+    if not i then
+        writeString("Error");
+} $ main

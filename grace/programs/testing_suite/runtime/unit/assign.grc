@@ -1,0 +1,5 @@
+fun main(): nothing
+    var a: int;
+{
+    a <- 1;
+}

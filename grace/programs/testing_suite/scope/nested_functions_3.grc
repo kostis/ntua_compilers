@@ -1,0 +1,28 @@
+fun main(): nothing
+    fun f(x: int): nothing
+        
+        fun g(): nothing
+        { $ g
+            $ This should call outer f because inner f is not yet declared/defined
+            $ even though it is on the same level as g
+            $ So when g is looking for f, it finds the outer f
+            $ Note: the different signature is used so the test can work without needing a runtime env
+            $ Note: We are expecting a same test in runtime to have the same resut
+            f(1);
+        } $ g
+
+        fun f(): nothing
+        { $ f
+            writeString("Inner f");
+        } $ f
+    
+    { $ f
+        writeString("Outer f");
+        g();
+    } $ f
+
+{ $ main
+    $ This calls outer f
+    $ outer f -> g -> inner f
+    f(1);
+} $ main

@@ -1,0 +1,170 @@
+$$
+
+Given a list of positive integers, return the number of unique elements in it
+
+Max length of the list is 100
+
+$$
+
+fun main(): nothing
+    var seed, times_called, i, test_size, test_res: int;
+    var nums: int[100];
+
+
+    fun pow(base, exp: int): int
+        var res, i: int;
+    { $ pow
+        i <- 0;
+        res <- base;
+        while i < exp - 1 do 
+        {
+            res <- res * base;
+            i <- i + 1;
+        }
+        return res;
+    } $ pow
+
+
+    fun random(upper_limit: int): int
+        var rand, a, c, m: int;    
+    { $ random
+        $ writeString("Random start\t");
+        $ writeInteger(seed);
+
+        a <- 65539;
+        c <- 0;
+        m <- pow(2,31);
+        rand <- (a * seed + c) mod m;
+        $ Update the seed for next use
+        seed <- (seed * 137 + 221 + times_called) mod 101;
+        $ writeString("Seed:\t");
+        $ writeInteger(seed);
+        $ writeChar('\n');
+        times_called <- times_called + 1;
+        $ writeString("Random finished\n");
+        return seed mod upper_limit;
+        
+        return rand mod upper_limit;
+    } $ random
+
+
+    fun writeArray(ref a: int[]; n: int): nothing
+        var i: int;
+    { $ writeArray
+       i <- 0 ;
+        while i < n do
+        {
+            writeInteger(a[i]);
+            writeString(" ");
+            i <- i+1;
+        } 
+        writeChar('\n');
+    } $ writeArray
+
+
+    fun solve(ref nums: int[]; len: int): int
+        var i, res: int;
+        $ Keep track of found ints
+        var found: int[100];
+        
+        fun clear_found(): nothing
+            var i: int;
+        { $ clear_found
+            i <- 0;
+            while i < 100 do
+            {
+                found[i] <- -1;
+                i <- i + 1;
+            }
+        } $ clear_found
+
+
+        fun exists(x : int): int
+            var i: int;
+        
+        { $ exists
+            $ writeString("Looking for: ");
+            $ writeInteger(x);
+            i <- 0;
+            while i < 100 do
+            {
+                if found[i] = x then 
+                {
+                    $ writeString("\tFound\t");
+                    return 1;
+                }
+                i <- i + 1;
+            }
+            $ writeString("\t Not Found\t");
+            return 0;
+        } $ exists
+
+    { $ solve
+        clear_found();
+        i <- 0;
+        res <- 0;
+        while i < len do 
+        { $ for every element in the test arr
+            if exists(nums[i]) # 1 then 
+            {
+                found[res] <- nums[i];
+                res <- res + 1;
+            }
+            i <- i + 1;
+        }
+        $ writeString("Unique elements:\t");
+        $ writeInteger(res);
+        $ writeChar('\n');
+        return res;
+    } $ solve
+
+
+    fun generate_testacase(): nothing
+        var test_res, res, i, r: int;
+    
+    { $ generate_testacase
+        i <- 0;
+        $ Random test size, max is 100
+        test_size <- random(100);
+        $ writeString("Generating testcase with ");
+        $ writeInteger(test_size);
+        $ writeString(" elements\n");
+        while i < test_size do 
+        {
+            nums[i] <- i+1;
+            i <- i + 1;
+        }
+        i <- 0;
+        r <- random(test_size);
+        while i < r do
+        {
+            nums[i] <- 0;
+            i <- i + 1;
+        }
+        $ writeString("Replacing ");
+        $ writeInteger(r);
+        $ writeString(" elements\n");
+        $ writeArray(nums, test_size);
+        if r = 0 or r = 1 then
+            res <- test_size;
+        else 
+            res <- test_size - r + 1;
+        test_res <- solve(nums, test_size);
+        if test_res = res then
+            writeString("PASS\n");
+        else
+            writeString("FAIL\n");
+    } $ generate_testacase
+
+{ $ main
+    seed <- 65;
+    i <- 0;
+    while i < 10 do 
+    {
+        generate_testacase();
+        i <- i + 1;
+    }
+
+} $ main
+
+$ Should only print PASS for each testcase, the default is 10 times
