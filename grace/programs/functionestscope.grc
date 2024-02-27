@@ -1,0 +1,60 @@
+$$
+    This program tests the scope implementation in recursive and nested functions.
+    It includes a function to test variable scope in a simple recursion (recursiveScopeCheck)
+    and another to test scope in nested function calls (nestedCheck).
+$$
+
+fun main() : nothing
+
+  var res :int;
+  fun recursiveScopeCheck(n:int):int
+    var localvar :int;
+  {
+    localvar <- n;
+    if n = 0 then
+        return 0;
+    recursiveScopeCheck(n-1);
+    return localvar;
+  }
+
+
+  fun nestedCheck():nothing
+    var num: int;
+    fun nestedCheck2():nothing
+        fun nestedCheck3():nothing
+            fun nestedCheck4():nothing
+            {
+                num <- 2;
+            }
+
+        {
+            nestedCheck4();
+        }
+    {
+      nestedCheck3();
+    }
+  {
+    num <-1;
+    nestedCheck2();
+
+    if num = 2 then
+        writeString("Test 2 Success \n");
+    else
+        writeString("Test 2 Error \n");
+
+  }
+
+
+{ $ main
+
+    res <- recursiveScopeCheck(4);
+
+    if res = 4 then
+        writeString("Test 1 Success \n");
+    else
+        writeString("Test 1 Error \n");
+
+    nestedCheck();
+
+ } $ main
+
