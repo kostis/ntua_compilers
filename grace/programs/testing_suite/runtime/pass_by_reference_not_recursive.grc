@@ -18,5 +18,5 @@ fun main(): nothing
     if a = 1 then
         writeString("Success");
     else
-        writeString("Failue");
+        writeString("Failure");
 } $ main

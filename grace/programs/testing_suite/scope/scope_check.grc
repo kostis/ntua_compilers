@@ -4,7 +4,7 @@ fun main(): nothing
 
     fun f(): nothing
     { $ f
-        $ x is defined in outter scope
+        $ x is defined in outer scope
         $ Expected to print 42
         writeInteger(x);
         x <- 17;

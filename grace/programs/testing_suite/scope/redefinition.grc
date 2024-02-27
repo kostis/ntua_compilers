@@ -7,7 +7,7 @@ fun main(): nothing
         var x: int;
     { $ f
         x <- 17;
-        $ x is defined in inner scope, the localy copy should change
+        $ x is defined in inner scope, the local copy should change
         $ Expected to print 17
         writeInteger(x);
     } $ f

@@ -68,21 +68,21 @@ fun main(): nothing
             if c = 'M' then return 1000;
         }
 
-        var i, ans, n: int;
+        var i, answer, n: int;
 
     { $ roman_to_int
         i <- 0;
-        ans <- 0;
+        answer <- 0;
         n <- strlen(str);
         while i < n  do 
         {
             if (get_mapping(str[i]) < get_mapping(str[i+1])) then 
-                ans <- ans - get_mapping(str[i]);
+                answer <- answer - get_mapping(str[i]);
             else
-                ans <- ans + get_mapping(str[i]);
+                answer <- answer + get_mapping(str[i]);
             i <- i+1;
         }
-        return ans;
+        return answer;
     } $ roman_to_int
 
 { $ main

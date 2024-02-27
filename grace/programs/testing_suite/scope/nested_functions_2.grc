@@ -9,7 +9,7 @@ fun main(): nothing
         fun g(): nothing
         { $ g
             $ This should call inner f, the different signature is used so the test can work without needing a runtime env
-            $ Note: We are expecting a same test in runtime to have the same resut
+            $ Note: We are expecting a same test in runtime to have the same result
             f(1);
         } $ g
     

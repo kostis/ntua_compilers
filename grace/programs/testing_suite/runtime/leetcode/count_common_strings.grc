@@ -6,7 +6,7 @@ Given two arrays of strings list1 and list2, find and count the common strings.
 A common string is a string that appeared in both list1 and list2.
 Return the number of common strings.
 
-Max lenght of lists: 50
+Max length of lists: 50
 Max length of string: 50
  
 Example 1:

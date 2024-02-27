@@ -7,7 +7,7 @@ fun main(): nothing
             $ even though it is on the same level as g
             $ So when g is looking for f, it finds the outer f
             $ Note: the different signature is used so the test can work without needing a runtime env
-            $ Note: We are expecting a same test in runtime to have the same resut
+            $ Note: We are expecting a same test in runtime to have the same result
             f(1);
         } $ g
 

@@ -8,7 +8,7 @@ fun main () : nothing
       l <- strlen(s);
       i <- 0;
 
-      $ The following are semantic errors, the initial parsing should be successfull
+      $ The following are semantic errors, the initial parsing should be successful
       r["hello"] <- 0;
       r[(4)] <- 0;
       r['\n'] <- 0;

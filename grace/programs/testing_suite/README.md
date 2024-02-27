@@ -11,6 +11,6 @@ Tests are organized in the following way:
 - `runtime/leetcode`: leetcode problems solved in `grace`
 - `runtime/unit`: unit tests
 
-The convention used in the naming of tests is that if a filename begins with `err` (e.g. `parser/err_arr_def_expr.grc`) the compilation should not be successfull.
+The convention used in the naming of tests is that if a filename begins with `err` (e.g. `parser/err_arr_def_expr.grc`) the compilation should not be successful.
 
 A utility script is provided in `run_tests.sh` to automatically run the test suite (make sure you change the directory path at the beginning of a file)
