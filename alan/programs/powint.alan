@@ -1,0 +1,29 @@
+powint (base : int, expon : int, mod : int) : int
+	res: int
+{
+	base = base % mod;
+	res = 1;
+	while (expon > 0) {
+		if (expon % 2 == 1) res = (res*base) % mod;
+		base = (base*base) % mod;
+		expon = expon / 2;
+	}
+	return res;
+}
+
+main () : proc
+	b: int
+	e: int
+	m: int
+	res: int
+{
+	b = readInteger();
+	e = readInteger();
+	m = readInteger();
+
+	res = powint(b, e, m);
+
+	writeInteger(res);
+	writeChar('\n');
+}
+
