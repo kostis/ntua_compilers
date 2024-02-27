@@ -25,7 +25,6 @@ def knapsack(n: int, w_max: int, w: list[int], v: list[int]) -> int:
     return dp(n - 1, w_max)
 
 
-CMD = "./knapsack.py"  # this will be changed to the Alan executable when we build it
 N = 10
 SIZE = 100
 MAX_W = 100
@@ -43,7 +42,7 @@ for _ in range(N):
     true_sol = knapsack(cur_size, w_max, w, v)
 
     stdin = f"{cur_size} {w_max}\n{' '.join(map(str, w))}\n{' '.join(map(str, v))}"
-    res = subprocess.run([CMD], capture_output=True, text=True, input=stdin)
+    res = subprocess.run(sys.argv[1], capture_output=True, text=True, input=stdin)
     assert not res.stderr, res.stderr
     assert res.returncode == 0, res.returncode
     assert int(res.stdout) == true_sol
