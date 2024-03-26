@@ -1,0 +1,108 @@
+$$
+  This program tests passing of multi-dimensional arrays as parameters.
+
+  In the main program, the sum of a three dimensional array is calculated with
+  two midlly different ways, using the functions 'array1DSum' and 'array2DSum'.
+$$
+
+fun main() : nothing
+  var arr : int [2][3][4];
+  var i, j: int;
+  var sum : int [2];
+  var msg : char[128];
+
+  fun incr(ref x : int) : nothing {
+    x <- x + 1;
+  }
+
+  fun incrByStep(ref x : int; step : int) : nothing {
+    x <- x + step;
+  }
+
+  fun initializeArray(ref a : int[2][3][4]) : nothing
+    var n, i, j, k : int;
+  {
+    n <- 0;
+    i <- 0;
+    while i < 2 do {
+      j <- 0;
+      while j < 3 do {
+        k <- 0;
+        while k < 4 do {
+          a[i][j][k] <- n;
+          incrByStep(n, 8);
+          incr(k);
+        }
+        incr(j);
+      }
+      incr(i);
+    }
+  }
+
+  fun array1DSum(ref a : int[]; size : int) : int
+    var sum, i : int;
+  { $array1DSum
+    i <- 0;
+    sum <- 0;
+    while i < size do {
+      sum <- a[i] + sum;
+      i <- i + 1;
+    }
+    return sum;
+  }
+
+  fun array2DSum(ref a : int[3][4]) : int
+    var sum, i, j : int;
+  { $array2DSum
+    i <- 0;
+    sum <- 0;
+    while i < 3 do {
+      j <- 0;
+      while j < 4 do {
+        sum <- sum + a[i][j];
+        j <- j + 1;
+      }
+      i <- i + 1;
+    }
+
+    return sum;
+  }
+
+{ $main
+
+  writeString("Initializing array... ");
+  initializeArray(arr);
+  writeString("done!\n");
+
+  writeString("Sum using the \'array1DSum\' function: ");
+  i <- 0;
+  sum[0] <- 0;
+  while i < 2 do {
+    j <- 0;
+    while j < 3 do {
+      sum[0] <- sum[0] + array1DSum(arr[i][j], 4);
+      j <- j + 1;
+    }
+    i <- i + 1;
+  }
+  writeInteger(sum[0]);
+  writeString("\n");
+
+  writeString("Sum using the \'array2DSum\' function: ");
+  i <- 0;
+  sum[1] <- 0;
+  while i < 2 do {
+    sum[1] <- sum[1] + array2DSum(arr[i]);
+    i <- i + 1;
+  }
+  writeInteger(sum[1]);
+  writeString("\n");
+
+  if sum[0] # sum[1] then
+    strcpy(msg, "Results differ!\n");
+  else
+    strcpy(msg, "Results are the same!\n");
+
+  writeString(msg);
+
+}

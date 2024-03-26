@@ -1,8 +1,8 @@
 $$
-  This grace program tests the utilization of array structures with multiple
-  dimensions as arguments, parameters, variables, l-values and r-values. It also
-  includes mildly complex arguments given to function calls and nested while
-  loops without blocks.
+  This program tests the use of array structures with multiple dimensions as
+  arguments, parameters, variables, l-values and r-values.  It also includes
+  mildly complex arguments given to function calls and nested while loops
+  without blocks.
 $$
 
 fun main () : nothing
@@ -30,11 +30,16 @@ fun main () : nothing
         i <- 0;
         j <- 0;
         k <- 0;
-        while i < 2 do
-          while j < 10 do
-            while k < 13 do
+        while i < 2 do {
+          while j < 10 do {
+            while k < 13 do {
               b[i][j][k] <- chr((i + j + k) mod 26 + ascii('A'));
-
+              k <- k + 1;
+            }
+            j <- j + 1;
+          }
+          i <- i + 1;
+        }
         return 0;
       }
 
@@ -49,7 +54,6 @@ fun main () : nothing
       s <- 11;
       while i < s do {
         x[i] <- a[i];
-
         i <- i + 1;
       }
 
@@ -58,30 +62,43 @@ fun main () : nothing
         z[i][9] <- 0;
         j <- 0;
         while j < 9 do {
+          writeInteger(j);
           z[i][j] <- 1;
           j <- j + 1;
         }
         i <- i + 1;
       }
+      writeString("\n");
+
       i <- 0;
-      j <- 0;
-      s <- 10;
-      while i < 10 do {
-        while (z[j][i] # 0) do {
-          z[j][i] <- a[i];
-          j <- j + 1;
+      j <- 1;
+      while i < j and z[j][i] # 0 do {
+        writeInteger(j);
+        z[j][i] <- a[i];
+        j <- j + 1;
+        if j >= 5 then {
+          j <- 0;
+          i <- i + 1;
         }
-        i <- i + 1;
       }
+      writeString("\n");
 
       i <- 0;
       j <- 0;
       k <- 0;
-      while i < 2 do
-        while j < 4 do
-          while k < 13 do
+      while i < 2 do {
+        while j < 4 do {
+          while k < 13 do {
             if ascii(b[i][j][k]) >= 65 then
               y[i][j][k] <- b[i][j][k];
+            writeInteger(j-k);
+            k <- k + 1;
+          }
+          j <- j + 1;
+        }
+        i <- i + 1;
+      }
+      writeString("\n");
     }
 
 { $ main
