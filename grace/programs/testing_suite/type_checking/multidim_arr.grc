@@ -1,0 +1,9 @@
+fun main(): nothing
+    var a : char[5][4][3];
+
+    fun f(ref a : char[4][3]): nothing
+    {}
+
+{
+    f(a[2]);
+}

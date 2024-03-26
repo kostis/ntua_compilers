@@ -1,0 +1,11 @@
+fun main () : nothing
+    var a : int;
+    fun f (s : char) : nothing
+    {
+        
+    }
+
+{ $ main
+   f(a);
+} $ main
+

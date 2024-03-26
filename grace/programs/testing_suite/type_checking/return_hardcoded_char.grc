@@ -1,0 +1,11 @@
+fun main(): nothing
+    var c: char;
+
+    fun f(): char
+    {
+        return 'f';
+    }
+
+{
+    c <- f();
+}

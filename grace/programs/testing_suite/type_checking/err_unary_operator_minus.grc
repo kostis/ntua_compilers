@@ -1,0 +1,8 @@
+fun main () : nothing
+
+var i, c : char;
+
+{ $ main
+    i <- 'a';
+    c <- -i;
+} $ main
