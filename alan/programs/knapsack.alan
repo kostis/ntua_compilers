@@ -1,33 +1,36 @@
-knapsack(n: int, w_max: int, w: reference int [], v: reference int []) : int
-	dp : int[10000];
-	i : int;
-	w_c : int;
-{
-	w_c = 0;
-	while (w_c<=w_max) {
-		dp[w_c] = 0;
-		w_c = w_c+1;
-	}
-	i = 0;
-	while (i<n) {
-		w_c = w_max;
-		while (w_c>0) {
-			if (w[i] <= w_c and v[i] + dp[w_c-w[i]] > dp[w_c]) dp[w_c] = v[i] + dp[w_c-w[i]];
-			w_c = w_c - 1;
-		}
-		i = i+1;
-	}
-	return dp[w_max];
-}
-	
-
 main () : proc
+
+	knapsack(n: int, w_max: int, w: reference int [], v: reference int []) : int
+		dp : int[10000];
+		i : int;
+		w_c : int;
+	{
+		w_c = 0;
+		while (w_c <= w_max) {
+			dp[w_c] = 0;
+			w_c = w_c+1;
+		}
+		i = 0;
+		while (i < n) {
+			w_c = w_max;
+			while (w_c > 0) {
+				if (w[i] <= w_c & v[i] + dp[w_c-w[i]] > dp[w_c])
+					dp[w_c] = v[i] + dp[w_c-w[i]];
+				w_c = w_c - 1;
+			}
+			i = i+1;
+		}
+		return dp[w_max];
+	}
+
 	w : int[10000];
 	v : int[10000];
 	n : int;
 	w_max : int;
 	res : int;
-{
+	i : int;
+
+{ -- main
 	n = readInteger();
 	w_max = readInteger();
 	
@@ -49,5 +52,5 @@ main () : proc
 
 	writeInteger(res);
 	writeChar('\n');
-}
+} -- main
 

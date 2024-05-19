@@ -1,3 +1,5 @@
+main () : proc
+
 merge (x: reference int [], start: int, mid: int, end: int) : proc
 	tmp: int[10000];
 	tmp_idx: int;
@@ -10,7 +12,7 @@ merge (x: reference int [], start: int, mid: int, end: int) : proc
 	l_itr = start;
 	r_itr = mid;
 
-	while (l_itr < mid and r_itr < end) {
+	while (l_itr < mid & r_itr < end) {
 		if (x[l_itr] < x[r_itr]) {
 			tmp[tmp_idx] = x[l_itr];
 			l_itr = l_itr+1;
@@ -33,24 +35,23 @@ merge (x: reference int [], start: int, mid: int, end: int) : proc
 		x_itr = x_itr+1;
 		tmp_idx2 = tmp_idx2+1;
 	}
+}
 
-
-mergesort (x: reference int [], int l, int r) : proc
+mergeSort (x: reference int [], l: int, r: int) : proc
 {
 	-- sort [l,r) segment
 	if (l == r-1) return;
-	mergesort(x, l, (l+r)/2);
-	mergesort(x, (l+r)/2, r);
+	mergeSort(x, l, (l+r)/2);
+	mergeSort(x, (l+r)/2, r);
 	
 	-- merge (separate function to allocate local variables in them and reduce stack consumption)
 	merge(x, l, (l+r)/2, r);
 }
 
-main () : proc
 	x : int [10000];
 	n : int;
 	i : int;
-{
+{ -- main
 	n = readInteger();
 	
 	if (n <= 0) return;

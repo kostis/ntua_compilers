@@ -1,4 +1,4 @@
-merge (x: reference int [], start: int, mid: int, end int) : proc
+merge (x: reference int [], start: int, mid: int, end: int) : proc
 	-- through recursion create a "recursive array" in callstack (through the 'cur' variables).
 	aux (x_itr: int, l: int, r: int) : proc
 	-- presumably (given the scope rules) x, mid, end are visible inside aux.
@@ -6,7 +6,7 @@ merge (x: reference int [], start: int, mid: int, end int) : proc
 	{
 	        if (x_itr >= end) return;
 
-		if (l < mid and r < end) {
+		if (l < mid & r < end) {
 			if (x[l] < x[r]) {
 				cur = x[l];
 				l = l+1;
@@ -23,14 +23,13 @@ merge (x: reference int [], start: int, mid: int, end int) : proc
 		x[x_itr] = cur;
 	}
 	aux(start, start, mid); -- no need for curly brackets as it is just one statement
-	
 
-mergesort (x: reference int [], int l, int r) : proc
+mergeSort (x: reference int [], l: int, r: int) : proc
 {
 	-- sort [l,r) segment
 	if (l == r-1) return;
-	mergesort(x, l, (l+r)/2);
-	mergesort(x, (l+r)/2, r);
+	mergeSort(x, l, (l+r)/2);
+	mergeSort(x, (l+r)/2, r);
 	
 	-- merge (separate function to allocate local variables in them and reduce stack consumption)
 	merge(x, l, (l+r)/2, r);
