@@ -1,0 +1,78 @@
+fun main () : nothing
+    var storage : int[16];
+
+    fun mergeSort(ref arr : int[]; l : int; r : int) : nothing
+        fun merge(ref arr : int[]; l : int; m : int; r : int) : nothing        
+            var i, j, tmp, counter : int;
+        {
+            counter <- l;
+            while (counter <= r) do {
+                storage[counter] <- arr[counter];
+                counter <- counter+1;
+            }
+            counter <- l;
+            i <- l;
+            j <- m+1;
+            while (i <= m and j <= r) do {
+                if (storage[i] < storage[j]) then {
+                    arr[counter] <- storage[i];
+                    i <- i+1;
+                } else {
+                    arr[counter] <- storage[j];
+                    j <- j+1;
+                }
+                counter <- counter+1;
+            }
+            while (i <= m) do {
+                arr[counter] <- storage[i];
+                i <- i+1;
+                counter <- counter+1;
+            }
+            while (j <= r) do {
+                arr[counter] <- storage[j];
+                j <- j+1;
+                counter <- counter+1;
+            }
+        }
+        var m : int;
+    {
+        if (l < r) then {
+            m <- l + ((r - l) div 2);
+    
+            $ Sort first and second halves 
+            mergeSort(arr, l, m);
+            mergeSort(arr, m + 1, r);
+    
+            merge(arr, l, m, r);
+        }
+    }
+
+   fun writeArray (ref msg : char[]; n : int; ref x : int[]) : nothing
+        var i : int;
+   {
+        writeString(msg);
+        i <- 0;
+        while i < n do {
+            if i > 0 then writeString(", ");
+            writeInteger(x[i]);
+            i <- i+1;
+        }
+        writeString("\n");
+   }
+   
+    var seed, i, N : int;
+    var x : int[421742];
+   
+{ $ main
+    N <- 16;
+    seed <- 65;
+    i <- 0;
+    while i < 16 do {
+        seed <- (seed * 137 + 221 + i) mod 101;
+        x[i] <- seed;
+        i <- i+1;
+    }
+    writeArray("Initial array: ", N, x);
+    mergeSort(x, 0, N-1);
+    writeArray("Sorted  array: ", N, x);
+} $ main

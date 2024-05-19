@@ -1,0 +1,41 @@
+fun main() : nothing
+
+    fun swap(ref x, y : int) : nothing
+        var temp : int;
+    {
+        temp <- x;
+        x <- y;
+        y <- temp;
+    }
+
+    fun swap_2(ref x : int[]) : nothing
+    {
+        swap(x[0], x[1]);
+    }
+
+    var x : int[2];
+
+{
+    x[0] <- 17;
+    x[1] <- 42;
+    writeString("x[0] = ");
+    writeInteger(x[0]);
+    writeString("\n");
+    writeString("x[1] = ");
+    writeInteger(x[1]);
+    writeString("\n\nSWAPPP\n");
+    swap(x[0],x[1]);
+    writeString("\nx[0] = ");
+    writeInteger(x[0]);
+    writeString("\n");
+    writeString("x[1] = ");
+    writeInteger(x[1]);
+    writeString("\n\nSWAPPP\n");
+    swap_2(x);
+    writeString("\nx[0] = ");
+    writeInteger(x[0]);
+    writeString("\n");
+    writeString("x[1] = ");
+    writeInteger(x[1]);
+    writeString("\n");
+}

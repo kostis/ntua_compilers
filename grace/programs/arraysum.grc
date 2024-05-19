@@ -64,7 +64,6 @@ fun main() : nothing
       }
       i <- i + 1;
     }
-
     return sum;
   }
 
