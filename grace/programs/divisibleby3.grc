@@ -48,5 +48,5 @@ fun main() : nothing
   writeString(" is ");
   if divisibleBy3(n) # 1 then
     writeString("not ");
-  writeString("divided by 3.\n");
+  writeString("divisible by 3\n");
 } $ main

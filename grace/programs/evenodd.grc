@@ -12,6 +12,14 @@ $$
 
 fun main(): nothing
 
+  fun abs(n: int): int
+  { $ abs
+    if n < 0 then
+      return -n;
+    else
+      return n;
+  }
+
   fun even(n: int): int;
 
   fun odd(n: int): int
@@ -33,7 +41,7 @@ fun main(): nothing
 { $ main
   writeString("Please, give an integer: ");
   
-  if odd(readInteger()) = 1 then
+  if odd(abs(readInteger())) = 1 then
     writeString("odd\n");
   else
     writeString("even\n");

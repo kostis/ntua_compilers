@@ -1,0 +1,15 @@
+Checking if 1 is equal to 1.
+'isOne' function called only for variable 'x'.
+
+Checking if n is a capital letter.
+'isUpperCase' function call should only happen for variable 'k'.
+
+Checking if 41 is between 17 and 42.
+Only 'isWithinLimit' function call should happen here.
+Checking if 42 is between 17 and 42.
+Checking if 42 is equal to 1.
+'isOne' function call should only happen once here.
+
+Checking if 0 is equal to 1.
+'isOne' function call should only happen once here.
+'isWithinLimit' function call should never happen here.
