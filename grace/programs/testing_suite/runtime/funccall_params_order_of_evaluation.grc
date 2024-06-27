@@ -1,0 +1,21 @@
+fun main() : nothing 
+    fun f() : int
+    { $ f
+        writeString("First\n");
+        return 0;
+    } $ f
+
+    fun g() : int 
+    { $ g
+        writeString("Second\n");
+        return 0;
+    } $ g
+
+    fun h(i, j : int) : nothing 
+    { $ h
+    } $ h 
+
+{ $ main
+    $ Expected behavior: f() is evaluated before g()
+    h(f(), g());
+} $ main

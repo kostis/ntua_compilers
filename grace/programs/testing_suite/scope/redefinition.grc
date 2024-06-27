@@ -1,0 +1,24 @@
+fun main(): nothing
+
+    var x: int;
+
+    fun f(): nothing
+    
+        var x: int;
+    { $ f
+        x <- 17;
+        $ x is defined in inner scope, the local copy should change
+        $ Expected to print 17
+        writeInteger(x);
+    } $ f
+
+{ $ main
+    x <- 42;
+    f();
+    $ Expected to print 42
+    writeInteger(x);
+    if x = 42 then 
+        writeString("Success\n");
+    else
+        writeString("Error\n");
+} $ main

@@ -1,0 +1,8 @@
+fun main(): nothing
+    var x: char;
+{
+    writeChar("hello"[1]);
+    writeChar('\n');
+}
+
+$ e
