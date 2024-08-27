@@ -1,6 +1,6 @@
 main () : proc
 
-	knapsack(n: int, w_max: int, w: reference int [], v: reference int []) : int
+	knapsack(n: int, w_max: int, p: reference int [], w: reference int []) : int
 		dp : int[10000];
 		i : int;
 		w_c : int;
@@ -8,47 +8,47 @@ main () : proc
 		w_c = 0;
 		while (w_c <= w_max) {
 			dp[w_c] = 0;
-			w_c = w_c+1;
+			w_c = w_c + 1;
 		}
 		i = 0;
 		while (i < n) {
 			w_c = w_max;
 			while (w_c > 0) {
-				if (w[i] <= w_c & v[i] + dp[w_c-w[i]] > dp[w_c])
-					dp[w_c] = v[i] + dp[w_c-w[i]];
+				if (w[i] <= w_c & p[i] + dp[w_c-w[i]] > dp[w_c])
+					dp[w_c] = p[i] + dp[w_c-w[i]];
 				w_c = w_c - 1;
 			}
-			i = i+1;
+			i = i + 1;
 		}
 		return dp[w_max];
 	}
 
-	w : int[10000];
-	v : int[10000];
 	n : int;
-	w_max : int;
+	weight_max : int;
+	profit : int[10000];
+	weight : int[10000];
 	res : int;
 	i : int;
 
 { -- main
 	n = readInteger();
-	w_max = readInteger();
+	weight_max = readInteger();
 	
 	if (n <= 0) return;
 
 	i = 0;
 	while (i < n) {
-		w[i] = readInteger();
+		profit[i] = readInteger();
 		i = i+1;
 	}
 
 	i = 0;
 	while (i < n) {
-		v[i] = readInteger();
+		weight[i] = readInteger();
 		i = i+1;
 	}
 
-	res = knapsack(n, w_max, w, v);
+	res = knapsack(n, weight_max, profit, weight);
 
 	writeInteger(res);
 	writeChar('\n');
