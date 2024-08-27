@@ -23,9 +23,12 @@ main () : proc
    counter : int;
    
 { -- main
-   writeString("Limit: ");
+   writeString("Please, give me the upper limit: ");
    limit = readInteger();
-   writeString("Primes:\n");
+   writeString("Prime numbers between 0 and ");
+   writeInteger(limit);
+   writeString(":\n\n");
+
    counter = 0;
    if (limit >= 2) {
       counter = counter + 1;
@@ -52,7 +55,7 @@ main () : proc
       number = number + 6;
    }
 
-   writeString("\nTotal: ");
-   writeInteger(counter);
    writeString("\n");
+   writeInteger(counter);
+   writeString(" prime number(s) were found.\n");
 } -- main
