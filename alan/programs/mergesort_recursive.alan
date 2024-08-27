@@ -1,8 +1,11 @@
-merge (x: reference int [], start: int, mid: int, end: int) : proc
+main () : proc
+
+mergeSort (x: reference int [], l: int, r: int) : proc
+    merge (x: reference int [], start: int, mid: int, end: int) : proc
 	-- through recursion create a "recursive array" in callstack (through the 'cur' variables).
 	aux (x_itr: int, l: int, r: int) : proc
-	-- presumably (given the scope rules) x, mid, end are visible inside aux.
-	cur : int;
+	    -- given the scope rules variables x, mid, end are visible inside aux.
+	    cur : int;
 	{
 	        if (x_itr >= end) return;
 
@@ -22,9 +25,9 @@ merge (x: reference int [], start: int, mid: int, end: int) : proc
 		aux(x_itr+1, l, r);
 		x[x_itr] = cur;
 	}
-	aux(start, start, mid); -- no need for curly brackets as it is just one statement
-
-mergeSort (x: reference int [], l: int, r: int) : proc
+    {
+	aux(start, start, mid);
+    }
 {
 	-- sort [l,r) segment
 	if (l == r-1) return;
@@ -35,7 +38,6 @@ mergeSort (x: reference int [], l: int, r: int) : proc
 	merge(x, l, (l+r)/2, r);
 }
 
-main () : proc
 	x : int [10000];
 	n : int;
 	i : int;
