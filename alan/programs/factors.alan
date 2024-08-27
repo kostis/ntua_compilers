@@ -4,7 +4,7 @@ main() : proc
   flag : int;
 
 {
-  writeString("Enter value of N > ");
+  writeString("Please, give me a positive integer: ");
   n = readInteger();
   lcv = 2; flag = 1;
   while (lcv <= (n / 2))

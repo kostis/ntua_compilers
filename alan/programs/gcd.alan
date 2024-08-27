@@ -21,10 +21,10 @@ gcd():proc
 	b:int;
 	
 	{
-		writeString("Give the first integer: ");
-		a=readInteger();
-		writeString("Give the second integer: ");
-		b=readInteger();
-		writeString("\nThe gcd you are looking for is ");
+		writeString("Give me two positive integers: \n");
+		a = readInteger();
+		b = readInteger();
+		writeString("\nTheir GCD is: ");
 		writeInteger(find_gcd(a, b));
+		writeString("\n");
 	}
