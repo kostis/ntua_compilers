@@ -1,0 +1,53 @@
+(*
+    The Sieve of Eratosthenes is an ancient and efficient algorithm used to find all
+    prime numbers  up to a specified  integer, n. The algorithm works by iteratively
+    marking the multiples of each prime number  starting from 2, the smallest prime.
+    It begins by assuming that all numbers up  to n  are prime,  then eliminates the
+    multiples  of each prime by marking them as non-prime. The process continues for
+    each number up to the  square   root of n. After all multiples   are marked, the
+    remaining  unmarked numbers are prime. This method is particularly effective due
+    to its  simplicity and ability to handle large ranges with minimal computational
+    resources.
+*)
+
+main(): proc
+    n : int;
+    i : int;
+    j : int;
+    primes : byte[100];
+{
+    n = 100;
+
+    -- Initialize all entries in primes[] to true
+    i = 0;
+    while (i < n) {
+        primes[i] = shrink(1);
+        i = i + 1;
+    }
+
+    i = 2;
+    while (i * i <= n) {
+        if (primes[i] == shrink(1)) {
+            -- Mark all multiples of i as false (not prime)
+            j = i * i;
+            while (j <= n) {
+                primes[j] = shrink(0);
+                j = j + i;
+            }
+        }
+        i = i + 1;
+    }
+
+    -- Print all prime numbers
+    i = 2;
+    while (i <= n) {
+        if (primes[i] == shrink(1)){
+            writeInteger(i);
+            writeChar(' ');
+        }
+
+        i = i + 1;
+    }
+
+    writeChar('\n');
+}

@@ -1,0 +1,9 @@
+main(): proc
+{
+    if (readInteger() == 42) {
+        writeString("The answer to the ultimate question of Life, the Universe, and Everything is 42.\n");
+    }
+    else {
+        writeString("I'm sorry, I don't understand the question.\n");
+    }
+}

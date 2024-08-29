@@ -1,0 +1,24 @@
+(*
+    Fizz buzz  is a group word game for children to teach them about division.
+    Players take turns to count  incrementally, replacing any number divisible
+    by three with the word "fizz", and any  number divisible by  five with the
+    word "buzz", and any number divisible by both three and five with the word
+    "fizzbuzz". 
+*)
+
+main(): proc
+    i : int;
+{
+    i = 0;
+    while (i < 100) {
+        i = i + 1;
+        if (i % 3 == 0 & i % 5 == 0) writeString("FizzBuzz");
+        else if (i % 3 == 0) writeString("Fizz");
+        else if (i % 5 == 0) writeString("Buzz");
+        else writeInteger(i);
+
+        if (i != 100)
+            writeChar(' ');
+    }
+    writeChar('\n');
+}
