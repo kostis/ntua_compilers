@@ -12,11 +12,12 @@ main(): proc
         else
             return fibonacci(n - 1) + fibonacci(n - 2);
     }
+    n: int;
     result: int;
 {
-    writeString("Enter a number: ");
-    result = fibonacci(readInteger());
-    writeString("Fibonacci: ");
+    n = readInteger();
+    result = fibonacci(n);
+    writeString("Fibonacci of "); writeInteger(n); writeString(" is ");
     writeInteger(result);
     writeString("\n");
 }
