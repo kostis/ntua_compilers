@@ -1,5 +1,5 @@
 (*
-    This Alan program, can be used for testing recursive functions and compiler optimizations
+    This Alan program can be used for testing recursive functions and compiler optimizations.
 *)
 
 main(): proc
