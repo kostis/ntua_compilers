@@ -14,7 +14,7 @@ main(): proc
     n : int;
     i : int;
     j : int;
-    primes : byte[100];
+    primes : byte[101];
 {
     n = 100;
 
