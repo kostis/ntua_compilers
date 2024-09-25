@@ -30,7 +30,7 @@ main(): proc
         if (primes[i] == shrink(1)) {
             -- Mark all multiples of i as false (not prime)
             j = i * i;
-            while (j <= n) {
+            while (j < n) {
                 primes[j] = shrink(0);
                 j = j + i;
             }
@@ -40,7 +40,7 @@ main(): proc
 
     -- Print all prime numbers
     i = 2;
-    while (i <= n) {
+    while (i < n) {
         if (primes[i] == shrink(1)){
             writeInteger(i);
             writeChar(' ');
