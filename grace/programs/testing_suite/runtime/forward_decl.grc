@@ -1,0 +1,17 @@
+fun main(): nothing
+    fun foo(a : int): nothing;
+    fun bar(a: int): nothing
+        {
+            foo(a-1);
+            writeInteger(a);
+        }
+    fun foo(a: int): nothing
+    {
+        if (a > 0) then
+            bar(a);
+    }
+{
+    foo(5);
+}
+
+$ 12345

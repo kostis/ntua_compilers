@@ -1,0 +1,9 @@
+fun main() : nothing
+
+{
+    ;
+    if 1 > 0 then ;
+    else ;
+    if 1 > 0 then ;
+    ;;;
+}
