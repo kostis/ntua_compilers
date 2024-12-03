@@ -20,13 +20,11 @@ cancer() : proc
 	{
 		writeString("Give a string with maximum length 30: ");
 		readString(30, source);
-		n = 0;
-		while (source[n]!='\0')
-			n = n+1;
-		n = n-1;
+		writeString(source);
+		n = strlen(source);
 		if (is_it(n, source) == 1)
-			writeString("\nIs not palindrome...");
+			writeString(" ... is not palindrome\n");
 		else
-			writeString("\nIs palindrome...");
+			writeString(" ... is palindrome\n");
 	}
 
