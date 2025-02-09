@@ -1,0 +1,21 @@
+def solve
+
+  def hanoi: rings as int, source target auxiliary as byte []
+
+    def move: source target as byte []
+      writeString: "Moving from "
+      writeString: source
+      writeString: " to "
+      writeString: target
+      writeString: ".\n"
+
+    if rings >= 1:
+      hanoi: rings-1, source, auxiliary, target
+      move: source, target
+      hanoi: rings-1, auxiliary, target, source
+
+  var numberOfRings is int
+
+  writeString: "Rings: "
+  numberOfRings := readInteger()
+  hanoi: numberOfRings, "left", "right", "middle"

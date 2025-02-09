@@ -1,0 +1,18 @@
+def main
+
+  var r is byte [32]
+
+  def reverse: s as byte []
+    var i l is int
+
+    l := strlen(s)
+    i := 0
+    loop:
+      if i < l:
+        r[i] := s[l-i-1]
+        i := i+1
+      else: break
+    r[i] := '\0'
+
+  reverse: "\n!dlrow olleH"
+  writeString: r
