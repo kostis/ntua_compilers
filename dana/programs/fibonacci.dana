@@ -1,0 +1,27 @@
+def main
+
+  def fib: n as int, result as ref int
+    if n <= 0:
+      result := 0
+    elif n = 1:
+      result := 1
+    else:
+      var a is int
+      var b is int
+      fib: n-1, a
+      fib: n-2, b
+      result := a + b
+
+  var n is int
+  var res is int
+
+  writeString: "Enter a number: "
+  n := readInteger()
+
+  fib: n, res
+
+  writeString: "F("
+  writeInteger: n
+  writeString: ") = "
+  writeInteger: res
+  writeString: "\n"
