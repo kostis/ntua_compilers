@@ -1,0 +1,15 @@
+def fib is int: n as int
+    if n <= 0: return: 0
+    elif n = 1: return: 1
+    else: return: fib(n-1) + fib(n-2)
+
+def main
+    var n is int
+    writeString: "Enter a number: "
+    n := readInteger()
+    
+    writeString: "Fibonacci("
+    writeInteger: n
+    writeString: ") = "
+    writeInteger: fib(n)
+    writeString: "\n"
