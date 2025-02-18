@@ -15,13 +15,12 @@ def main
   var n is int
   var res is int
 
-  writeString: "Enter a number: "
   n := readInteger()
 
   fib: n, res
 
-  writeString: "F("
+  writeString: "Fibonacci of "
   writeInteger: n
-  writeString: ") = "
+  writeString: " is "
   writeInteger: res
   writeString: "\n"
