@@ -1,0 +1,37 @@
+def partition is int: low, high as int, arr as int []
+begin
+    var pivot i temp j is int
+    pivot := arr[high]
+    i := low - 1
+    j := low
+
+    loop:
+    begin
+        if arr[j] < pivot:
+        begin
+            i := i + 1
+            temp := arr[i]
+            arr[i] := arr[j]
+            arr[j] := temp
+        end
+        j := j + 1
+        if j <= high-1: break
+    end
+    temp := arr[i+1]
+    arr[i+1] := arr[high]
+    arr[high] := temp
+    return: i+1 
+end
+
+
+def quicksort: low high as int, arr as int []
+begin 
+    if low <= high:
+    begin
+        var pivot is int
+        pivot := partition(low, high, arr)
+        # recursion
+        quicksort(low, pivot-1, arr)
+        quicksort(pivot+1, high, arr)
+    end
+end
