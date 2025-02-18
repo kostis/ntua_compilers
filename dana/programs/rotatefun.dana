@@ -1,0 +1,50 @@
+# LeetCode problem: 396. Rotate Function (https://leetcode.com/problems/rotate-function/description/)
+def main
+  
+  def maxRotateFunction is int: n as int, nums as int []
+
+    var sum prevF maxF i is int
+    sum := 0
+    prevF := 0
+    maxF := 0
+    i := 0
+
+    loop:
+      if i < n:      
+        sum := sum + nums[i]
+        prevF := prevF + i * nums[i]
+        i := i + 1
+      else: break
+
+    maxF := prevF
+    i := 1
+
+    loop:
+      if i < n:
+        var F is int
+        F := prevF + sum - n * nums[n-i]
+        if F > maxF: maxF := F
+        prevF := F
+        i := i + 1
+      else: break
+
+    return: maxF
+
+  var n is int
+  n := readInteger()
+  
+  var nums is int [n]
+
+  var i is int
+  i := 0
+  loop:
+    if i < n:
+      nums[i] := readInteger()
+      i := i + 1
+    else: break
+
+  var result is int
+  result := maxRotateFunction(n, nums)
+
+  writeInteger: result
+  writeString: "\n"
