@@ -1,0 +1,21 @@
+fun p(): nothing
+    fun f(ref x : int) : nothing
+        fun g(ref y : int) : nothing
+        {
+            y <- y-1;
+        }      
+    {
+        g(x);
+        if x > 3 then f(x);
+    } 
+
+    var i : int;
+
+{
+    i <- 10;
+    f(i);
+    writeInteger(i);
+    writeChar('\n');
+}
+
+$ 3
