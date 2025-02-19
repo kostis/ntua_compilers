@@ -1,9 +1,8 @@
 (*
-    This is an implemenation of my solution for the first exercise in
+    This is an implementation of my solution for the first exercise in
     the first coding exercises set for the Algorithms course during the
     2024-2025 winter Semester @ ECE/NTUA. The full description of the 
     problem can be found in the web page of the course in Helios.
-
 *)
 
 def main    
@@ -114,12 +113,3 @@ def main
     
     writeInteger: largest_minimum_distance(arr, tail, stores)
     writeString: "\n"
-
-        
-    
-
- 
-
-
-
-                    
