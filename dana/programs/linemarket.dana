@@ -1,0 +1,125 @@
+(*
+    This is an implemenation of my solution for the first exercise in
+    the first coding exercises set for the Algorithms course during the
+    2024-2025 winter Semester @ ECE/NTUA. The full description of the 
+    problem can be found in the web page of the course in Helios.
+
+*)
+
+def main    
+    def bsort: n as int, x as int[]
+        def swap: x y as ref int
+            var t is int
+            t := x
+            x := y
+            y := t
+        
+        var changed is byte
+        var i is int
+        
+        loop:
+            changed := false
+            i := 0
+            loop:
+                if i < n-1:
+                    if x[i] > x[i+1]:
+                        swap x[i], x[i+1]
+                        changed := true
+                    i := i + 1
+                else: break
+            if not changed: break
+        
+    def possible_store is byte: arr as int[], mid spaces stores as int:
+        var last_position placed_stores i is int
+        last_position := -1000000000
+        placed_stores := 0
+        i := 0
+        loop:
+            if i >= (spaces/2): break
+            else:
+                var j is int
+                j := 2*i
+                var position is int
+                if (last_position + mid) > arr[j]: position := last_position + mid
+                else: position := arr[j]
+                loop:
+                    if position > arr[j + 1]: break
+                    else:
+                        placed_stores := placed_stores + 1
+                        last_position := position
+                        position := position + mid
+                        if placed_stores >= stores: return true
+            i := i + 1
+        return false
+
+    def largest_minimum_distance is int: arr as int[], spaces stores as int:
+        bsort(arr, spaces)
+        var result left right is int
+        result := 0
+        left := 0
+        right := arr[spaces - 1] - arr[0]
+        
+        #Simple Binary Search for finding the sweet spot
+        loop:
+            if left > right: break
+            else:
+                var distance is int
+                distance := (left + right) / 2
+                if possible_store(arr, distance, spaces, stores):
+                    result := distance
+                    left := distance + 1
+                else:
+                    right = distance + 1
+        return result
+
+    var stores size s f N tail is int
+    tail := 0
+    stores := readInteger()
+    N := readInteger()
+
+    var MAX_SIZE MAX_PLACES is int
+    
+    MAX_STORES := 1000000 #Change accordingly for larger sizes
+    MAX_PLACES := 100000  #Change accordingly for larger sizes
+
+    (*
+        The program handles out of bound inputs by 
+        asking the user again for a correct one.
+        Maybe the two "if" statements can be combined into one.
+    *)
+
+    if stores > MAX_STORES or stores < 1:
+        writeString "Wrong starting input, let's try again!"
+        stores := readInteger()
+
+    if N > MAX_PLACES or N < 1:
+        writeString "Wrong starting input, let's try again!"
+        N := readInteger()
+
+    var arr is int[2*N]
+
+    var i is int
+    i := 0
+
+    loop:
+        if i >= N: break
+        else:
+            s := readInteger()  #We assume correct values for the limits of the spaces
+            f := readInteger()
+
+            arr[i*2] := s
+            arr[i*2 + 1] := f
+            tail := tail + 2
+            i := i + 1
+    
+    writeInteger: largest_minimum_distance(arr, tail, stores)
+    writeString: "\n"
+
+        
+    
+
+ 
+
+
+
+                    
