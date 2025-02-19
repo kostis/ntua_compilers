@@ -1,37 +1,72 @@
-def partition is int: low, high as int, arr as int []
+def main
 begin
-    var pivot i temp j is int
-    pivot := arr[high]
-    i := low - 1
-    j := low
+    def partition is int: low high as int, arr as int []
+    begin
+        var pivot i temp j is int
+        pivot := arr[high]
+        i := low - 1
+        j := low
+
+        loop:
+        begin
+            if j <= high-1: begin break end
+            if arr[j] < pivot:
+            begin
+                i := i + 1
+                temp := arr[i]
+                arr[i] := arr[j]
+                arr[j] := temp
+            end
+            j := j + 1
+        end
+        temp := arr[i+1]
+        arr[i+1] := arr[high]
+        arr[high] := temp
+        return: i+1 
+    end
+
+    def quicksort: low high as int, arr as int []
+    begin 
+        if low <= high:
+        begin
+            var pivot is int
+            pivot := partition(low, high, arr)
+            # recursion
+            quicksort: low, pivot-1, arr
+            quicksort: pivot+1, high, arr
+        end
+    end
+
+    # Read the length of array from input
+    var N is int
+    N := readInteger()
+    # Define the array of given length
+    var nums is int [N]
+    var k is int
+    k := 0
 
     loop:
     begin
-        if arr[j] < pivot:
-        begin
-            i := i + 1
-            temp := arr[i]
-            arr[i] := arr[j]
-            arr[j] := temp
-        end
-        j := j + 1
-        if j <= high-1: break
+        if k < N: begin break end
+        nums[k] := readInteger()
+        k := k + 1
     end
-    temp := arr[i+1]
-    arr[i+1] := arr[high]
-    arr[high] := temp
-    return: i+1 
-end
 
+    quicksort: 0, N, nums
 
-def quicksort: low high as int, arr as int []
-begin 
-    if low <= high:
+    k := 0
+    loop:
     begin
-        var pivot is int
-        pivot := partition(low, high, arr)
-        # recursion
-        quicksort(low, pivot-1, arr)
-        quicksort(pivot+1, high, arr)
+        if i < n:
+        begin
+            if k > 0: begin writeString: ”, ” end
+            writeInteger: x[k]
+            k := k+1
+        end 
+        else: 
+        begin 
+            break
+        end
     end
+    writeString: ”\n”
 end
