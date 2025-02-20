@@ -1,0 +1,114 @@
+def factorial is int: n as int
+    if n = 0 or n = 1: 
+        return: 1
+    else: 
+        return: n * factorial(n-1)
+
+def reverseNumber is int: n as int
+    var rev is int
+    rev := 0
+    loop:
+        if n > 0:
+            rev := rev * 10 + (n % 10)
+            n := n / 10
+        else: 
+            break
+    return: rev
+
+def gcd is int: a b as int
+    loop:
+        if b = 0:
+            return: a
+        else:
+            var temp is int
+            temp := b
+            b := a % b
+            a := temp
+
+def binarySearch is byte: n as int, arr as int [], target as int
+    var left right mid is int
+    left := 0
+    right := n - 1
+    loop:
+        if left <= right:
+            mid := (left + right) / 2
+            if arr[mid] = target:
+                return: true
+            elif arr[mid] < target:
+                left := mid + 1
+            else:
+                right := mid - 1
+        else:
+            break
+    return: false
+
+def main
+    writeString: "Choose an operation:\n"
+    writeString: "1: Factorial\n"
+    writeString: "2: Reverse Number\n"
+    writeString: "3: GCD Calculation\n"
+    writeString: "4: Binary Search\n"
+    writeString: "Enter your choice: "
+    var choice is int
+    choice := readInteger()
+
+    if choice = 1:
+        writeString: "Enter n for Factorial: "
+        var n is int
+        n := readInteger()
+        writeString: "Factorial("
+        writeInteger: n
+        writeString: ") = "
+        writeInteger: factorial(n)
+        writeString: "\n"
+
+    elif choice = 2:
+        writeString: "Enter number to reverse: "
+        var num is int
+        num := readInteger()
+        writeString: "Reversed number: "
+        writeInteger: reverseNumber(num)
+        writeString: "\n"
+
+    elif choice = 3:
+        writeString: "Enter two numbers for GCD calculation:\n"
+        var a b is int
+        writeString: "First number: "
+        a := readInteger()
+        writeString: "Second number: "
+        b := readInteger()
+        writeString: "GCD("
+        writeInteger: a
+        writeString: ", "
+        writeInteger: b
+        writeString: ") = "
+        writeInteger: gcd(a, b)
+        writeString: "\n"
+
+    elif choice = 4:
+        writeString: "Enter array size (max 100): "
+        var size is int
+        size := readInteger()
+        var arr is int [100]
+        var i is int
+        i := 0
+        loop:
+            if i < size:
+                writeString: "Enter element "
+                writeInteger: i
+                writeString: ": "
+                arr[i] := readInteger()
+                i := i + 1
+            else:
+                break
+
+        writeString: "Enter target number to search: "
+        var target is int
+        target := readInteger()
+        if binarySearch(size, arr, target):
+            writeString: "Number found in array.\n"
+        else:
+            writeString: "Number NOT found in array.\n"
+
+    else:
+        writeString: "Invalid choice.\n"
