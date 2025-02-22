@@ -1,0 +1,33 @@
+def main
+	
+	def check_pal is byte: s as byte[]
+
+		var res is byte
+		var i l is int
+	
+		l:=strlen(s)
+		i:=0
+		res:=true
+		
+		loop:
+			if i = l/2: break
+			elif not s[i] = s[l-i-1]:
+				res:=false
+				break
+			else:
+				i:=i+1
+
+		return: res
+
+
+	val is_pal is byte
+	val input is byte []
+	val n is int
+
+	readString: n, input
+	is_pal := check_pal: input
+	
+	if is_pal:
+		writeString: "It is a palindrome"
+	else:
+		writeString: "It is not a palindrome"
