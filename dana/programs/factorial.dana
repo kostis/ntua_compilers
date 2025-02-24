@@ -10,6 +10,6 @@ def main
   output := fact(input)
   writeString: "The factorial of ";
   writeInteger: input
-  writeString: " is: "
+  writeString: " is "
   writeInteger: output
   writeString "\n"
