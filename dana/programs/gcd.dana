@@ -1,0 +1,15 @@
+def main
+
+  def gcd is int: a b as int
+    if b == 0: return: a
+    else:      return: gcd(b, a % b) 
+
+  var n1 is int
+  var n2 is int
+  var d  is int
+  
+  n1 := readInteger()
+  n2 := readInteger()
+  d  := gcd(n1, n2)
+  writeInteger: d
+  writeString: "\n"
