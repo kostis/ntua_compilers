@@ -1,0 +1,22 @@
+def factorial is int: n as int
+    if n <= 1:
+        return: 1
+    else:
+        return: n * factorial(n - 1)
+
+def main
+    var num result is int
+
+    writeString: "Enter a number: "
+    num := readInteger()
+
+    if num < 0:
+        writeString: "Factorial is not defined for negative numbers.\n"
+    else:
+        result := factorial(num)
+        writeString: "Factorial of "
+        writeInteger: num
+        writeString: " is "
+        writeInteger: result
+        writeString: ".\n"
+
