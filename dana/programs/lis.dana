@@ -1,4 +1,7 @@
-(* Finds the length of the Longest Increasing Subsequence. Dynamic Programming solution in O(N^2)*)
+(*
+   Finds the length of the Longest Increasing Subsequence.
+   Dynamic Programming solution in O(N^2)
+*)
 
 def main
 	
@@ -55,6 +58,6 @@ def main
 	var len is int
 	len := lis: n, arr
 
-	writeString: "ans: "
+	writeString: "longest inreasing subsequence has length "
 	writeInteger: len
 	writeString: "\n"
