@@ -30,6 +30,6 @@ def main
 	is_pal := check_pal: input
 	
 	if is_pal:
-		writeString: "... is palindrome\n"
+		writeString: " ... is palindrome\n"
 	else:
-		writeString: "... is not palindrome\n"
+		writeString: " ... is not palindrome\n"
