@@ -4,8 +4,7 @@ def main
     # Divide out all factors of 2
     loop:
       if n % 2 = 0:
-        writeInteger: 2
-        writeString: " "
+        writeString: " 2"
         n := n / 2
       else: break
 
@@ -16,8 +15,8 @@ def main
       if i * i <= n:
         loop:
           if n % i = 0:
-            writeInteger: i
             writeString: " "
+            writeInteger: i
             n := n / i
           else: break
         i := i + 2
@@ -25,13 +24,12 @@ def main
 
     # If remaining n is a prime greater than 2, print it
     if n > 2:
-      writeInteger: n
       writeString: " "
+      writeInteger: n
 
-  # Main program: prompt user and call primeFactors
-  writeString: "Enter a positive integer: "
+  # Main program: Read input and call primeFactors
   var num is int
   num := readInteger()
-  writeString: "Prime factors: "
+  writeString: "Prime factors:"
   primeFactors: num
   writeString: "\n"
