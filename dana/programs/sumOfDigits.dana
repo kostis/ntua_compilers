@@ -1,0 +1,22 @@
+def main
+    def sum_of_digits: n as int, result as ref int
+        var sum_digits is int
+        sum_digits := 0
+
+        loop:
+            if n > 0:
+                sum_digits := sum_digits + (n % 10)
+                n := n / 10
+            else: break
+
+        result := sum_digits
+
+    var n is int
+    var res is int
+
+    n := readInteger()
+    sum_of_digits: n, res
+
+    writeString: "Sum of digits: "
+    writeInteger: res
+    writeString: "\n"
