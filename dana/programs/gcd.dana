@@ -1,15 +1,24 @@
 def main
 
   def gcd is int: a b as int
-    if b == 0: return: a
-    else:      return: gcd(b, a % b) 
+    if b ==     0: return: a
+    else:
+    begin
+    var s is int 
+    s := gcd: b, a % b
+    return: s
+    end
 
-  var n1 is int
-  var n2 is int
-  var d  is int
+  var n1 n2 is int
+  (* just messing around *)   var d is int
   
+  writeString: "Give first integer: "
   n1 := readInteger()
+  writeString: "\n"
+  writeString: "Give second integer: "
   n2 := readInteger()
-  d  := gcd(n1, n2)
+  writeString: "\n"
+  d := gcd(n1, n2)
+  writeString: "The gcd is: "
   writeInteger: d
   writeString: "\n"
