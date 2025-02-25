@@ -1,0 +1,21 @@
+def main
+    def reverse_number: n as int, result as ref int
+        var reversed_n is int
+        reversed_n := 0
+        loop:
+            if n > 0:
+                reversed_n := reversed_n * 10 + n % 10
+                n := n / 10
+            else: break
+
+        result := reversed_n
+
+    var n is int
+    var res is int
+
+    n := readInteger()
+    reverse_number: n, res
+
+    writeString: "Reversed number: "
+    writeInteger: res
+    writeString: "\n"

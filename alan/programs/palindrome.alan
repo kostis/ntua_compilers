@@ -1,4 +1,4 @@
-cancer() : proc
+palindrome() : proc
 	is_it (n : int, source:reference byte[]) : int
 		i : int;
 
@@ -27,4 +27,3 @@ cancer() : proc
 		else
 			writeString(" ... is palindrome\n");
 	}
-

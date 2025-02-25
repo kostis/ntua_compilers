@@ -1,0 +1,15 @@
+def main
+
+  def fact is int: n as int
+    if n <= 1: return: 1
+    else: return: n*fact(n-1)
+    
+  var input output is int
+  input := readInteger()
+  
+  output := fact(input)
+  writeString: "The factorial of ";
+  writeInteger: input
+  writeString: " is "
+  writeInteger: output
+  writeString "\n"

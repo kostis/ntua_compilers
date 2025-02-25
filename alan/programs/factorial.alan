@@ -13,10 +13,14 @@ factorial () : proc
       else return n * factorial (n - 1);
    }
 
+   n : int;
    f : int;
 {
-  f = factorial(7);
-  writeString("The factorial of 7 is ");
+  n = readInteger();
+  f = factorial(n);
+  writeString("The factorial of ");
+  writeInteger(n);
+  writeString(" is ");
   writeInteger(f);
   writeString("\n");
 }
