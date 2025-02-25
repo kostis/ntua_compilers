@@ -1,0 +1,35 @@
+def main
+	
+	def check_pal is byte: s as byte[]
+
+		var res is byte
+		var i l is int
+	
+		l:=strlen(s)
+		i:=0
+		res:=true
+		
+		loop:
+			if i = l/2: break
+			elif not s[i] = s[l-i-1]:
+				res:=false
+				break
+			else:
+				i:=i+1
+
+		return: res
+
+
+	val is_pal is byte
+	val input is byte []
+	
+	writeString: "Give a string with maximum length 30: "
+	readString: 30, input
+	writeString: input
+
+	is_pal := check_pal: input
+	
+	if is_pal:
+		writeString: " ... is palindrome\n"
+	else:
+		writeString: " ... is not palindrome\n"
