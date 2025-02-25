@@ -1,0 +1,24 @@
+def checkPalindrome is byte: word as byte[]
+    var length is int := 0
+    loop:
+        if word[length] = '\0': break
+        length := length + 1
+
+    var i is int := 0
+    loop:
+        if i >= length / 2: break
+        if word[i] <> word[length - i - 1]:
+            return false
+        i := i + 1
+    return true
+
+def main
+    var word is byte[100]
+
+    writestring: "Gimme a word!\n"
+    readstring: 100, word
+
+    if checkPalindrome(word):
+        writestring: "It is a palindrome!\n"
+    else:
+        writestring: "It is not a palindrome\n"
