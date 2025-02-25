@@ -22,12 +22,14 @@ def main
 
 	val is_pal is byte
 	val input is byte []
-	val n is int
+	
+	writeString: "Give a string with maximum length 30: "
+	readString: 30, input
+	writeString: input
 
-	readString: n, input
 	is_pal := check_pal: input
 	
 	if is_pal:
-		writeString: "It is a palindrome"
+		writeString: "... is palindrome\n"
 	else:
-		writeString: "It is not a palindrome"
+		writeString: "... is not palindrome\n"
