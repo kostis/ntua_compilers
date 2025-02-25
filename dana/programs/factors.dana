@@ -1,0 +1,28 @@
+(* 
+   This program reads a positive integer from the user and prints all its factors.
+   For the special cases where the number is 2 or 3, it directly prints the two factors: 1 and the number.
+*)
+
+def main
+  var n is int
+  var i is int
+
+  # Read the input
+  n := readInteger()
+
+  writeString: "Factors:"
+  
+  # If n is 2 or 3, print the factors 1 and n, then exit
+  if n = 2 or n = 3:
+    writeString: " 1 "
+    writeInteger: n
+    exit
+
+  # For all other numbers, iterate from 1 to n and print divisors
+  i := 2
+  loop:
+    if i > n / 2: break
+    elif n % i = 0:
+      writeString: " "
+      writeInteger: i  # i is a factor of n
+    i := i + 1

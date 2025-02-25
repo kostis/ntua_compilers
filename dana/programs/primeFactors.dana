@@ -1,0 +1,35 @@
+def main
+  # Helper procedure: prints the prime factors of n
+  def primeFactors: n as int
+    # Divide out all factors of 2
+    loop:
+      if n % 2 = 0:
+        writeString: " 2"
+        n := n / 2
+      else: break
+
+    var i is int
+    i := 3
+    # Loop over odd numbers starting from 3 while i*i <= n
+    loop:
+      if i * i <= n:
+        loop:
+          if n % i = 0:
+            writeString: " "
+            writeInteger: i
+            n := n / i
+          else: break
+        i := i + 2
+      else: break
+
+    # If remaining n is a prime greater than 2, print it
+    if n > 2:
+      writeString: " "
+      writeInteger: n
+
+  # Main program: Read input and call primeFactors
+  var num is int
+  num := readInteger()
+  writeString: "Prime factors:"
+  primeFactors: num
+  writeString: "\n"
