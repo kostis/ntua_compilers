@@ -7,18 +7,15 @@ def main
   var n is int
   var i is int
 
-  # Prompt the user for a positive integer
-  writeString: "Enter a positive integer: "
+  # Read the input
   n := readInteger()
 
-  writeString: "Factors:\n"
+  writeString: "Factors:"
   
   # If n is 2 or 3, print the factors 1 and n, then exit
   if n = 2 or n = 3:
-    writeInteger: 1
-    writeString: "\n"
+    writeString: " 1 "
     writeInteger: n
-    writeString: "\n"
     exit
 
   # For all other numbers, iterate from 1 to n and print divisors
@@ -26,6 +23,6 @@ def main
   loop:
     if i > n / 2: break
     elif n % i = 0:
+      writeString: " "
       writeInteger: i  # i is a factor of n
-      writeString: "\n"
     i := i + 1
