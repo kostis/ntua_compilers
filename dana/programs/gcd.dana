@@ -12,6 +12,7 @@ def main
   var n1 n2 is int
   (* just messing around *)   var d is int
   
+  writeString: "Give me two positive integers: \n"
   n1 := readInteger()
   n2 := readInteger()
 
@@ -20,6 +21,6 @@ def main
   if n1 < 0: n1 := -n1
   if not n2 >= 0: n2 := -n2 
   d := gcd(n1, n2)
-  writeString: "The gcd is: "
+  writeString: "\nTheir GCD is: "
   writeInteger: d
   writeString: "\n"
