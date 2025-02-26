@@ -3,6 +3,27 @@
     the first coding exercises set for the Algorithms course during the
     2024-2025 winter Semester @ ECE/NTUA. The full description of the 
     problem can be found in the web page of the course in Helios.
+
+    Our goal is to place N stores in M non-overlapping integer intervals[s_i, x_i]. 
+    A store can be placed in any integer number that belongs to an interval. We want our 
+    program to calculate the smallest possible distance between two consecutive stores such as 
+    that distance is maximized.
+    
+    Input: The program reads from the standard input two positive integers, N amount of stores and M amount of spaces(intervals) to place them. 
+           After that for the next M lines it reads from the standard input two non-negative integers defining the begining and the end of each space(interval).
+           We assume the spaces are given in a random order and their total length is not shorter than N.
+
+    Output: Our program prints in the standard output a positive integer, 
+            the minimum required distance between two consecutive stores in a 
+            placement of all stores such as that minimum distance is maximized.
+
+    Example Input:  6 3
+                    10 12
+                    0 4
+                    5 8
+
+    Example Output: 2
+    
 *)
 
 def main    
