@@ -10,7 +10,7 @@
     that distance is maximized.
     
     Input: The program reads from the standard input two positive integers, N amount of stores and M amount of spaces(intervals) to place them. 
-           After that for the next M lines it reads from the standard input two non-negative integers defining the begining and the end of each space(interval).
+           After that for the next M lines it reads from the standard input two non-negative integers defining the beginning and the end of each space(interval).
            We assume the spaces are given in a random order and their total length is not shorter than N.
 
     Output: Our program prints in the standard output a positive integer, 
