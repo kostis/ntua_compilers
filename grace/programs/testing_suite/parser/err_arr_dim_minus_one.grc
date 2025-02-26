@@ -1,0 +1,8 @@
+fun main () : nothing
+   
+   $ The following should be illegal because first dimension is -1
+   var r : char[-1]; 
+
+{ $ main
+
+} $ main
