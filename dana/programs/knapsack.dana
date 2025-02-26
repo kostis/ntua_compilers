@@ -1,0 +1,50 @@
+def main
+
+    def knapsack is int: n as int, w_max as int, p as int[], w as int[]
+
+        var dp is int [10000]
+        var i w_c is int
+
+        w_c := 0
+        loop:
+            if w_c > w_max : break
+            dp[w_c] := 0
+            w_c := w_c + 1
+        
+        i := 0;
+        loop:
+            if i >= n: break
+            w_c := w_max
+            loop:
+                if w_c <= 0: break
+                if w[i] <= w_c and p[i] + dp[w_c-w[i]] > dp[w_c]:
+                    dp[w_c] := p[i] + dp[w_c - w[i]]
+                w_c := w_c - 1
+            i := i + 1
+        return: dp[w_max]
+
+    var n weight_max res i is int
+    var profit weight is int[10000]
+
+    n := readInteger()
+    weight_max := readInteger()
+
+    if n <= 0: return
+
+    i := 0
+    loop:
+        if i >= n: break
+        profit[i] := readInteger()
+        i := i + 1
+    
+    i := 0
+    loop:
+        if i >= n: break
+        weight[i] := readInteger()
+        i := i + 1
+    
+    res := knapsack: n, weight_max, profit, weight
+
+    writeInteger: res
+    writeChar: "\n"
+
