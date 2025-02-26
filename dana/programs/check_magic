@@ -1,0 +1,74 @@
+def isMagicSquare is byte: matrix as int[][], size as int
+    var sum is int := 0
+    var diag1 is int := 0
+    var diag2 is int := 0
+
+    # First row check (reference)
+    var i is int := 0
+    loop:
+        if i >= size: break
+        sum := sum + matrix[0][i]
+        i := i + 1
+
+    # Rows check
+    i := 0
+    loop:
+        if i >= size: break
+        var rowSum is int := 0
+        var j is int := 0
+        loop:
+            if j >= size: break
+            rowSum := rowSum + matrix[i][j]
+            j := j + 1
+        if rowSum <> sum: return false
+        i := i + 1
+
+    # Columns check
+    i := 0
+    loop:
+        if i >= size: break
+        var colSum is int := 0
+        var j is int := 0
+        loop:
+            if j >= size: break
+            colSum := colSum + matrix[j][i]
+            j := j + 1
+        if colSum <> sum: return false
+        i := i + 1
+
+    # Diagonial check
+    i := 0
+    loop:
+        if i >= size: break
+        diag1 := diag1 + matrix[i][i]
+        diag2 := diag2 + matrix[i][size - i - 1]
+        i := i + 1
+
+    if diag1 <> sum or diag2 <> sum: return false
+
+    return true
+
+def main
+    var size is int
+    writestring: "Give me the size of the matrix (n x n): "
+    size := readInteger()
+
+    var matrix is int[size][size]
+
+    # Element input
+    writestring: "Give me the matrix elements!\n"
+    var i is int := 0
+    loop:
+        if i >= size: break
+        var j is int := 0
+        loop:
+            if j >= size: break
+            matrix[i][j] := readInteger()
+            j := j + 1
+        i := i + 1
+
+    # Έλεγχος και έξοδος
+    if isMagicSquare(matrix, size):
+        writestring: "The matrix is a magic square!\n"
+    else:
+        writestring: "The matrix is NOT a magic square\n"
