@@ -1,0 +1,13 @@
+fun p(): nothing
+    fun f() : int
+    {
+        return 1;
+        writeString("This should not be printed");
+        return 2;
+    }
+{
+    writeInteger(f());
+    writeChar('\n');
+}
+
+$ 1;

@@ -1,0 +1,6 @@
+fun main () : nothing
+var x : int;
+{ $ main
+    if (x > 0) + 1 then
+        writeString("a");
+} $ main
