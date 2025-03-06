@@ -1,0 +1,83 @@
+def merge: arr as int [], left as int, mid as int, right as int
+    var n1 n2 i j k is int
+    n1 := mid - left + 1
+    n2 := right - mid
+
+    var L is int [n1]
+    var R is int [n2]
+
+    i := 0
+    loop:
+        if i < n1:
+            L[i] := arr[left + i]
+            i := i + 1
+        else: break
+
+    j := 0
+    loop:
+        if j < n2:
+            R[j] := arr[mid + 1 + j]
+            j := j + 1
+        else: break
+
+    i := 0
+    j := 0
+    k := left
+
+    loop:
+        if i < n1 and j < n2:
+            if L[i] <= R[j]:
+                arr[k] := L[i]
+                i := i + 1
+            else:
+                arr[k] := R[j]
+                j := j + 1
+            k := k + 1
+        else: break
+
+    loop:
+        if i < n1:
+            arr[k] := L[i]
+            i := i + 1
+            k := k + 1
+        else: break
+
+    loop:
+        if j < n2:
+            arr[k] := R[j]
+            j := j + 1
+            k := k + 1
+        else: break
+
+def merge_sort: arr as int [], left as int, right as int
+    if left < right:
+        var mid is int
+        mid := (left + right) / 2
+        merge_sort: arr, left, mid
+        merge_sort: arr, mid + 1, right
+        merge: arr, left, mid, right
+
+def main
+    var n is int
+    n := readInteger()
+
+    var arr is int [n]
+    var i is int
+
+    i := 0
+    loop:
+        if i < n:
+            arr[i] := readInteger()
+            i := i + 1
+        else: break
+
+    merge_sort: arr, 0, n-1
+
+    i := 0
+    loop:
+        if i < n:
+            writeInteger: arr[i]
+            writeString: " "
+            i := i + 1
+        else: break
+    writeString: "\n"
