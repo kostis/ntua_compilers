@@ -63,8 +63,3 @@ def main
     writeString: "\n"
     writeString: "Value is: "
     writeInteger: (binarySearch: nums, 0, (size - 1), find)
-
-
-
-
-        
