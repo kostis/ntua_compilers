@@ -33,12 +33,14 @@ def main
     (*
         Simple Calculator
 
-        Input lines of the following form:
+        Input: lines of the following form:
         <Num1> <Op> <Num2>
-        where <NumX> is an positive integer
+        where <NumX> is a positive integer
         and <Op> is one of +, -, *, /
+        Any other characters among them get ignored.
 
-        Output lines with the results
+        Output: lines with the results
+        or a message "Invalid" in case of failure
     *)
 
     var buf is byte[256]
