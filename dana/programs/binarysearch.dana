@@ -17,9 +17,9 @@ def main
     def quicksort: arr as int [], low high as int
         var pi is int
         if low < high:
-        pi := (partition: arr, low, high)
-        quicksort: arr, low, (pi - 1)
-        quicksort: arr, (pi + 1), high  
+            pi := (partition: arr, low, high)
+            quicksort: arr, low, (pi - 1)
+            quicksort: arr, (pi + 1), high  
     
     def swap: a as ref int, b as ref int
         var t is int
