@@ -1,0 +1,65 @@
+def main
+
+    def partition: arr as int [], low high as int
+        var pivot i j is int
+        pivot := arr[high]
+        i := low - 1
+        j := low
+        loop:
+            if j > high: break
+            if arr[j] < pivot:
+                i := i + 1
+                swap: arr[i], arr[j]
+            j := j + 1
+        swap: arr[i+1] arr[high]
+        return: (i+1)
+
+    def quicksort: arr as int [], low high as int
+        var pi is int
+        if low < high:
+            pi := (partition: arr, low, high)
+            quicksort: arr, low, (pi - 1)
+            quicksort: arr, (pi + 1), high  
+    
+    def swap: a as ref int, b as ref int
+        var t is int
+        t := a
+        a := b
+        b := t
+
+    def binarySearch: arr as int [], low high x as int
+        var mid is int 
+        loop:
+            if low > high: break
+            mid := low + (high - low)/2
+            if arr[mid] = x: 
+                return: mid
+            if arr[mid] < x:
+                low := mid + 1
+            else:
+                high := mid - 1
+        return: -1
+
+    var nums is int []
+    var size k find is int
+    k := 0
+    writeString: "Give size of array: "
+    size := readInteger()
+    writeString: "\n"
+    writeString: "Give the numbers of the array: "
+    loop:
+        if k <= size:
+            nums[k] := readInteger()
+            k = k + 1
+        else:
+            nums[k] := '\0'
+            break
+
+    writeString: "\n"
+    quicksort: nums, 0, (size - 1)
+    writeString: "Array is now sorted\n"
+    writeString: "Which value should I search for? "
+    find := readInteger()
+    writeString: "\n"
+    writeString: "Value is: "
+    writeInteger: (binarySearch: nums, 0, (size - 1), find)
