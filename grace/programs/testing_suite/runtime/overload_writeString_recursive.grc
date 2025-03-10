@@ -1,0 +1,13 @@
+fun main(): nothing
+    fun writeString(a : int): nothing
+    {
+        $ Tests that recursion uses the correct version of the overloaded function
+        if a > 0 then
+            writeString(a-1);
+        writeInteger(a);
+    }
+{
+    writeString(5);
+}
+
+$ 012345

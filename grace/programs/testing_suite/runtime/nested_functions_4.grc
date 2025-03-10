@@ -1,0 +1,29 @@
+$ Same test as scope/nested_functions_4.grc but with same signature -> Requires runtime to see the expected result
+
+fun main(): nothing
+    fun f(): nothing
+        $ Forward declare inner f
+        fun f():nothing;
+        
+        fun g(): nothing
+        { $ g
+            $ This should call inner f because of the forward declaration
+            $ Inner f is expecting no params, so this should fail in semantic analysis
+            f();
+        } $ g
+
+        fun f(): nothing
+        { $ f
+            writeString("Inner f");
+        } $ f
+    
+    { $ f
+        writeString("Outer f");
+        g();
+    } $ f
+
+{ $ main
+    $ This calls outer f
+    $ outer f -> g -> inner f
+    f();
+} $ main

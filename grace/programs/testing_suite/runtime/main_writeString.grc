@@ -1,0 +1,5 @@
+$ Test that the name of the main function can be one of the library functions
+fun writeString(): nothing
+{
+    
+}

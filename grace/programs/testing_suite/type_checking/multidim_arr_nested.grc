@@ -1,0 +1,15 @@
+fun main(): nothing
+    var a: char[1][3][5];
+
+    fun g(ref a: char[][5]): nothing
+    {}
+
+    fun f(ref a: char[][3][5]): nothing
+    {
+        g(a[0]);
+    }
+
+
+{
+    f(a);
+}

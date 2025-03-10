@@ -1,0 +1,27 @@
+fun main(): nothing
+    fun f(x: int): nothing
+        $ Forward declare inner f
+        fun f():nothing;
+        
+        fun g(): nothing
+        { $ g
+            $ This should call inner f because of the forward declaration
+            $ Inner f is expecting no params, so this should fail in semantic analysis
+            f(1);
+        } $ g
+
+        fun f(): nothing
+        { $ f
+            writeString("Inner f");
+        } $ f
+    
+    { $ f
+        writeString("Outer f");
+        g();
+    } $ f
+
+{ $ main
+    $ This calls outer f
+    $ outer f -> g -> inner f
+    f(1);
+} $ main
