@@ -9,10 +9,10 @@
 readonly ERL=/home/kostis/HiPE/otp/bin/erl
 export ERL_LIBS=/home/kostis/HiPE/proper
 
-${ERL}c -pa ${ERL_LIBS}/ebin +debug_info *.erl
+${ERL}c -pa ${ERL_LIBS}/ebin +debug_info ./*.erl
 
 mkdir -p progs
-for i in $(seq 1 $1)
+for i in $(seq 1 "$1")
 do
-  $ERL -noshell -noinput -s minibasic_pp p -s erlang halt > progs/p$i.mba
+  $ERL -noshell -noinput -s minibasic_pp p -s erlang halt > progs/p"$i".mba
 done
