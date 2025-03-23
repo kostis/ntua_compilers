@@ -1,0 +1,8 @@
+var a : int
+let a = 42
+begin
+  var a : int
+  let a = 17
+  print a
+end
+print a

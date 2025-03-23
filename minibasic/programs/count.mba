@@ -1,0 +1,6 @@
+let x = 0
+for 42 do   ' count up to 42
+  begin
+    let x = x + 1
+    print x
+  end

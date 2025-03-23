@@ -1,0 +1,11 @@
+let a = 0
+for 10 do
+begin
+  let a = a + 1
+  let b = 0
+  for 10 do
+  begin
+    let b = b + 1
+    print a * b
+  end
+end

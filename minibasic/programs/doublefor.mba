@@ -1,0 +1,12 @@
+let a = 1
+for 10 do
+begin
+   let b = 0
+   for a do
+   begin
+     let a = 1000000
+     let b = b + 1
+     print a * 1000 + b
+   end
+   let a = 1
+end

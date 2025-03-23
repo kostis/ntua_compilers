@@ -1,0 +1,4 @@
+if 17 < 42 then
+  print 42
+else
+  print 17

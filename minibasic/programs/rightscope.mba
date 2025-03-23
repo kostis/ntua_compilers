@@ -1,0 +1,15 @@
+var a : int
+var b : int
+let a = 42
+let b = 7
+print a
+print b
+begin
+  var a : int
+  let a = 17
+  let b = 37
+  print a
+  print b
+end
+print a
+print b

@@ -1,0 +1,4 @@
+var a : int
+var a : bool
+let a = 42
+print a

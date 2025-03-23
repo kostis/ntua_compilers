@@ -1,0 +1,14 @@
+let a = 42174217
+let b = 17421742
+
+for 100 do
+  if a then
+    if b then begin
+      let x = 0
+      for a - b do let x = 1
+      if x then let a = a % b
+      let x = 0
+      for b - a do let x = 1
+      if x then let b = b % a
+    end
+print a + b

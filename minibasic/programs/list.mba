@@ -1,0 +1,14 @@
+let i = 0
+for 1000 do
+begin
+  let i = i+1
+  print i
+  ' create list
+  let l = nil
+  let n = 0
+  for 1000000 do
+  begin
+    let n = n+1
+    let l = n :: l
+  end
+end
