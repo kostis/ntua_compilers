@@ -1,0 +1,12 @@
+# x is declared in the loop but called outside
+# the loop -> out of scope error
+
+def main
+	var i is int
+	i	:= 10
+	loop:
+		var x is byte
+		x := 'A'
+		i := i - 1
+		if i=0	: break
+	x := 42
