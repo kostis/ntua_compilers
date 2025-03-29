@@ -2,10 +2,10 @@
 
 def main:
 	
-	#A binary number is represented with an array
-	#where every bit is stored as an int
+	# A binary number is represented with an array
+	# where every bit is stored as an int
 	
-	# Function Definitions
+	# Function definitions
 	def DecToBin: n as int, N as int[15]
 		var max i is int
 		max	:= 16384
@@ -41,24 +41,24 @@ def main:
 			if i < 0:	break
 
 
-	#Main program
+	# Main program
 	var a b x is int
 	var A B X is int[15]
 
-	#read input
+	# Read input
 	writeString: "Input 2 non negative integers"
 	a := readInteger() 
 	b := readInteger()
 
-	#convert to bianry 
+	# Convert to binary 
 	DecToBin: a, A
 	DecToBin: b, B
 
-	#Calculate XOR
+	# Calculate XOR
 	XOR: A, B, X
 	
-	#Convert result to int
+	# Convert result to int
 	x := BinToDec(X)
 	
-	#Print result
+	# Print result
 	writeInteger: x
