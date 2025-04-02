@@ -1,0 +1,36 @@
+fun main(): nothing
+    var seed, i: int;
+
+    fun f(): nothing
+        fun g(): nothing
+        { $ g
+
+            seed <- seed + 1;
+
+        } $ g
+    
+    { $ f
+        writeInteger(seed);
+        seed <- seed + 1;
+        g();
+    } $ f
+
+{ $ main
+    i <- 0;
+    seed <- 1;
+    while i < 3 do
+    {
+        f();
+        i <- i + 1;
+        writeInteger(seed);
+        writeChar('\n');
+    }
+} $ main
+
+$$
+
+13
+35
+57
+
+$$

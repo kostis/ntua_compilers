@@ -1,0 +1,33 @@
+fun p(): nothing
+    fun r(ref b : int) : nothing
+    {
+        b <- b + 500;
+    }
+    fun h(ref b : int[]) : nothing
+    {
+        b[1000] <- b[1000] + 400;
+        r(b[1000]);
+    }
+    fun g(ref b : int[][2024]) : nothing
+    {
+        b[4][1000] <- b[4][1000] + 300;
+        h(b[4]);
+    }
+    fun f(ref b : int[][8][2024]) : nothing
+    {
+        b[2][4][1000] <- b[2][4][1000] + 200;
+        g(b[2]);
+    }
+
+    var a : int[5][8][2024];
+{
+    a[2][4][1000] <- 100;
+    writeInteger(a[2][4][1000]);
+    writeChar('\n');
+
+    f(a);
+    writeInteger(a[2][4][1000]);
+    writeChar('\n');
+}
+
+$ 100, 1500

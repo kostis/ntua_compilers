@@ -1,0 +1,14 @@
+fun p(): nothing
+    fun f() : int
+    {
+        writeInteger(100);
+        writeChar('\n');
+        return 200;
+        writeInteger(300);
+    }
+{
+    writeInteger(f());
+    writeChar('\n');
+}
+
+$ 100, 200
