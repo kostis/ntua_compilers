@@ -48,5 +48,5 @@ def main
       i := i+1
     else: break
   writeArray: "Initial array: ", 16, x
-  bsort: 16 x
+  bsort: 16, x
   writeArray: "Sorted array: ", 16, x
