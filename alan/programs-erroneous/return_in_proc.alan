@@ -1,0 +1,10 @@
+main() : proc
+
+   printMessage () : proc
+   {
+      return 42;   -- Returning a value from a procedure, which is invalid
+   }
+
+{
+   printMessage();
+}

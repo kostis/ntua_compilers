@@ -1,0 +1,6 @@
+main() : proc
+   arr : int [10];
+   x : int;
+{
+   x = arr; -- Using array variable without an index
+}

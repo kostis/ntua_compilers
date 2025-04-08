@@ -1,0 +1,6 @@
+main() : proc
+   x : int;
+   x : int;   -- Redeclaring the variable 'x'
+{
+   x = 42;
+}

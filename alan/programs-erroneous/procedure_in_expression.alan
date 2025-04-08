@@ -1,0 +1,11 @@
+main() : proc
+
+   printMessage () : proc
+   {
+      writeString("Hello\n");
+   }
+
+   x : int;
+{
+   x = printMessage() + 42;   -- Using a procedure in an expression
+}

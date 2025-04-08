@@ -1,0 +1,77 @@
+main() : proc
+
+   multiply (A: reference int [], B: reference int [], C: reference int [], n: int) : proc
+      calcElement (i: int, j: int) : int
+         sum : int;
+         k : int;
+      {
+         sum = 0;
+         k = 0;
+         while (k < n) {
+            sum = sum + A[i * n + k] * B[k * n + j];
+            k = k + 1;
+         }
+         return sum;
+      }
+      i : int;
+      j : int;
+   {
+
+      i = 0;
+      while (i < n) {
+         j = 0;
+         while (j < n) {
+            C[i * n + j] = calcElement(i, j);
+            j = j + 1;
+         }
+         i = i + 1;
+      }
+   }
+
+   A : int [100];
+   B : int [100];
+   C : int [100];
+   n : int;
+   i : int;
+   j : int;
+{
+   n = readInteger();
+
+   -- Read matrix A
+   i = 0;
+   while (i < n) {
+      j = 0;
+      while (j < n) {
+         A[i * n + j] = readInteger();
+         j = j + 1;
+      }
+      i = i + 1;
+   }
+
+   -- Read matrix B
+   i = 0;
+   while (i < n) {
+      j = 0;
+      while (j < n) {
+         B[i * n + j] = readInteger();
+         j = j + 1;
+      }
+      i = i + 1;
+   }
+
+   -- Multiply A and B into C
+   multiply(A, B, C, n);
+
+   -- Print matrix C
+   i = 0;
+   while (i < n) {
+      j = 0;
+      while (j < n) {
+         writeInteger(C[i * n + j]);
+         if (j < n - 1) writeChar(' ');
+         j = j + 1;
+      }
+      writeChar('\n');
+      i = i + 1;
+   }
+}

@@ -1,0 +1,28 @@
+main() : proc
+
+   concat (s1: reference byte [], s2: reference byte []) : proc
+      i : int;
+      l1 : int;
+      l2 : int;
+   {
+      l1 = strlen(s1);
+      l2 = strlen(s2);
+      i = 0;
+      while (i < l2) {
+         s1[l1+i] = s2[i];
+         i = i+1;
+      }
+      s1[l1+l2] = '\0';
+   }
+
+   str1 : byte [64];
+   str2 : byte [32];
+{
+   readString(64, str1);
+   readString(32, str2);
+
+   concat(str1, str2);
+
+   writeString(str1);
+   writeChar('\n');
+}

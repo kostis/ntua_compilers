@@ -1,0 +1,4 @@
+main() : proc
+{
+   x = 42;   -- 'x' is undeclared
+}

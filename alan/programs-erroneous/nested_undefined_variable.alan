@@ -1,0 +1,14 @@
+main() : proc
+
+   outerFunction () : proc
+      innerFunction () : proc
+      {
+         y = 42;   -- 'y' is not declared in any accessible scope
+      }
+   {
+      innerFunction();
+   }
+
+{
+   outerFunction();
+}

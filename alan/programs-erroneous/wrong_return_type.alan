@@ -1,0 +1,11 @@
+main() : proc
+
+   getValue () : int
+   {
+      return "string";   -- Returning a string instead of an integer
+   }
+
+   result : int;
+{
+   result = getValue();
+}

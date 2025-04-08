@@ -1,0 +1,5 @@
+main() : proc
+   x : int;
+{
+   x = "hello";   -- Assigning string to an integer variable
+}
