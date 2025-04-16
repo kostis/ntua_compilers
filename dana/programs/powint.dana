@@ -9,10 +9,10 @@ def main
       result := 1
     else:
       if exp % 2 = 0:
-        powint: base, exp / 2, mod, temp # SEMANTIC ERROR: temp is not a ref variable but being passed to a ref parameter
+        powint: base, exp / 2, mod, temp
         result := (temp * temp) % mod
       else:
-        powint: base, exp - 1, mod, temp # SEMANTIC ERROR: temp is not a ref variable but being passed to a ref parameter
+        powint: base, exp - 1, mod, temp
         result := (base * temp) % mod
 
   var b   is int

@@ -11,13 +11,13 @@ def main
                 i := i + 1
                 swap: arr[i], arr[j]
             j := j + 1
-        swap: arr[i+1] arr[high]
+        swap: arr[i+1], arr[high]
         return: (i+1)
 
     def quicksort: arr as int [], low high as int
         var pi is int
         if low < high:
-            pi := (partition: arr, low, high)
+            pi := partition(arr, low, high)
             quicksort: arr, low, (pi - 1)
             quicksort: arr, (pi + 1), high  
     
@@ -40,7 +40,7 @@ def main
                 high := mid - 1
         return: -1
 
-    var nums is int []
+    var nums is int [100]
     var size k find is int
     k := 0
     writeString: "Give size of array: "
@@ -50,7 +50,7 @@ def main
     loop:
         if k <= size:
             nums[k] := readInteger()
-            k = k + 1
+            k := k + 1
         else:
             nums[k] := '\0'
             break
@@ -62,4 +62,4 @@ def main
     find := readInteger()
     writeString: "\n"
     writeString: "Value is: "
-    writeInteger: (binarySearch: nums, 0, (size - 1), find)
+    writeInteger: (binarySearch( nums, 0, (size - 1), find))
