@@ -1,0 +1,13 @@
+fun main(): nothing 
+
+    fun a(): int
+    {
+        return 0;
+    }
+
+    fun f(ref s : int) : nothing
+    {}
+
+{
+    f(a());
+}

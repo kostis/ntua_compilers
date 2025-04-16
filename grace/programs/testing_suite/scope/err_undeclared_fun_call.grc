@@ -1,0 +1,5 @@
+fun main(): nothing
+{
+    $ f is undeclared
+    f();
+}

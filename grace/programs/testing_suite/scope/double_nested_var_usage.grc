@@ -1,0 +1,22 @@
+fun main(): nothing
+    var x: int;
+
+    fun foo(): nothing
+
+        fun bar(): nothing
+        { $ bar
+            writeInteger(x);
+            if x = 17 then 
+                writeString("Success\n");
+            else
+                writeString("Error\n");
+        } $ bar
+    
+    { $ foo
+        bar();
+    } $ foo
+
+{ $ main
+    x <- 17;
+    foo();
+} $ main
