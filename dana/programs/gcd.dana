@@ -1,26 +1,24 @@
 def main
 
   def gcd is int: a b as int
-    if b ==     0: return: a
+    var s is int
+
+    if b = 0: return: a
     else:
-    begin
-    var s is int 
-    s := gcd: b, a % b
-    return: s
-    end
+      s := gcd(b, a % b)
+      return: s
 
   var n1 n2 is int
-  (* just messing around *)   var d is int
-  
+  (* just messing around *) var d is int
   writeString: "Give me two positive integers: \n"
   n1 := readInteger()
   n2 := readInteger()
 
-  # Making sure numbers are non-negative 
-  
+  # Making sure numbers are non-negative
+
   if n1 < 0: n1 := -n1
-  if not n2 >= 0: n2 := -n2 
+  if not n2 >= 0: n2 := -n2
   d := gcd(n1, n2)
   writeString: "\nTheir GCD is: "
   writeInteger: d
-  writeString: "\n"
+  writeString : "\n"

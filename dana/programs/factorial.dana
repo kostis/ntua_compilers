@@ -8,8 +8,8 @@ def main
   input := readInteger()
   
   output := fact(input)
-  writeString: "The factorial of ";
+  writeString: "The factorial of "
   writeInteger: input
   writeString: " is "
   writeInteger: output
-  writeString "\n"
+  writeString: "\n"

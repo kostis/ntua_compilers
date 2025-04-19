@@ -9,7 +9,7 @@ def main
         if c = '+' or c = '-' or c = '*' or c = '/':
             return: true
         else:
-            return false
+            return: false
 
     (*
         Conversion from part of a string to an int
@@ -44,7 +44,7 @@ def main
     *)
 
     var buf is byte[256]
-    var idx len start end a b is int
+    var idx len start p_end a b is int
     var op is byte
 
     loop lines:
@@ -57,27 +57,27 @@ def main
         idx := 0
 
         loop a_start:
-            if idx == len:
+            if idx = len:
                 writeString: "Invalid\n"
                 continue: lines
             elif is_number(buf[idx]):
                 break: a_start
             idx := idx + 1
-        start := idx;
+        start := idx
 
         loop a_end:
-            if idx == len:
+            if idx = len:
                 writeString: "Invalid\n"
                 continue: lines
             elif not is_number(buf[idx]):
                 break: a_end
             idx := idx + 1
-        end := idx;
+        p_end := idx
 
-        a := string_to_int(buff, start, end);
+        a := string_to_int(buff, start, p_end)
 
         loop op_detect:
-            if idx == len:
+            if idx = len:
                 writeString: "Invalid\n"
                 continue: lines
             elif is_operator(buf[idx]):
@@ -86,21 +86,21 @@ def main
         op := buf[idx]
 
         loop b_start:
-            if idx == len:
+            if idx = len:
                 writeString: "Invalid\n"
                 continue: lines
             elif is_number(buf[idx]):
                 break: b_start
             idx := idx + 1
-        start := idx;
+        start := idx
 
         loop b_end:
-            if idx == len or not is_number(buf[idx]):
+            if idx = len or not is_number(buf[idx]):
                 break: b_end
             idx := idx + 1
-        end := idx;
+        p_end := idx
 
-        b := string_to_int(buff, start, end);
+        b := string_to_int(buff, start, p_end)
 
         # We have finished parsing now we can calculate
 

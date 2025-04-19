@@ -1,18 +1,15 @@
 def main
-begin
-     def dot_product is int : n as int, vector1 as int [], vector2 as int []
-     begin
-        var product i is int
-        product := 0
-        i := 0
-        loop:
-          begin
-            if i == n : begin break end
-            product := product + vector1[i]*vector2[i]
-            i := i + 1
-          end
-        return : product
-     end
+  def dot_product is int : n as int, vector1 as int [], vector2 as int []
+    var product i is int
+    product := 0
+    i := 0
+    loop:
+      begin
+        if i = n : begin break end
+        product := product + vector1[i]*vector2[i]
+        i := i + 1
+      end
+    return : product
 
   var ex_vector1 ex_vector2 is int[4]
 
@@ -27,8 +24,7 @@ begin
   ex_vector2[3] := 7
 
   var result is int
-  result := dot_product : 4, ex_vector1, ex_vector2
+  result := dot_product(4, ex_vector1, ex_vector2)
   writeString : "The dot product of the two vectors is: "
   writeInteger : result
   writeChar : '\n'
-end
