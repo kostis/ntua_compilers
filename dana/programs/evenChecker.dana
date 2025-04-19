@@ -1,7 +1,7 @@
 def main
 
   def even: n as int, result as ref int
-    if n % 2 == 0:
+    if n % 2 = 0:
       result := 1
     else:
       result := 0
@@ -15,7 +15,7 @@ def main
 
   writeInteger: n
   writeString: " is "
-  if res == 0:
+  if res = 0:
     writeString: "even!"
   else:
     writeString: "odd!"
