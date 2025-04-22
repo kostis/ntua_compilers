@@ -1,6 +1,6 @@
 def main
 
-    def partition: arr as int [], low high as int
+    def partition is int: arr as int [], low high as int
         var pivot i j is int
         pivot := arr[high]
         i := low - 1
@@ -27,7 +27,7 @@ def main
         a := b
         b := t
 
-    def binarySearch: arr as int [], low high x as int
+    def binarySearch is int: arr as int [], low high x as int
         var mid is int 
         loop:
             if low > high: break
@@ -52,7 +52,7 @@ def main
             nums[k] := readInteger()
             k := k + 1
         else:
-            nums[k] := '\0'
+            nums[k] := 0
             break
 
     writeString: "\n"
