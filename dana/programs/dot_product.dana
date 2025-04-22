@@ -4,11 +4,9 @@ def main
     product := 0
     i := 0
     loop:
-      begin
         if i = n : begin break end
         product := product + vector1[i]*vector2[i]
         i := i + 1
-      end
     return : product
 
   var ex_vector1 ex_vector2 is int[4]

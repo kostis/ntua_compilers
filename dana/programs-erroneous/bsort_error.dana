@@ -50,5 +50,5 @@ def main
   writeArray: "Initial array: ", 16, x
   # according to the grammar, x here should be a proc-call of function `x` with no arguments
   # error should be that x is a variable of type int[16], not a function.
-  bsort: 16 x
+  bsort: 16, x
   writeArray: "Sorted array: ", 16, x
