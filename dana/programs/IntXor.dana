@@ -1,43 +1,43 @@
-# A (not so efficient) program that returns the XOR of 2 ints 
+# A (not so efficient) program that returns the XOR of 2 ints
 
-def main:
-	
+def main
+
 	# A binary number is represented with an array
 	# where every bit is stored as an int
-	
+
 	# Function definitions
-	def DecToBin: n as int, N as int[15]
+	def DecToBin: n as int, N as int[]
 		var max i is int
 		max	:= 16384
 		i	:= 14
 
 		loop:
 			N[i] := n / max
-			n := n % max					
+			n := n % max
 			max := max / 2
-			i = i - 1
+			i := i - 1
 			if i < 0:	break
-	
-	def BinToDec is int: N as int[15]
+
+	def BinToDec is int: N as int[]
 		var max i n is int
 		max := 16384
 		i   := 14
 		n	:= 0
-		
-		loop:
-			n := n + N[i] *  max					
-			max := max / 2
-			i = i - 1
-			if i < 0:	break
-		return n
 
-	def XOR: A B X is int[15]
+		loop:
+			n := n + N[i] * max
+			max := max / 2
+			i := i - 1
+			if i < 0:	break
+		return : n
+
+	def XOR: A B X as int[]
 		var i is int
 		i := 14
-	
+
 		loop:
-			X[i] := (A[i] + B[i]) % 2	
-			i = i - 1
+			X[i] := (A[i] + B[i]) % 2
+			i := i - 1
 			if i < 0:	break
 
 
@@ -47,18 +47,19 @@ def main:
 
 	# Read input
 	writeString: "Input 2 non negative integers"
-	a := readInteger() 
+	a := readInteger()
 	b := readInteger()
 
-	# Convert to binary 
+	# Convert to binary
 	DecToBin: a, A
 	DecToBin: b, B
 
 	# Calculate XOR
 	XOR: A, B, X
-	
+
 	# Convert result to int
 	x := BinToDec(X)
-	
+
 	# Print result
 	writeInteger: x
+	writeString : "\n"

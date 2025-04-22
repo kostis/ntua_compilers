@@ -11,7 +11,7 @@ def main
             dp[w_c] := 0
             w_c := w_c + 1
         
-        i := 0;
+        i := 0
         loop:
             if i >= n: break
             w_c := w_max
@@ -29,7 +29,7 @@ def main
     n := readInteger()
     weight_max := readInteger()
 
-    if n <= 0: return
+    if n <= 0: exit 
 
     i := 0
     loop:
@@ -43,8 +43,8 @@ def main
         weight[i] := readInteger()
         i := i + 1
     
-    res := knapsack: n, weight_max, profit, weight
+    res := knapsack( n, weight_max, profit, weight)
 
     writeInteger: res
-    writeChar: "\n"
+    writeChar: '\n'
 
