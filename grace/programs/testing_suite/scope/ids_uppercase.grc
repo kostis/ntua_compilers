@@ -1,0 +1,21 @@
+fun main(): nothing
+    var f: int;
+
+    fun F(): nothing
+    {}
+
+    fun a(): nothing
+    {}
+
+    fun A(): nothing;
+    fun A(): nothing
+    {}
+
+    fun b(): nothing
+    {}
+
+    fun B(b: int): nothing
+    {}
+{
+
+}

@@ -1,0 +1,11 @@
+fun main(): nothing
+    var a: int[1000];
+    var i: int;
+{
+    i <- a[10*10];
+    i <- a[10 mod 10];
+    i <- a[10 div 10];
+    i <- a[10+10];
+    i <- a[10-10];
+    i <- a[-(-10)];
+}

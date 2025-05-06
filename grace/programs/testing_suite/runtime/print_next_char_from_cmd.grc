@@ -1,0 +1,7 @@
+fun k(): nothing
+{
+    $ Prints the char after the one provided as input
+    $ Eg: given a as input, expected to print b
+    writeChar(chr(ascii(readChar())+1));
+    return;
+}

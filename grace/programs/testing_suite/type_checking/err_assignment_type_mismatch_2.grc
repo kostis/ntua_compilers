@@ -1,0 +1,10 @@
+fun main(): nothing
+
+    var i : char;
+
+    fun f(): nothing
+    {}
+
+{
+    i <- f();
+}

@@ -1,0 +1,68 @@
+$$ 
+
+A solution to https://leetcode.com/problems/two-sum/description/
+
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+You can return the answer in any order.
+
+$$
+
+fun main(): nothing
+    var arr : int[10];
+
+    fun writeArray(ref a: int[]; n: int): nothing
+        var i: int;
+    {
+       i <- 0 ;
+        while i < n do
+        {
+            writeInteger(a[i]);
+            writeString(" ");
+            i <- i+1;
+        } 
+        writeChar('\n');
+    }
+
+    fun two_sum(ref a: int[]; n, target: int): nothing
+        $ We expect the solve function to populate the solution arr
+        var solution: int[2];
+        
+        fun solve(ref a: int[]; n, target: int): nothing
+            var i, j: int; 
+            { $ solve
+                i <- 0;
+                while i < n - 1 do 
+                {
+                    j <- i + 1;
+                    while j < n do 
+                    {
+                        if a[i] + a[j] = target then 
+                        {
+                            solution[0] <- i;
+                            solution[1] <- j;
+                        }
+                        j <- j+1;
+                    }
+                    i <- i+1;
+                }
+            } $ solve
+    { $ two_sum
+        solve(a, n, target);
+        if a[solution[0]] + a[solution[1]] = target then
+            writeString("PASS\n");
+        else
+            writeString("FAIL\n");
+    } $ two_sum
+
+{
+    arr[0] <- 2;
+    arr[1] <- 7;
+    arr[2] <- 11;
+    arr[3] <- 15;
+    $ writeString("Solving for arr: ");
+    $ writeArray(arr, 4);
+    two_sum(arr, 4, 9); $ Test Case 1
+    two_sum(arr, 4, 9); $ Test Case 2
+    two_sum(arr, 4, 17); $ Test Case 3
+}
