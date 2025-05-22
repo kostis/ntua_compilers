@@ -1,136 +1,123 @@
-(*
-    This is an implementation of my solution for the first exercise in
-    the first coding exercises set for the Algorithms course during the
-    2024-2025 winter Semester @ ECE/NTUA. The full description of the 
-    problem can be found in the web page of the course in Helios.
+(* linemarket.dana 
+ *
+ * Input:
+ * 6     <-- stores
+ * 3     <-- N (number of intervals)
+ * 10    <-- s (start of interval 1)
+ * 12    <-- f (end of interval 1)
+ * 0     <-- s (start of interval 2)
+ * 4     <-- f (end of interval 2)
+ * 5     <-- s (start of interval 3)
+ * 8     <-- f (end of interval 3)
+ * 
+ * Output:
+ * 2
+ *)
+def main
+    var stores size s f N tail is int
+    var MAX_STORES MAX_PLACES is int
+    var i is int
+    var arr is int[200000]
 
-    Our goal is to place N stores in M non-overlapping integer intervals[s_i, x_i]. 
-    A store can be placed in any integer number that belongs to an interval.
-    We want our program to calculate the smallest possible distance between
-    two consecutive stores such as that distance is maximized.
-    
-    Input: The program reads from the standard input two positive integers, N amount of stores and M amount of spaces(intervals) to place them. 
-           After that for the next M lines it reads from the standard input two non-negative integers defining the beginning and the end of each space(interval).
-           We assume the spaces are given in a random order and their total length is not shorter than N.
+    def swap: x y as ref int
+        var t is int
+        t := x
+        x := y
+        y := t
 
-    Output: Our program prints in the standard output a positive integer, 
-            the minimum required distance between two consecutive stores in a 
-            placement of all stores such as that minimum distance is maximized.
-
-    Example Input:  6 3
-                    10 12
-                    0 4
-                    5 8
-
-    Example Output: 2
-    
-*)
-
-def main    
     def bsort: n as int, x as int[]
-        def swap: x y as ref int
-            var t is int
-            t := x
-            x := y
-            y := t
-        
         var changed is byte
-        var i is int
-        
+        var i_bsort is int
+
         loop:
             changed := false
-            i := 0
+            i_bsort := 0
             loop:
-                if i < n-1:
-                    if x[i] > x[i+1]:
-                        swap x[i], x[i+1]
+                if i_bsort < n-1:
+                    if x[i_bsort] > x[i_bsort+1]:
+                        swap: x[i_bsort], x[i_bsort+1]
                         changed := true
-                    i := i + 1
+                    i_bsort := i_bsort + 1
                 else: break
             if not changed: break
-        
-    def possible_store is byte: arr as int[], mid spaces stores as int:
-        var last_position placed_stores i is int
+
+    def possible_store is byte: current_arr as int[], mid spaces stores_to_place as int
+        var last_position placed_stores i_ps is int
+        var j is int
+        var position is int
         last_position := -1000000000
         placed_stores := 0
-        i := 0
+        i_ps := 0
         loop:
-            if i >= (spaces/2): break
+            if i_ps >= (spaces/2): break
             else:
-                var j is int
-                j := 2*i
-                var position is int
-                if (last_position + mid) > arr[j]: position := last_position + mid
-                else: position := arr[j]
+                j := 2*i_ps
+                if (last_position + mid) > current_arr[j]: position := last_position + mid
+                else: position := current_arr[j]
                 loop:
-                    if position > arr[j + 1]: break
+                    if position > current_arr[j + 1]: break
                     else:
                         placed_stores := placed_stores + 1
                         last_position := position
                         position := position + mid
-                        if placed_stores >= stores: return true
-            i := i + 1
-        return false
+                        if placed_stores >= stores_to_place: return: true
+                i_ps := i_ps + 1
+        return: false
 
-    def largest_minimum_distance is int: arr as int[], spaces stores as int:
-        bsort(arr, spaces)
+    def largest_minimum_distance is int: lmd_arr as int[], spaces num_stores as int
+        var distance is int
         var result left right is int
+
+        bsort: spaces, lmd_arr
         result := 0
         left := 0
-        right := arr[spaces - 1] - arr[0]
-        
-        #Simple Binary Search for finding the sweet spot
+        if spaces > 0 : right := lmd_arr[spaces - 1] - lmd_arr[0]
+        else: right := 0
+
+
         loop:
             if left > right: break
             else:
-                var distance is int
-                distance := (left + right) / 2
-                if possible_store(arr, distance, spaces, stores):
+                if left > right : distance := left
+                else: distance := (left + right) / 2
+
+                if distance <= 0 : distance := 1
+
+                if possible_store(lmd_arr, distance, spaces, num_stores):
                     result := distance
                     left := distance + 1
                 else:
-                    right = distance + 1
-        return result
+                    right := distance - 1
+        return: result
 
-    var stores size s f N tail is int
     tail := 0
+    MAX_STORES := 1000000
+    MAX_PLACES := 100000
+
     stores := readInteger()
     N := readInteger()
 
-    var MAX_SIZE MAX_PLACES is int
-    
-    MAX_STORES := 1000000 #Change accordingly for larger sizes
-    MAX_PLACES := 100000  #Change accordingly for larger sizes
-
-    (*
-        The program handles out of bound inputs by 
-        asking the user again for a correct one.
-        Maybe the two "if" statements can be combined into one.
-    *)
 
     if stores > MAX_STORES or stores < 1:
-        writeString "Wrong starting input, let's try again!"
+        writeString: "Wrong starting input, let's try again!\n"
         stores := readInteger()
 
     if N > MAX_PLACES or N < 1:
-        writeString "Wrong starting input, let's try again!"
+        writeString: "Wrong starting input, let's try again!\n"
         N := readInteger()
 
-    var arr is int[2*N]
-
-    var i is int
     i := 0
 
     loop:
         if i >= N: break
         else:
-            s := readInteger()  #We assume correct values for the limits of the spaces
+            s := readInteger()
             f := readInteger()
 
             arr[i*2] := s
             arr[i*2 + 1] := f
             tail := tail + 2
             i := i + 1
-    
+
     writeInteger: largest_minimum_distance(arr, tail, stores)
     writeString: "\n"
