@@ -2,62 +2,68 @@
    Finds the length of the Longest Increasing Subsequence.
    Dynamic Programming solution in O(N^2)
 *)
-
 def main
-	
-	def lis is int: n as int, arr as int[]
+    var n_main is int
+    var arr_main is int [1000]
+    var i_main is int
+    var len is int
+    var dummy_val is int
 
-		var dp is int [n]
-		var i j maxLen is int
+    def lis is int: n_param as int, arr_param as int[]
 
-		if n <= 0:
-			return: 0
+        var dp is int [1000]
+        var i j maxLen is int
 
-		(* Initialize dp array *)
-		i := 0
-		loop:
-			if i >= n : break
-			dp[i] := 1
-			i := i + 1
+        if n_param <= 0:
+            return: 0
 
-		(* Begin computing values *)
-		i := 1
-  		loop:
-    		if i >= n: break
-    		j := 0
-    		loop:
-      			if j >= i: break
-      			if arr[j] < arr[i] and dp[j] + 1 > dp[i]:
-        			dp[i] := dp[j] + 1
-      			j := j + 1
-    		i := i + 1
+        i := 0
+        loop:
+            if i >= n_param : break
+            dp[i] := 1
+            i := i + 1
 
-  		maxLen := dp[0]
-  		i := 1
-  		loop:
-    		if i >= n: break
-    		if dp[i] > maxLen:
-      			maxLen := dp[i]
-   			i := i + 1
+        i := 1
+        loop:
+            if i >= n_param: break
+            j := 0
+            loop:
+                if j >= i: break
+                if arr_param[j] < arr_param[i] and dp[j] + 1 > dp[i]:
+                    dp[i] := dp[j] + 1
+                j := j + 1
+            i := i + 1
 
-  		return: maxLen
+        if n_param > 0:
+             maxLen := dp[0]
+        else:
+             maxLen := 0
 
-	var n is int
-	n := readInteger()
+        i := 1
+        loop:
+            if i >= n_param: break
+            if dp[i] > maxLen:
+                maxLen := dp[i]
+            i := i + 1
 
-	var arr is int [n]
+        return: maxLen
 
-	(* Populate array *)
-	var i is int
-	i := 0
-	loop:
-		if i >= n: break
-		arr[i] := readInteger()
-		i := i + 1
-	
-	var len is int
-	len := lis: n, arr
+    n_main := readInteger()
 
-	writeString: "longest inreasing subsequence has length "
-	writeInteger: len
-	writeString: "\n"
+    i_main := 0
+    loop:
+        if i_main >= n_main: break
+        if i_main < 1000:
+            arr_main[i_main] := readInteger()
+        else:
+            dummy_val := readInteger()
+        i_main := i_main + 1
+    
+    if n_main > 1000:
+        writeString: "Warning: Input size exceeds program capacity, processing up to 1000 elements.\n"
+        n_main := 1000
+
+    len := lis( n_main, arr_main )
+    writeString: "longest increasing subsequence has length "
+    writeInteger: len
+    writeString: "\n"

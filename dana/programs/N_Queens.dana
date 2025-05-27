@@ -1,101 +1,110 @@
 def main
 
-    def printBoard: board as byte[][], n as int
-        var i j is int
-        i := 0
+    var size_main is int
+
+    def printBoard: board_param as byte[][], n_param as int
+        var i_pb j_pb is int
+        i_pb := 0
         loop:
-            if i >= n : 
+            if i_pb >= n_param :
                 break
-            j := 0
+            j_pb := 0
             loop:
-                if j >= n :  
+                if j_pb >= n_param :
                     break
-                if board[i][j] = 1 :  
+                if board_param[i_pb][j_pb] = true :
                     writeString: "Q "
                 else :
                     writeString: ". "
-                j := j + 1
+                j_pb := j_pb + 1
             writeString: "\n"
-            i := i + 1
+            i_pb := i_pb + 1
         writeString: "\n"
 
-    def isSafe is byte: board as byte[][], row col n as int
-        var i j is int
+    def isSafe is byte: board_param as byte[][], row_param col_param n_param as int
+        var i_is j_is is int
 
-        # check columns
-        i := 0
+        i_is := 0
         loop:
-            if i >= row :  
+            if i_is >= row_param :
                 break
-            if board[i][col] = 1 :  
-                return : 0  
-            i := i + 1
+            if board_param[i_is][col_param] = true :
+                return : false
+            i_is := i_is + 1
 
-        # check left diagonal
-        i := row - 1
-        j := col - 1
+        i_is := row_param - 1
+        j_is := col_param - 1
         loop:
-            if i < 0 or j < 0 :  
+            if i_is < 0 or j_is < 0 :
                 break
-            if board[i][j] = 1 :  
-                return : 0
-            i := i - 1
-            j := j - 1
+            if board_param[i_is][j_is] = true :
+                return : false
+            i_is := i_is - 1
+            j_is := j_is - 1
 
-        # check right diagonal
-        i := row - 1
-        j := col + 1
+        i_is := row_param - 1
+        j_is := col_param + 1
         loop:
-            if i < 0 or j >= n :  
+            if i_is < 0 or j_is >= n_param :
                 break
-            if board[i][j] = 1 :  
-                return : 0
-            i := i - 1
-            j := j + 1
+            if board_param[i_is][j_is] = true :
+                return : false
+            i_is := i_is - 1
+            j_is := j_is + 1
 
-        return : 1  
+        return : true
 
-    def solveNQueensUtil is byte: board as byte[][], row n as int
-        if row = n :  
-            printBoard: board, n
-            return : 1   
+    def solveNQueensUtil is byte: board_param as byte[][], row_param n_param as int
+        var col_util is int
 
-        var col is int
-        col := 0
+        if row_param = n_param :
+            printBoard: board_param, n_param
+            return : true
+
+        col_util := 0
         loop:
-            if col >= n :  
+            if col_util >= n_param :
                 break
-            if isSafe: board, row, col, n :  
-                board[row][col] := 1  
-                if solveNQueensUtil: board, row + 1, n :  
-                    return : 1  
-                board[row][col] := 0  
-            col := col + 1  
+            if isSafe(board_param, row_param, col_util, n_param) :
+                if row_param < 20 and col_util < 20 : board_param[row_param][col_util] := true
 
-        return : 0   
+                if solveNQueensUtil(board_param, row_param + 1, n_param) :
+                    return : true
+                
+                if row_param < 20 and col_util < 20 : board_param[row_param][col_util] := false
+            col_util := col_util + 1
 
-    def solveNQueens: n as int
-        var board is byte[n][n]
-        var i j is int
+        return : false
 
-        i := 0
+    def solveNQueens: n_param as int
+        var board_snq is byte[20][20]
+        var i_snq j_snq is int
+
+        i_snq := 0
         loop:
-            if i >= n :  
+            if i_snq >= n_param :
                 break
-            j := 0
+            j_snq := 0
             loop:
-                if j >= n :  
+                if j_snq >= n_param :
                     break
-                board[i][j] := 0  
-                j := j + 1  
-            i := i + 1  
+                if i_snq < 20 and j_snq < 20 : board_snq[i_snq][j_snq] := false
+                j_snq := j_snq + 1
+            i_snq := i_snq + 1
 
-        if solveNQueensUtil: board, 0, n :  
-            writeString: "Solution found.\n"
+        if solveNQueensUtil(board_snq, 0, n_param) :
+            skip
         else :
             writeString: "No solution exists.\n"
 
-    var size is int
     writeString: "Enter board size: "
-    size := readInteger()  
-    solveNQueens: size  
+    size_main := readInteger()
+    if size_main > 20 :
+        writeString: "Warning: Board size capped at 20 due to program limits.\n"
+        size_main := 20
+    if size_main < 1 :
+        writeString: "Info: Board size must be at least 1. Setting to 1.\n"
+        size_main := 1
+    
+    if size_main > 0 : solveNQueens: size_main
+    else: writeString: "No solution exists for non-positive size.\n"
