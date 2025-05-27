@@ -1,3 +1,4 @@
+(* calculator.dana *)
 def main
     # Helper Function
 
@@ -11,10 +12,8 @@ def main
         else:
             return: false
 
-    (*
-        Conversion from part of a string to an int
-        [from, to)
-    *)
+    # Conversion from part of a string to an int
+    # [from, to)
     def string_to_int is int: s as byte[], from to as int
         var i res pow is int
 
@@ -30,18 +29,16 @@ def main
 
         return: res
 
-    (*
-        Simple Calculator
-
-        Input: lines of the following form:
-        <Num1> <Op> <Num2>
-        where <NumX> is a positive integer
-        and <Op> is one of +, -, *, /
-        Any other characters among them get ignored.
-
-        Output: lines with the results
-        or a message "Invalid" in case of failure
-    *)
+    # Simple Calculator
+    #
+    # Input: lines of the following form:
+    # <Num1> <Op> <Num2>
+    # where <NumX> is a positive integer
+    # and <Op> is one of +, -, *, /
+    # Any other characters among them get ignored.
+    #
+    # Output: lines with the results
+    # or a message "Invalid" in case of failure
 
     var buf is byte[256]
     var idx len start p_end a b is int
@@ -60,50 +57,71 @@ def main
             if idx = len:
                 writeString: "Invalid\n"
                 continue: lines
-            elif is_number(buf[idx]):
+            elif is_digit(buf[idx]):
                 break: a_start
             idx := idx + 1
         start := idx
 
         loop a_end:
             if idx = len:
-                writeString: "Invalid\n"
-                continue: lines
-            elif not is_number(buf[idx]):
+                p_end := idx
+                break: a_end
+            elif not is_digit(buf[idx]):
+                p_end := idx
                 break: a_end
             idx := idx + 1
-        p_end := idx
+            if idx = len:
+                p_end := idx
+                break: a_end
+        
+        if start = p_end:
+             writeString: "Invalid\n"
+             continue: lines
 
-        a := string_to_int(buff, start, p_end)
+        a := string_to_int(buf, start, p_end)
 
         loop op_detect:
             if idx = len:
                 writeString: "Invalid\n"
                 continue: lines
             elif is_operator(buf[idx]):
+                op := buf[idx]
+                idx := idx + 1
                 break: op_detect
             idx := idx + 1
-        op := buf[idx]
+        
+        if idx = start:
+            writeString: "Invalid\n"
+            continue: lines
 
         loop b_start:
             if idx = len:
                 writeString: "Invalid\n"
                 continue: lines
-            elif is_number(buf[idx]):
+            elif is_digit(buf[idx]):
                 break: b_start
             idx := idx + 1
         start := idx
 
         loop b_end:
-            if idx = len or not is_number(buf[idx]):
+            if idx = len:
+                p_end := idx
+                break: b_end
+            elif not is_digit(buf[idx]):
+                p_end := idx
                 break: b_end
             idx := idx + 1
-        p_end := idx
+            if idx = len:
+                p_end := idx
+                break: b_end
 
-        b := string_to_int(buff, start, p_end)
+        if start = p_end: # No digits were found for the second number
+            writeString: "Invalid\n"
+            continue: lines
+
+        b := string_to_int(buf, start, p_end) # Corrected buff to buf
 
         # We have finished parsing now we can calculate
-
         if op = '+':
             writeInteger: a + b
         elif op = '-':
@@ -111,9 +129,12 @@ def main
         elif op = '*':
             writeInteger: a * b
         elif op = '/':
-            writeInteger: a / b
+            if b = 0:
+                writeString: "Invalid\n" # Division by zero
+            else:
+                writeInteger: a / b
         else:
             writeString: "Invalid\n"
+        writeString: "\n"
 
     exit
-
