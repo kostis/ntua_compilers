@@ -43,23 +43,21 @@ def main
     var nums is int [100]
     var size k find is int
     k := 0
-    writeString: "Give size of array: "
+    # writeString: "Give size of array: "
     size := readInteger()
-    writeString: "\n"
-    writeString: "Give the numbers of the array: "
+    # writeString: "Give the numbers of the array: "
     loop:
-        if k <= size:
+        if k < size:
             nums[k] := readInteger()
             k := k + 1
         else:
             nums[k] := 0
             break
 
-    writeString: "\n"
     quicksort: nums, 0, (size - 1)
-    writeString: "Array is now sorted\n"
-    writeString: "Which value should I search for? "
+    # writeString: "Array is now sorted\n"
+    # writeString: "Which value should I search for? "
     find := readInteger()
-    writeString: "\n"
     writeString: "Value is: "
     writeInteger: (binarySearch( nums, 0, (size - 1), find))
+    writeString: "\n"

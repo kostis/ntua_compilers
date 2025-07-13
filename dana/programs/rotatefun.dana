@@ -33,7 +33,7 @@ def main
   var i_main is int 
   var result is int
 
-  writeString: "Enter number of elements (max 100):\n"
+  # writeString: "Enter number of elements (max 100):\n"
   n_actual := readInteger()
 
   if n_actual <= 0:
@@ -46,7 +46,7 @@ def main
   i_main := 0
   loop:
     if i_main < n_actual:
-      writeString: "Enter element "
+      # writeString: "Enter element "
       nums_main[i_main] := readInteger()
       i_main := i_main + 1
     else: break

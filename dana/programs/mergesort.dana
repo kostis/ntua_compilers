@@ -79,7 +79,6 @@ def main
         writeString: "Warning: Input size exceeds program capacity (1000 elements). Processing first 1000.\n"
         n_main := 1000
 
-
     if n_main > 0 :
         merge_sort: arr_main, 0, n_main - 1
 
@@ -88,6 +87,6 @@ def main
         if i_main >= n_main: break
         if i_main < 1000:
              writeInteger: arr_main[i_main]
-             writeString: " "
         i_main := i_main + 1
+        if i_main <> n_main: writeString: " "
     writeString: "\n"
