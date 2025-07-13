@@ -1,10 +1,7 @@
 def main
 
   def even: n as int, result as ref int
-    if n % 2 = 0:
-      result := 1
-    else:
-      result := 0
+    result := (n % 2)
 
   var n is int
   var res is int
