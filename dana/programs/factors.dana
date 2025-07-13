@@ -16,6 +16,7 @@ def main
   if n = 2 or n = 3:
     writeString: " 1 "
     writeInteger: n
+    writeString: "\n"
     exit
 
   # For all other numbers, iterate from 1 to n and print divisors
@@ -26,3 +27,4 @@ def main
       writeString: " "
       writeInteger: i  # i is a factor of n
     i := i + 1
+  writeString: "\n"

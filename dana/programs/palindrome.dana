@@ -21,9 +21,6 @@ def main
 
     writeString: "Give a string with maximum length 30: "
     readString: 31, input
-    writeString: "Input was: "
-    writeString: input
-    writeString: "\n"
 
     is_pal := check_pal(input)
 
