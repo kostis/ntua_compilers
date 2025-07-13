@@ -1,50 +1,57 @@
 # LeetCode problem: 396. Rotate Function (https://leetcode.com/problems/rotate-function/description/)
 def main
-  
-  def maxRotateFunction is int: n as int, nums as int []
 
-    var sum prevF maxF i is int
+  def maxRotateFunction is int: n_param as int, nums_param as int []
+    var sum prevF maxF i F is int 
     sum := 0
     prevF := 0
-    maxF := 0
     i := 0
 
     loop:
-      if i < n:      
-        sum := sum + nums[i]
-        prevF := prevF + i * nums[i]
+      if i < n_param:
+        sum := sum + nums_param[i]
+        prevF := prevF + i * nums_param[i]
         i := i + 1
       else: break
 
-    maxF := prevF
-    i := 1
+    maxF := prevF 
+    i := 1 
 
     loop:
-      if i < n:
-        var F is int
-        F := prevF + sum - n * nums[n-i]
-        if F > maxF: maxF := F
+      if i < n_param:
+        F := prevF + sum - n_param * nums_param[n_param-i]
+        if F > maxF:
+            maxF := F
         prevF := F
         i := i + 1
       else: break
 
     return: maxF
 
-  var n is int
-  n := readInteger()
-  
-  var nums is int [n]
+  var n_actual is int
+  var nums_main is int [100] 
+  var i_main is int 
+  var result is int
 
-  var i is int
-  i := 0
+  writeString: "Enter number of elements (max 100):\n"
+  n_actual := readInteger()
+
+  if n_actual <= 0:
+    writeString: "Number of elements must be positive.\n"
+    exit
+  if n_actual > 100:
+    writeString: "Number of elements exceeds array capacity (100).\n"
+    exit
+  
+  i_main := 0
   loop:
-    if i < n:
-      nums[i] := readInteger()
-      i := i + 1
+    if i_main < n_actual:
+      writeString: "Enter element "
+      nums_main[i_main] := readInteger()
+      i_main := i_main + 1
     else: break
 
-  var result is int
-  result := maxRotateFunction(n, nums)
+  result := maxRotateFunction(n_actual, nums_main)
 
   writeInteger: result
   writeString: "\n"

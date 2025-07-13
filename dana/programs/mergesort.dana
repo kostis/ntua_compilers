@@ -1,83 +1,93 @@
-def merge: arr as int [], left as int, mid as int, right as int
-    var n1 n2 i j k is int
-    n1 := mid - left + 1
-    n2 := right - mid
-
-    var L is int [n1]
-    var R is int [n2]
-
-    i := 0
-    loop:
-        if i < n1:
-            L[i] := arr[left + i]
-            i := i + 1
-        else: break
-
-    j := 0
-    loop:
-        if j < n2:
-            R[j] := arr[mid + 1 + j]
-            j := j + 1
-        else: break
-
-    i := 0
-    j := 0
-    k := left
-
-    loop:
-        if i < n1 and j < n2:
-            if L[i] <= R[j]:
-                arr[k] := L[i]
-                i := i + 1
-            else:
-                arr[k] := R[j]
-                j := j + 1
-            k := k + 1
-        else: break
-
-    loop:
-        if i < n1:
-            arr[k] := L[i]
-            i := i + 1
-            k := k + 1
-        else: break
-
-    loop:
-        if j < n2:
-            arr[k] := R[j]
-            j := j + 1
-            k := k + 1
-        else: break
-
-def merge_sort: arr as int [], left as int, right as int
-    if left < right:
-        var mid is int
-        mid := (left + right) / 2
-        merge_sort: arr, left, mid
-        merge_sort: arr, mid + 1, right
-        merge: arr, left, mid, right
-
 def main
-    var n is int
-    n := readInteger()
+    var n_main is int
+    var arr_main is int [1000]
+    var i_main is int
+    var dummy_val is int
 
-    var arr is int [n]
-    var i is int
+    def merge: arr_param as int [], left_param as int, mid_param as int, right_param as int
+        var n1_local n2_local i_local j_local k_local is int
+        var L_temp is int [1000]
+        var R_temp is int [1000]
 
-    i := 0
+        n1_local := mid_param - left_param + 1
+        n2_local := right_param - mid_param
+
+        i_local := 0
+        loop:
+            if i_local < n1_local and left_param + i_local < 1000 and i_local < 1000:
+                L_temp[i_local] := arr_param[left_param + i_local]
+                i_local := i_local + 1
+            else: break
+
+        j_local := 0
+        loop:
+            if j_local < n2_local and mid_param + 1 + j_local < 1000 and j_local < 1000:
+                R_temp[j_local] := arr_param[mid_param + 1 + j_local]
+                j_local := j_local + 1
+            else: break
+
+        i_local := 0
+        j_local := 0
+        k_local := left_param
+
+        loop:
+            if i_local < n1_local and j_local < n2_local:
+                if L_temp[i_local] <= R_temp[j_local]:
+                    if k_local < 1000: arr_param[k_local] := L_temp[i_local]
+                    i_local := i_local + 1
+                else:
+                    if k_local < 1000: arr_param[k_local] := R_temp[j_local]
+                    j_local := j_local + 1
+                k_local := k_local + 1
+            else: break
+
+        loop:
+            if i_local < n1_local:
+                if k_local < 1000: arr_param[k_local] := L_temp[i_local]
+                i_local := i_local + 1
+                k_local := k_local + 1
+            else: break
+
+        loop:
+            if j_local < n2_local:
+                if k_local < 1000: arr_param[k_local] := R_temp[j_local]
+                j_local := j_local + 1
+                k_local := k_local + 1
+            else: break
+
+    def merge_sort: arr_param as int [], left_param as int, right_param as int
+        var mid_local is int
+
+        if left_param < right_param:
+            mid_local := (left_param + right_param) / 2
+            merge_sort: arr_param, left_param, mid_local
+            merge_sort: arr_param, mid_local + 1, right_param
+            merge: arr_param, left_param, mid_local, right_param
+
+    n_main := readInteger()
+
+    i_main := 0
     loop:
-        if i < n:
-            arr[i] := readInteger()
-            i := i + 1
-        else: break
+        if i_main >= n_main: break
+        if i_main < 1000:
+            arr_main[i_main] := readInteger()
+        else:
+            dummy_val := readInteger()
+        i_main := i_main + 1
+    
+    if n_main > 1000:
+        writeString: "Warning: Input size exceeds program capacity (1000 elements). Processing first 1000.\n"
+        n_main := 1000
 
-    merge_sort: arr, 0, n-1
 
-    i := 0
+    if n_main > 0 :
+        merge_sort: arr_main, 0, n_main - 1
+
+    i_main := 0
     loop:
-        if i < n:
-            writeInteger: arr[i]
-            writeString: " "
-            i := i + 1
-        else: break
+        if i_main >= n_main: break
+        if i_main < 1000:
+             writeInteger: arr_main[i_main]
+             writeString: " "
+        i_main := i_main + 1
     writeString: "\n"
