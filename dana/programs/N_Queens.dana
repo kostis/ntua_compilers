@@ -19,7 +19,6 @@ def main
                 j_pb := j_pb + 1
             writeString: "\n"
             i_pb := i_pb + 1
-        writeString: "\n"
 
     def isSafe is byte: board_param as byte[][], row_param col_param n_param as int
         var i_is j_is is int
@@ -97,7 +96,7 @@ def main
         else :
             writeString: "No solution exists.\n"
 
-    writeString: "Enter board size: "
+    # writeString: "Enter board size: "
     size_main := readInteger()
     if size_main > 20 :
         writeString: "Warning: Board size capped at 20 due to program limits.\n"
