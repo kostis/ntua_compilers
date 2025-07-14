@@ -28,7 +28,7 @@ def main
     var nums is int [100] 
     var k is int
 
-    writeString: "Enter number of elements (max 100):\n"
+    # writeString: "Enter number of elements (max 100):\n"
     N := readInteger()
 
     if N > 100:
@@ -41,14 +41,14 @@ def main
     k := 0
     loop:
         if k >= N: break 
-        writeString: "Enter element "
+        # writeString: "Enter element "
         nums[k] := readInteger()
         k := k + 1
 
     quicksort: 0, N-1, nums 
 
     k := 0
-    writeString: "Sorted array: \n"
+    writeString: "Sorted array: "
     loop:
         if k < N:
             if k > 0: writeString: ", " 
