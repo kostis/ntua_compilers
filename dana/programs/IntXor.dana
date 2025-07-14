@@ -46,7 +46,7 @@ def main
 	var A B X is int[15]
 
 	# Read input
-	writeString: "Input 2 non negative integers"
+	# writeString: "Input 2 non negative integers"
 	a := readInteger()
 	b := readInteger()
 
