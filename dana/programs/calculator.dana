@@ -1,6 +1,7 @@
-(* calculator.dana *)
+(* A line calculator *)
+
 def main
-    # Helper Function
+    # Helper Functions
 
     def is_digit is byte: c as byte
         if '0' <= c and c <= '9':   return: true
@@ -38,7 +39,7 @@ def main
     # Any other characters among them get ignored.
     #
     # Output: lines with the results
-    # or a message "Invalid" in case of failure
+    # or a message "Invalid" in case of failure(s)
 
     var buf is byte[256]
     var idx len start p_end a b is int
