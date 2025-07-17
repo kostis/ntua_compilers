@@ -1,3 +1,5 @@
+(* This is the bsort.dana program with a type error *)
+
 def main
 
   def bsort: n as int, x as int []
@@ -43,12 +45,10 @@ def main
   i := 0
   loop:
     if i < 16:
-      seed := (seed * 137 + 220 + i) % 101
+      seed := (seed * 137 + 221 + i) % 101
       x[i] := seed
       i := i+1
     else: break
   writeArray: "Initial array: ", 16, x
-  # according to the grammar, x here should be a proc-call of function `x` with no arguments
-  # error should be that x is a variable of type int[16], not a function.
-  bsort: 16, x
-  writeArray: "Sorted array: ", 16, x
+  bsort: 16, x[0]	# ERROR: Type mismatch
+  writeArray: "Sorted  array: ", 16, x

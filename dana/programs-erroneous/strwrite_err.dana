@@ -1,3 +1,9 @@
+(*
+  This is the powint program containing a semantic error in a call to
+  the writeString function.  The function expexts a byte[] argunment,
+  not an int type (variable temp below).
+*)
+
 def main
 
   def powint: base as int, exp as int, mod as int, result as ref int
@@ -16,7 +22,7 @@ def main
       else: 
         result := (base * temp * temp) % mod
         
-        writeString: temp # SEMANTIC ERROR: Calling writeString (expects byte[]) with an int argument (temp)
+        writeString: temp # SEMANTIC ERROR on this line
 
   var b   is int
   var e   is int
