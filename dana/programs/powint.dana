@@ -1,9 +1,9 @@
 def main
 
   def powint: base as int, exp as int, mod as int, result as ref int
+    var temp is int
 
     base := base % mod
-    var temp is int
 
     if exp < 1:
       result := 1
