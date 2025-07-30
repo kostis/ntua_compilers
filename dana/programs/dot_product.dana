@@ -10,6 +10,7 @@ def main
     return : product
 
   var ex_vector1 ex_vector2 is int[4]
+  var result is int
 
   ex_vector1[0] := 2
   ex_vector1[1] := 4
@@ -21,7 +22,6 @@ def main
   ex_vector2[2] := 5
   ex_vector2[3] := 7
 
-  var result is int
   result := dot_product(4, ex_vector1, ex_vector2)
   writeString : "The dot product of the two vectors is: "
   writeInteger : result
