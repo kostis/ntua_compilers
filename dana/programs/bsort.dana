@@ -1,4 +1,9 @@
 def main
+  def swap: x y as ref int
+    var t is int
+    t := x
+    x := y
+    y := t
 
   def bsort: n as int, x as int []
     var changed is byte
@@ -17,12 +22,6 @@ def main
           break : inner_loop_label
       if not changed:
         break : outer_loop_label
-
-  def swap: x y as ref int
-    var t is int
-    t := x
-    x := y
-    y := t
 
   def writeArray: msg as byte [], n as int, x as int []
     var i is int

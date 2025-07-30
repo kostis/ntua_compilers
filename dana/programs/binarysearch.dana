@@ -1,4 +1,9 @@
 def main
+    def swap: a as ref int, b as ref int
+        var t is int
+        t := a
+        a := b
+        b := t
 
     def partition is int: arr as int [], low high as int
         var pivot i j is int
@@ -20,12 +25,6 @@ def main
             pi := partition(arr, low, high)
             quicksort: arr, low, (pi - 1)
             quicksort: arr, (pi + 1), high  
-    
-    def swap: a as ref int, b as ref int
-        var t is int
-        t := a
-        a := b
-        b := t
 
     def binarySearch is int: arr as int [], low high x as int
         var mid is int 
