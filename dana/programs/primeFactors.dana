@@ -1,6 +1,8 @@
 def main
   # Helper procedure: prints the prime factors of n
   def primeFactors: n as int
+    var i is int
+    
     # Divide out all factors of 2
     loop:
       if n % 2 = 0:
@@ -8,7 +10,6 @@ def main
         n := n / 2
       else: break
 
-    var i is int
     i := 3
     # Loop over odd numbers starting from 3 while i*i <= n
     loop:
