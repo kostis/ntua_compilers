@@ -2,7 +2,7 @@ def main
 
     var size_main is int
 
-    def printBoard: board_param as byte[][], n_param as int
+    def printBoard: board_param as byte[][20], n_param as int
         var i_pb j_pb is int
         i_pb := 0
         loop:
@@ -20,7 +20,7 @@ def main
             writeString: "\n"
             i_pb := i_pb + 1
 
-    def isSafe is byte: board_param as byte[][], row_param col_param n_param as int
+    def isSafe is byte: board_param as byte[][20], row_param col_param n_param as int
         var i_is j_is is int
 
         i_is := 0
@@ -53,7 +53,7 @@ def main
 
         return : true
 
-    def solveNQueensUtil is byte: board_param as byte[][], row_param n_param as int
+    def solveNQueensUtil is byte: board_param as byte[][20], row_param n_param as int
         var col_util is int
 
         if row_param = n_param :
