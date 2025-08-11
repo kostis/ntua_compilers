@@ -46,6 +46,7 @@ def main
     var op is byte
 
     loop lines:
+        buf[0] := '\0'
         readString: 256, buf
 
         # Stop if we got nothing
