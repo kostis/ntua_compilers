@@ -1,0 +1,113 @@
+def main
+
+    var board is int[9][9]
+
+    def printBoard: b as int[][9]
+        var i j is int
+        i := 0
+        loop:
+            if i < 9:
+                j := 0
+                loop:
+                    if j < 9:
+                        writeInteger: b[i][j]
+                        if j < 8: writeString: " "
+                        j := j + 1
+                    else: break
+                writeString: "\n"
+                i := i + 1
+            else: break
+
+    def isSafe is byte: b as int[][9], row col num as int
+        var i j boxStartRow boxStartCol is int
+
+        # Row check
+        j := 0
+        loop:
+            if j < 9:
+                if b[row][j] = num: return: false
+                j := j + 1
+            else: break
+
+        # Column check
+        i := 0
+        loop:
+            if i < 9:
+                if b[i][col] = num: return: false
+                i := i + 1
+            else: break
+
+        # 3x3 box check
+        boxStartRow := (row / 3) * 3
+        boxStartCol := (col / 3) * 3
+        i := 0
+        loop:
+            if i < 3:
+                j := 0
+                loop:
+                    if j < 3:
+                        if b[boxStartRow + i][boxStartCol + j] = num: return: false
+                        j := j + 1
+                    else: break
+                i := i + 1
+            else: break
+
+        return: true
+
+    def findEmpty is byte: b as int[][9], rowRef colRef as ref int
+        var i j is int
+        i := 0
+        loop:
+            if i < 9:
+                j := 0
+                loop:
+                    if j < 9:
+                        if b[i][j] = 0:
+                            rowRef := i
+                            colRef := j
+                            return: true
+                        j := j + 1
+                    else: break
+                i := i + 1
+            else: break
+        return: false
+
+    def solve is byte: b as int[][9]
+        var row col num is int
+        var hasEmpty is byte
+
+        hasEmpty := findEmpty(b, row, col)
+        if hasEmpty = false:
+            return: true
+
+        num := 1
+        loop:
+            if num <= 9:
+                if isSafe(b, row, col, num):
+                    b[row][col] := num
+                    if solve(b):
+                        return: true
+                    b[row][col] := 0   # backtrack
+                num := num + 1
+            else: break
+
+        return: false
+
+    # Read 9x9 grid (0 = empty)
+    var i j is int
+    i := 0
+    loop:
+        if i < 9:
+            j := 0
+            loop:
+                if j < 9:
+                    board[i][j] := readInteger()
+                    j := j + 1
+                else: break
+            i := i + 1
+        else: break
+
+    if solve(board):
+        printBoard: board
+    else:
+        writeString: "No solution\n"
