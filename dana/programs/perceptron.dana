@@ -8,6 +8,11 @@ def main
     var iter is int
     var in_iter is int
 
+    # First line of input file
+    var NUM_EXAMPLES is int
+    # Number of examples is written right above the input data, maximum can be 4
+    var example_size is int
+
     # Fixed-point arithmetic multiplication
     def fpmul is int: a b as int
         return: (a * b) / SCALE
@@ -35,7 +40,7 @@ def main
         writeString: "Given input:\n"
         tt := 0
         loop:
-            if tt < 4:
+            if tt < example_size:
                 writeInteger: tt
                 writeString: ": "
                 writeInteger: x[tt][0]
@@ -65,7 +70,7 @@ def main
 
                 tt := 0
                 loop:
-                    if tt < 4:
+                    if tt < example_size:
 
                         temp_x[0] := x[tt][0]
                         temp_x[1] := x[tt][1]
@@ -96,15 +101,19 @@ def main
     LR := SCALE / 4
     NUM_EPOCHS := 100
 
+    NUM_EXAMPLES := readInteger()
+
     in_iter := 0
     loop:
-        if in_iter < 2:
+        if in_iter < NUM_EXAMPLES:
+
+            example_size := readInteger()
 
             init_weights_bias: weights, bias
 
             iter := 0
             loop input_loop:
-                if iter < 4:
+                if iter < example_size:
                     inputs[iter][0] := readInteger()
                     inputs[iter][1] := readInteger()
                     expected[iter] := readInteger()
@@ -116,7 +125,7 @@ def main
 
             iter := 0
             loop test_loop:
-                if iter < 4:
+                if iter < example_size:
                     writeInteger: predict(inputs[iter], weights, bias)
                     writeChar: ' '
                     iter := iter + 1
