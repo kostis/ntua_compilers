@@ -1,0 +1,138 @@
+def main
+    var SCALE LR NUM_EPOCHS is int
+    var weights is int[2]
+    var bias is int
+    var inputs is int[4][2]
+    var expected is int[4]
+    var test_in is int[2]
+    var iter is int
+    var in_iter is int
+
+    # First line of input file
+    var NUM_EXAMPLES is int
+    # Number of examples is written right above the input data, maximum can be 4
+    var example_size is int
+
+    # Fixed-point arithmetic multiplication
+    def fpmul is int: a b as int
+        return: (a * b) / SCALE
+
+    # Convert int to fixed-point arithmetic number
+    def tofp is int: x as int
+        return: x * SCALE
+
+    # Step function
+    def activate is int: z as int
+        if z >= 0:
+            return: 1
+        else:
+            return: 0
+
+    # Predict/Inference function
+    def predict is int: x w as int[2], b as int
+        var sum is int
+        
+        sum := fpmul(w[0], tofp(x[0])) + fpmul(w[1], tofp(x[1])) + b
+        return: activate(sum)
+
+    def debugInput: x as int[4][2], t as int[4]
+        var tt is int
+        writeString: "Given input:\n"
+        tt := 0
+        loop:
+            if tt < example_size:
+                writeInteger: tt
+                writeString: ": "
+                writeInteger: x[tt][0]
+                writeChar: ' '
+                writeInteger: x[tt][1]
+                writeChar: ' '
+                writeInteger: t[tt]
+                writeChar: '('
+                writeInteger: tt
+                writeChar: ')'
+                writeChar: '\n'
+                tt := tt + 1
+            else:
+                break
+
+    # Main perceptron training function
+    def train: x as int[4][2], t as int[4], w as int[2], bias as ref int
+        var epoch tt is int
+        var y err delta is int
+        var temp_x is int[2]
+
+        # debugInput: x, t
+
+        epoch := 0
+        loop:
+            if epoch < NUM_EPOCHS:
+
+                tt := 0
+                loop:
+                    if tt < example_size:
+
+                        temp_x[0] := x[tt][0]
+                        temp_x[1] := x[tt][1]
+                        y := predict(temp_x, w, bias)
+
+                        # Error can be -1, 0, 1
+                        err := t[tt] - y
+                        
+                        w[0] := w[0] + fpmul(LR, tofp(err * x[tt][0]))
+                        w[1] := w[1] + fpmul(LR, tofp(err * x[tt][1]))
+                        bias := bias + fpmul(LR, tofp(err))
+
+                        tt := tt + 1
+
+                    else:
+                        break
+
+                epoch := epoch + 1
+            else:
+                break
+
+    def init_weights_bias: weights as int[], b as ref int
+        weights[0] := 0
+        weights[1] := 0
+        b := 0
+
+    SCALE := 256
+    LR := SCALE / 4
+    NUM_EPOCHS := 100
+
+    NUM_EXAMPLES := readInteger()
+
+    in_iter := 0
+    loop:
+        if in_iter < NUM_EXAMPLES:
+
+            example_size := readInteger()
+
+            init_weights_bias: weights, bias
+
+            iter := 0
+            loop input_loop:
+                if iter < example_size:
+                    inputs[iter][0] := readInteger()
+                    inputs[iter][1] := readInteger()
+                    expected[iter] := readInteger()
+                    iter := iter + 1
+                else:
+                    break: input_loop
+
+            train: inputs, expected, weights, bias
+
+            iter := 0
+            loop test_loop:
+                if iter < example_size:
+                    writeInteger: predict(inputs[iter], weights, bias)
+                    writeChar: ' '
+                    iter := iter + 1
+                else:
+                    break: test_loop
+            writeChar: '\n'
+
+            in_iter := in_iter + 1
+        else:
+            break
