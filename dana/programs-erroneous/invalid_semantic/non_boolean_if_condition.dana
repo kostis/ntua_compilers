@@ -2,4 +2,4 @@
 
 def main
     if "not a boolean":
-        writeString: "branch"
+        writeString: "erroneous"
