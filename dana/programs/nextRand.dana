@@ -1,4 +1,6 @@
-# Random integer number generator (works fine)
+#
+# Random integer generator
+#
 def main
     var seed iter is int
 
@@ -11,11 +13,9 @@ def main
         seed := (a * seed + b) % c
         if seed < 0:
             seed := -seed
-
         return: seed
 
     seed := 123456
-
     iter := 0
     loop:
         if iter < 10:
