@@ -1,0 +1,3 @@
+def main
+  break             # Error: break outside loop
+  return: 42

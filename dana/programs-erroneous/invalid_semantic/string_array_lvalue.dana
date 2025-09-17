@@ -1,0 +1,4 @@
+def main
+    var s is byte [16]
+    s := "hello" # should've written: strcpy: s, "hello\n"
+    writeString: s

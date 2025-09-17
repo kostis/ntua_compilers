@@ -1,0 +1,10 @@
+# Error: duplicate definition of function 'greet'
+
+def main
+    def greet
+        writeString: "Hello"
+
+    def greet 
+        writeString: "Again"
+    
+    greet

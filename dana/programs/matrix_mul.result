@@ -1,0 +1,5 @@
+Enter n m p (max 20): Enter A (n x m) elements row-wise:
+Enter B (m x p) elements row-wise:
+Result C (n x p):
+58 64
+139 154

@@ -1,0 +1,5 @@
+def main
+  var x is int
+  var s is byte[10]
+
+  return: x + s     # Error: cannot add int and byte[]

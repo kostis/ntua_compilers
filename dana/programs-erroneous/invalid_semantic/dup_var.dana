@@ -1,0 +1,7 @@
+def main
+   var a b a is int
+begin
+   a := 1
+   writeInteger: a
+   writeString: "\nthis program is wrong!!!\n"
+end

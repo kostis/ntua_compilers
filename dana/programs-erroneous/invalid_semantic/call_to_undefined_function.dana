@@ -1,0 +1,6 @@
+# Error: call to undefined function 'printInt'
+
+def main
+    begin
+        printInt: 42
+    end

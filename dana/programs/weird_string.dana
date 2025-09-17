@@ -1,0 +1,9 @@
+def main
+    var c is byte
+    var i is int
+
+    i := 3
+    c := "gazonk"[i + 1]
+
+    writeChar: c
+    writeChar: '\n'

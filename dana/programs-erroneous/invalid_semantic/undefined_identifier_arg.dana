@@ -1,0 +1,6 @@
+# Error: use of undefined identifier 'msg' as an argument
+
+def main
+    begin
+        writeString: msg
+    end
