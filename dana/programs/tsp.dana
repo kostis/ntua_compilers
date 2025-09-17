@@ -1,0 +1,295 @@
+#
+# Genetic Algorithm for the Travelling Salesman Problem
+#
+def main
+    var NUM_CITIES POP_SIZE MAX_GEN is int
+    var distance is int[8][8]
+
+    # Dimensions should be [POP_SIZE][NUM_CITIES]
+    var population new_population is int[100][8]
+    
+    var seed is int
+    def nextRand is int
+        var a b c is int
+        
+        a := 1664525
+        b := 1013904223
+        c := 2147483647
+        seed := (a * seed + b) % c
+        if seed < 0:
+            seed := -seed
+
+        return: seed
+
+    def fitness is int: chromosome as int[]
+        var total i is int
+
+        total := 0
+        i := 0
+
+        loop:
+            if i < NUM_CITIES-1:
+                total := total + distance[chromosome[i]][chromosome[i+1]]
+                i := i + 1
+            else:
+                break
+        # Add the distance to return to the starting city
+        total := total + distance[chromosome[NUM_CITIES-1]][chromosome[0]]
+        return: total
+
+    def select_parent is int
+        var a b is int
+
+        a := nextRand() % POP_SIZE
+        b := nextRand() % POP_SIZE
+
+        if fitness(population[a]) < fitness(population[b]):
+            return: b
+        else:
+            return: a
+
+    def crossover: p1 p2 child as int[]
+        var start final_idx tmp i idx is int
+        var city found j is int
+
+        start := nextRand() % NUM_CITIES
+        final_idx := nextRand() % NUM_CITIES
+        if start > final_idx:
+            tmp := start
+            start := final_idx
+            final_idx := tmp
+        
+        # Take a slice from the first parent
+        i := start
+        loop:
+            if i <= final_idx:
+                child[i] := p1[i]
+                i := i + 1
+            else:
+                break 
+
+        # Fill the remaining positions from the second parent
+        idx := (final_idx + 1) % NUM_CITIES
+        i := 0
+        loop:
+            if i < NUM_CITIES:
+
+                city := p2[i]
+                found := 0
+                j := start
+                loop:
+                    if j <= final_idx:
+                        if child[j] = city:
+                            found := 1
+                        j := j + 1
+                    else:
+                        break
+                
+                if found = 0:
+                    child[idx] := city
+                    idx := (idx + 1) % NUM_CITIES
+
+                i := i + 1
+            else:
+                break
+
+    def mutate: chromosome as int[], chance_per_gene as int
+        var i j tmp r is int
+
+        i := 0
+        loop:
+            if i < NUM_CITIES:
+
+                r := nextRand() % 100
+                if r < chance_per_gene:
+                    # swap current gene with a random gene(may be the same)
+                    j := nextRand() % NUM_CITIES
+                    tmp := chromosome[i]
+                    chromosome[i] := chromosome[j]
+                    chromosome[j] := tmp
+
+                i := i + 1
+            else:
+                break
+
+    def init_distance
+        var i j is int
+        
+        i := 0
+        loop:
+            if i < NUM_CITIES:
+                
+                j := 0
+                loop:
+                    if j < NUM_CITIES:
+                        if i = j:
+                            distance[i][j] := 0
+                        else:
+                            distance[i][j] := (nextRand() % 20) + 1
+                        j := j + 1
+                    else:
+                        break
+                
+                i := i + 1
+            else:
+                break
+
+    def init_population
+        var i j k tmp rand_idx is int
+        
+        i := 0
+        loop:
+            if i < POP_SIZE:
+                
+                # Fill chromosome with 0..NUM_CITIES-1
+                j := 0
+                loop:
+                    if j < NUM_CITIES:
+                        population[i][j] := j
+                        j := j + 1
+                    else:
+                        break
+                
+                # Shuffle using Fisher-Yates
+                k := NUM_CITIES-1
+                loop:
+                    if k > 0:
+                        rand_idx := nextRand() % (k+1)
+                        tmp := population[i][k]
+                        population[i][k] := population[i][rand_idx]
+                        population[i][rand_idx] := tmp
+                        k := k - 1
+                    else:
+                        break
+
+                i := i + 1
+            else:
+                break
+
+    def print_path: path as int[], len as int
+        var i is int
+
+        i := 0
+        loop:
+            if i < len:
+                writeInteger: path[i]
+                writeString: ", "
+                i := i + 1
+            else:
+                break
+        writeChar: '\n'
+
+    def assign_1d: src target as int[], len as int
+        var i is int
+
+        i := 0
+        loop:
+            if i < len:
+                target[i] := src[i]
+                i := i + 1
+            else:
+                break
+
+    def assign_2d: src target as int[][8], dim1 dim2 as int
+        var i j is int
+
+        i := 0
+        loop:
+            if i < dim1:
+
+                j := 0
+                loop:
+                    if j < dim2:
+                        target[i][j] := src[i][j]
+                        j := j + 1
+                    else:
+                        break
+
+                i := i + 1
+            else:
+                break
+
+    var gen k p1 p2 i d is int
+    var child1 child2 is int[8]
+
+    var best_path is int[8]
+    var best_distance is int
+
+    NUM_CITIES := 8
+    POP_SIZE := 100
+    MAX_GEN := 50
+
+    #seed := 123456
+    seed := 12345678
+    best_distance := 1000
+
+    init_distance
+    init_population
+
+    gen := 0
+    loop gen_loop:
+        if gen < MAX_GEN:
+
+            # Check best solution this generation
+            i := 0
+            loop i_loop:
+                if i < POP_SIZE:
+                    
+                    d := fitness(population[i])
+                    if d < best_distance:
+                        best_distance := d
+                        assign_1d: population[i], best_path, NUM_CITIES
+                    
+                    i := i + 1
+                else:
+                    break: i_loop
+            writeString: "Generation "
+            writeInteger: gen
+            writeString: " best distance = "
+            writeInteger: best_distance
+            writeString: " with best path: "
+            print_path: best_path, NUM_CITIES
+
+            k := 0
+            loop k_loop:
+                (*
+                writeString: "k = "
+                writeInteger: k
+                writeString: ", gen = "
+                writeInteger: gen
+                writeChar: '\n'
+                *)
+                if k < POP_SIZE/2:
+                    p1 := select_parent()
+                    p2 := select_parent()
+                    
+                    crossover: population[p1], population[p2], child1
+                    crossover: population[p2], population[p1], child2
+
+                    mutate: child1, 5
+                    mutate: child2, 5
+
+                    assign_1d: child1, new_population[2*k], NUM_CITIES
+                    assign_1d: child2, new_population[2*k+1], NUM_CITIES
+
+                    #writeString: "Made new generation...\n"
+
+                    k := k + 1
+                else:
+                    break: k_loop
+
+            # pick the current best one and put it in the new population
+            assign_1d: best_path, new_population[0], NUM_CITIES
+
+            assign_2d: new_population, population, POP_SIZE, NUM_CITIES
+
+            gen := gen + 1
+        else:
+            break: gen_loop
+
+    # Print best solution
+    writeString: "Best distance: "
+    writeInteger: best_distance
+    writeChar: '\n'
+    writeString: "Best path: "
+    print_path: best_path, NUM_CITIES

@@ -1,0 +1,76 @@
+# Matrix multiplication: C(n×p) = A(n×m) × B(m×p)
+def main
+
+    # Read an n×m matrix into M
+    def readMatrix: rows cols as int, M as int[][20]
+        var i j x is int
+        i := 0
+        loop:
+            if i >= rows: break
+            j := 0
+            loop:
+                if j >= cols: break
+                x := readInteger()
+                M[i][j] := x
+                j := j + 1
+            i := i + 1
+
+    # Write an n×m matrix M
+    def writeMatrix: rows cols as int, M as int[][20]
+        var i j is int
+        i := 0
+        loop:
+            if i >= rows: break
+            j := 0
+            loop:
+                if j >= cols: break
+                if j > 0: writeString: " "
+                writeInteger: M[i][j]
+                j := j + 1
+            writeString: "\n"
+            i := i + 1
+
+    # C(n×p) = A(n×m) × B(m×p)
+    def matmul: n m p as int, A B C as int[][20]
+        var i j k sum is int
+        i := 0
+        loop:
+            if i >= n: break
+            j := 0
+            loop:
+                if j >= p: break
+                sum := 0
+                k := 0
+                loop:
+                    if k >= m: break
+                    sum := sum + A[i][k] * B[k][j]
+                    k := k + 1
+                C[i][j] := sum
+                j := j + 1
+            i := i + 1
+
+    var n m p is int
+    var A B C is int[20][20]
+
+    # writeString: "Enter n m p (max 20): "
+    n := readInteger()
+    m := readInteger()
+    p := readInteger()
+
+    if n < 1 or m < 1 or p < 1:
+        writeString: "Invalid (non-positive) sizes of n m p.\n"
+        exit
+    if n > 20: n := 20
+    if m > 20: m := 20
+    if p > 20: p := 20
+
+    # writeString: "Enter A (n x m) elements row-wise:\n"
+    readMatrix: n, m, A
+
+    # writeString: "Enter B (m x p) elements row-wise:\n"
+    readMatrix: m, p, B
+
+    matmul: n, m, p, A, B, C
+
+    writeString: "Result C (n x p):\n"
+    writeMatrix: n, p, C

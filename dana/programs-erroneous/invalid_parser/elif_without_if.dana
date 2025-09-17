@@ -1,0 +1,7 @@
+# Error: 'elif' used without a preceding 'if'
+
+def main
+    begin
+        elif condition
+            writeString: "This should never be reached"
+    end

@@ -1,0 +1,5 @@
+# Error: 'begin' block is never closed with 'end'
+
+def main
+    begin
+        writeString: "Hello from an unclosed block"

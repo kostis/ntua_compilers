@@ -1,0 +1,103 @@
+def main
+    var counter is int
+    
+    # Top-level (within main) f
+    def f
+        writeString: "main.f\n"
+
+    # ---- A: nesting + shadowing + sibling call inside a nested scope
+    def a
+        
+
+        # f in a
+        def f
+            writeString: "a.f\n"
+
+        # b inside a, with its own f and an inner that calls sibling f
+        def b
+
+            def f
+                writeString: "a.b.f\n"
+
+            def callf
+                # should resolve to a.b.f (closest scope)
+                f
+
+            writeString: "enter a.b\n"
+            callf
+            writeString: "leave a.b\n"
+
+        # c inside a, with its own f and an inner that calls it
+        def c
+
+            def f
+                writeString: "a.c.f\n"
+
+            def inner
+                # should resolve to a.c.f
+                f
+
+            writeString: "enter a.c\n"
+            inner
+            writeString: "leave a.c\n"
+
+        writeString: "enter a\n"
+        b          # prints "enter a.b", "a.b.f", "leave a.b"
+        f          # should resolve to a.f
+        c
+        writeString: "leave a\n"
+
+    # ---- B: sibling resolution: inner calls sibling helper, then parent's f
+    def runner
+
+        def f
+            writeString: "runner.f\n"
+
+        def helper
+            writeString: "runner.helper\n"
+
+        def inner
+            # 'helper' must resolve to sibling under 'runner', not deeper
+            helper
+            # 'f' must resolve to runner.f (parent scope), not main.f
+            f
+
+        writeString: "enter runner\n"
+        inner
+        writeString: "leave runner\n"
+
+    # ---- C: recursion inside a nested function (fact)
+    def outer
+        def fact is int: n as int
+            if n <= 1:
+                return: 1
+            else:
+                return: n * fact(n - 1)
+
+        writeInteger: fact(5)
+        writeChar: '\n'
+
+    # ---- D: captured local through multiple levels
+    def useCounter
+        def inc
+            counter := counter + 1
+            writeInteger: counter
+            writeChar: '\n'
+
+        def callTwice
+            inc
+            inc
+
+        callTwice
+
+    
+
+    writeString: "BEGIN\n"
+    counter := 0
+    # Execute the plan
+    a
+    runner
+    outer
+    useCounter
+    f                # should resolve to main.f
+    writeString: "END\n"

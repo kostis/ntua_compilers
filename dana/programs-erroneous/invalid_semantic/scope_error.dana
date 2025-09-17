@@ -1,0 +1,9 @@
+# Error: use of variable 'x' outside its scope (declared inside nested def 'inner')
+
+def main
+    var y is int
+
+    def inner
+        var x is int
+        x := 42
+    y := x

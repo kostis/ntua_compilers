@@ -1,0 +1,26 @@
+#
+# Random integer generator
+#
+def main
+    var seed iter is int
+
+    def nextRand is int
+        var a b c is int
+        
+        a := 1664525
+        b := 1013904223
+        c := 2147483647
+        seed := (a * seed + b) % c
+        if seed < 0:
+            seed := -seed
+        return: seed
+
+    seed := 123456
+    iter := 0
+    loop:
+        if iter < 10:
+            writeInteger: (nextRand() % 100)
+            writeChar: '\n'
+            iter := iter + 1
+        else:
+            break

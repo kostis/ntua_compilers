@@ -1,0 +1,19 @@
+BEGIN
+enter a
+enter a.b
+a.b.f
+leave a.b
+a.f
+enter a.c
+a.c.f
+leave a.c
+leave a
+enter runner
+runner.helper
+runner.f
+leave runner
+120
+1
+2
+main.f
+END

@@ -1,0 +1,6 @@
+# Error: type mismatch in '+' expression (string + number)
+
+def main
+    begin
+        writeString: "Count: " + 1
+    end

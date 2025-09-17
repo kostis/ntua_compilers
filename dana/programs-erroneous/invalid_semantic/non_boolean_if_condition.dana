@@ -1,0 +1,5 @@
+# Error: 'if' condition is not boolean (string used as condition)
+
+def main
+    if "not a boolean":
+        writeString: "erroneous"
