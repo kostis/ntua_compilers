@@ -127,8 +127,8 @@ def main
             loop test_loop:
                 if iter < example_size:
                     writeInteger: predict(inputs[iter], weights, bias)
-                    writeChar: ' '
                     iter := iter + 1
+                    if iter < example_size: writeChar: ' '
                 else:
                     break: test_loop
             writeChar: '\n'
