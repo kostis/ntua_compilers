@@ -1,4 +1,6 @@
-# Genetic Algoirthm for the Travelling Salesman Problem
+#
+# Genetic Algorithm for the Travelling Salesman Problem
+#
 def main
     var NUM_CITIES POP_SIZE MAX_GEN is int
     var distance is int[8][8]
