@@ -1,4 +1,0 @@
-def main
-  var x is int
-
-  return: foo(x, 42) # Error: foo is not defined

@@ -1,5 +1,0 @@
-def main
-  var x is int
-
-  callMe: 42        # Error: callMe is not declared
-  return: x

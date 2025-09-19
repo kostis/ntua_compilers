@@ -1,3 +1,0 @@
-def main
-  continue          # Error: continue outside loop
-  return: 42

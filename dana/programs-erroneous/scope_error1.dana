@@ -1,9 +1,8 @@
-# x is declared in the loop but called outside
-# the loop -> out of scope error
+# Error: x is declared in the loop but called outside the loop
 
 def main
 	var i is int
-	i	:= 10
+	i := 10
 	loop:
 		var x is byte
 		x := 'A'
