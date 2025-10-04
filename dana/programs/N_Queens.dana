@@ -64,10 +64,10 @@ def main
         loop:
             if col_util >= n_param :
                 break
-            if isSafe(board_param, row_param, col_util, n_param) :
+            if isSafe(board_param, row_param, col_util, n_param) = true:
                 if row_param < 20 and col_util < 20 : board_param[row_param][col_util] := true
 
-                if solveNQueensUtil(board_param, row_param + 1, n_param) :
+                if solveNQueensUtil(board_param, row_param + 1, n_param) = true:
                     return : true
                 
                 if row_param < 20 and col_util < 20 : board_param[row_param][col_util] := false
@@ -91,7 +91,7 @@ def main
                 j_snq := j_snq + 1
             i_snq := i_snq + 1
 
-        if solveNQueensUtil(board_snq, 0, n_param) :
+        if solveNQueensUtil(board_snq, 0, n_param) = true:
             skip
         else :
             writeString: "No solution exists.\n"
