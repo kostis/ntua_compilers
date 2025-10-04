@@ -1,0 +1,7 @@
+# Error: 'if' condition is not boolean (byte variable used as condition)
+
+def main
+    var b is byte
+    b := true
+    if b:
+        writeString: "erroneous"
