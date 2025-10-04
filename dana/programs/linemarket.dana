@@ -83,7 +83,7 @@ def main
 
                 if distance <= 0 : distance := 1
 
-                if possible_store(lmd_arr, distance, spaces, num_stores):
+                if possible_store(lmd_arr, distance, spaces, num_stores) = true:
                     result := distance
                     left := distance + 1
                 else:
