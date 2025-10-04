@@ -20,7 +20,7 @@ def main
           i := i+1
         else:
           break : inner_loop_label
-      if not changed:
+      if not (changed = true) :
         break : outer_loop_label
 
   def writeArray: msg as byte [], n as int, x as int []
