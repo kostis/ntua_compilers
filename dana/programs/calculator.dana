@@ -59,7 +59,7 @@ def main
             if idx = len:
                 writeString: "Invalid\n"
                 continue: lines
-            elif is_digit(buf[idx]):
+            elif is_digit(buf[idx]) = true:
                 break: a_start
             idx := idx + 1
         start := idx
@@ -68,7 +68,7 @@ def main
             if idx = len:
                 p_end := idx
                 break: a_end
-            elif not is_digit(buf[idx]):
+            elif not is_digit(buf[idx]) = true:
                 p_end := idx
                 break: a_end
             idx := idx + 1
@@ -86,7 +86,7 @@ def main
             if idx = len:
                 writeString: "Invalid\n"
                 continue: lines
-            elif is_operator(buf[idx]):
+            elif is_operator(buf[idx]) = true:
                 op := buf[idx]
                 idx := idx + 1
                 break: op_detect
@@ -100,7 +100,7 @@ def main
             if idx = len:
                 writeString: "Invalid\n"
                 continue: lines
-            elif is_digit(buf[idx]):
+            elif is_digit(buf[idx]) = true:
                 break: b_start
             idx := idx + 1
         start := idx
@@ -109,7 +109,7 @@ def main
             if idx = len:
                 p_end := idx
                 break: b_end
-            elif not is_digit(buf[idx]):
+            elif not is_digit(buf[idx]) = true:
                 p_end := idx
                 break: b_end
             idx := idx + 1

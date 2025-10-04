@@ -83,9 +83,9 @@ def main
         num := 1
         loop:
             if num <= 9:
-                if isSafe(b, row, col, num):
+                if isSafe(b, row, col, num) = true:
                     b[row][col] := num
-                    if solve(b):
+                    if solve(b) = true:
                         return: true
                     b[row][col] := 0   # backtrack
                 num := num + 1
@@ -107,7 +107,7 @@ def main
             i := i + 1
         else: break
 
-    if solve(board):
+    if solve(board) = true:
         printBoard: board
     else:
         writeString: "No solution\n"
