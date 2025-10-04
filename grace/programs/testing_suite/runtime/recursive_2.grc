@@ -1,0 +1,16 @@
+fun p(): nothing
+    fun f(n : int) : nothing
+        var x : int;
+    {
+        if n > 0 then 
+        {
+            x <- n;
+            f(n-1);
+            writeInteger(x);
+            writeChar('\n');
+        }
+    }
+
+{
+    f(10);
+}

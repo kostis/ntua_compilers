@@ -1,0 +1,30 @@
+fun p(): nothing
+
+    var a : char[5];
+
+    fun f(ref s : char[]) : nothing   
+    {
+        writeString(s);
+        writeChar('\n');
+
+        s[3] <- 'o';
+        
+        writeString(s);
+        writeChar('\n');
+    } 
+{
+    a[0] <- 'x';
+    a[1] <- 'x';
+    a[2] <- 'x';
+    a[3] <- 'x';
+    a[4] <- 'x';
+
+    f(a);
+
+    f("blond");
+}
+
+$ xxxxx
+$ xxxox
+$ blond
+$ Segmentation fault (core dumped)

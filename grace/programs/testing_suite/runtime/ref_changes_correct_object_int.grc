@@ -1,0 +1,17 @@
+fun main() : nothing
+    var c : int;
+
+    fun f(ref s : int) : nothing
+    {
+        s <- 1;
+    }
+
+{ $ main
+    c <- 0;
+    $ f(c) is expected to change the actual value of int c
+    f(c);
+    if c = 1 then 
+        writeString("Correct");
+    else
+        writeString("Error");
+} $ main

@@ -1,0 +1,15 @@
+fun main(): nothing
+    var x: int;
+
+    fun f(x: int): nothing
+    { $ f
+        if x = 42 then
+            writeString("Success\n");
+        else 
+            writeString("Error\n");
+    } $ f
+
+{ $ main
+    x <- 17;
+    f(42);
+} $ main
