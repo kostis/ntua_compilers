@@ -39,7 +39,7 @@ def main
                         changed := true
                     i_bsort := i_bsort + 1
                 else: break
-            if not changed: break
+            if changed = false: break
 
     def possible_store is byte: current_arr as int[], mid spaces stores_to_place as int
         var last_position placed_stores i_ps is int
