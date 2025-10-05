@@ -3,5 +3,5 @@
 def main
     var b is byte
     b := true
-    if b:
+    if b:	# should be "if b = true:" instead
         writeString: "erroneous"
