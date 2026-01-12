@@ -21,6 +21,8 @@ def print_fail(format):
 def extension(lang):
     if lang == "alan":
         return '.alan'
+    elif lang == "dana":
+        return '.dana'
     elif lang == "grace":
         return '.grc'
     elif lang == "llama":
