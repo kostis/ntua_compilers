@@ -1,0 +1,11 @@
+fun main(): nothing
+    var x : int;
+
+    fun f(): int
+    { $ f
+        return 1;
+    } $ f
+
+{ $ main
+    x <- f;
+} $ main

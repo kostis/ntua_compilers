@@ -1,0 +1,8 @@
+fun main () : nothing 
+
+var f : char[20][20];
+var i : char[20];
+
+{
+    f[20] <- i;
+}

@@ -1,0 +1,13 @@
+fun main(): nothing
+var a,b : int;
+{
+    a <- 1;
+    b <- a + a;
+    if readInteger() = 0 then
+        {
+            b <- b + a;
+            writeInteger(b);
+        }
+    else
+        writeInteger(b);
+}

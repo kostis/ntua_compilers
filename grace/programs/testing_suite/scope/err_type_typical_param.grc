@@ -1,0 +1,13 @@
+fun main(): nothing
+    var x: int;
+
+    fun f(x : char): nothing
+    {
+        $ This is invalid because the inner x is of type char
+        if x > 1 then 
+            ;
+    }
+{ $ main
+    x <- 17;
+    f('a');
+} $ main

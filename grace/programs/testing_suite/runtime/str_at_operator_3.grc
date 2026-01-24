@@ -1,0 +1,7 @@
+fun main(): nothing
+    var x: char;
+{
+    "hello"[1] <- 'x';
+}
+
+$ e

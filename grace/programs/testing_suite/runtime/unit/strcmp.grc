@@ -1,0 +1,7 @@
+fun main(): nothing
+{
+    if strcmp("hello", "hello") = 0 then
+        writeString("PASS");
+}
+
+$ PASS

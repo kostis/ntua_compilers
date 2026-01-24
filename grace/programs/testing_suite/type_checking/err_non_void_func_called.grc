@@ -1,0 +1,11 @@
+fun main() : nothing
+
+    fun f() : int
+    {
+        return 1;
+    }
+
+{
+    $ f doesn't return nothing so it can't be called like that
+    f();
+}

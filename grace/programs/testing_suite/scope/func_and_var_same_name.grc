@@ -1,0 +1,15 @@
+fun main(): nothing
+    var f : int;
+    var x : int;
+    
+    fun g(): nothing
+        fun f(): int
+            { $ f
+                return 1;
+            } $ f
+    {
+    }
+
+{ $ main
+    x <- f;
+} $ main

@@ -1,0 +1,9 @@
+fun main() : nothing 
+    
+    fun f(i : int) : nothing
+    { $ f 
+    } $ f
+
+{ $ main
+    f(1, 2);
+} $ main

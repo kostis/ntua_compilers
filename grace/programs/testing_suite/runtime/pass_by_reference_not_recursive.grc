@@ -1,0 +1,22 @@
+fun main(): nothing
+    var a: int;
+
+    fun g(x : int): nothing
+    {
+        x <- 2;
+    } 
+
+    fun f(ref x : int): nothing
+    {
+        x <- 1;
+        g(x);
+    }
+   
+{ $ main
+    a <- 0;
+    f(a);
+    if a = 1 then
+        writeString("Success");
+    else
+        writeString("Failure");
+} $ main

@@ -1,0 +1,17 @@
+fun main(): nothing
+    fun g(): int
+    {
+        return 1;
+    }
+    fun f(): int
+    {
+        return g;
+    }
+    
+    var x, i: int;
+
+{
+    $ This is not a valid thing in grace, there are no pointers to functions
+    x <- f();
+    i <- x();
+}

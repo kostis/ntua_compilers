@@ -1,0 +1,7 @@
+fun main () : nothing
+var i : char;
+var r : char[10];
+{
+    $ Is this something the compiler should catch or is it a runtime issue ?
+    i <- r[11];
+}

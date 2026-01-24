@@ -1,0 +1,14 @@
+fun main(): nothing
+
+    $ Multiple same forward declarations are allowed if the signature is correct
+    fun f(a: int): nothing;
+    fun f(a: int): nothing;
+    fun f(a: int): nothing;
+    fun f(a: int): nothing;
+    fun f(a :int): nothing
+    {}
+
+
+{
+    f(3);
+}

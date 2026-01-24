@@ -1,0 +1,6 @@
+fun main () : nothing
+   var r : int[20];
+
+{ $ main
+   r[0] <- 1;
+} $ main

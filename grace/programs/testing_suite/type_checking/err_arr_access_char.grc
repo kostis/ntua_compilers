@@ -1,0 +1,7 @@
+fun main () : nothing 
+var i, b : char;
+var r : char[1000];
+{
+    i <- 'a';
+    b <- r[i];
+}

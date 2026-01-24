@@ -1,0 +1,6 @@
+fun writeString(): nothing
+{
+    $ writeString is now shadowed by the entry function
+    $ The following should recursively call itself
+    writeString();
+}

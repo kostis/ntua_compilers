@@ -1,0 +1,12 @@
+fun main(): nothing
+    fun writeString(a : int): nothing 
+    {
+        writeInteger(a);
+    }
+
+{
+    $ This call should use the nested function defined above 
+    writeString(5);
+}
+
+$ 5

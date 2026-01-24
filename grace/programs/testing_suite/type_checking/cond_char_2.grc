@@ -1,0 +1,9 @@
+fun main(): nothing
+
+var c : char[20];
+
+{
+    c[0] <- 'a';
+    if c[0] < 'b' then 
+    writeString("True");
+}

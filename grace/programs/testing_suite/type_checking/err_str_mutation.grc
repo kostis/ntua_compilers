@@ -1,0 +1,11 @@
+fun main () : nothing
+
+   fun f (ref s : char[]) : nothing
+   {
+      $ This should be illegal because s is a string const which is immutable
+      s[0] <- 'c';
+   }
+
+{ $ main
+   f("Hello");
+} $ main
