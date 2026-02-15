@@ -1,0 +1,66 @@
+program bsort;
+
+   procedure BubbleSort (var x : array of integer; n : integer);
+      var i       : integer;
+          changed : boolean;
+
+      procedure swap (var x, y : integer);
+         var t : integer;
+      begin
+         t := x;
+	 x := y;
+	 y := t
+      end;
+
+   begin
+      changed := true;
+      while changed do
+      begin
+         i := 0;
+         changed := false;
+         while i < n-1 do
+         begin
+            if x[i] > x[i+1] then
+            begin
+               swap(x[i], x[i+1]);
+               changed := true
+            end;
+            i := i+1
+         end
+      end
+   end;
+
+   procedure PrintArray (var msg : array of char;
+                         var x   : array of integer;
+                             n   : integer);
+      var i : integer;
+   begin
+      writeString(msg);
+      i := 0;
+      while i < n do
+      begin
+         if i > 0 then
+            writeString(", ");
+         writeInteger(x[i]);
+         i := i+1
+      end;
+      writeString("\n");
+   end;
+
+   var i    : integer;
+       x    : array [16] of integer;
+       seed : integer;
+
+begin
+   i := 0;
+   seed := 65;
+   while i < 16 do
+   begin
+      seed := (seed * 137 + 221 + i) mod 101;
+      x[i] := seed;
+      i := i + 1
+   end;
+   PrintArray("Initial array: ", x, 16);
+   BubbleSort(x, 16);
+   PrintArray("Sorted array: ", x, 16)
+end.

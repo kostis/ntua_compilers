@@ -1,0 +1,4 @@
+program hello;
+begin
+   writeString("Hello world!\n")
+end.
