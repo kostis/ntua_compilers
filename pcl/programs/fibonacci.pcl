@@ -1,0 +1,19 @@
+program fibonacci;
+
+var n : integer;
+
+function fib (x : integer) : integer;
+begin
+    if x <= 0 then
+        result := 0
+    else if x = 1 then
+        result := 1
+    else
+        result := fib(x - 1) + fib(x - 2)
+end;
+
+begin
+    n := readInteger();
+    writeInteger(fib(n));
+    writeString("\n")
+end.
