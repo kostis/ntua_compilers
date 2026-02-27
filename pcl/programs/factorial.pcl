@@ -1,0 +1,20 @@
+program factorial;
+
+var n : integer;
+
+function fact (x : integer) : integer;
+begin
+    if x <= 1 then
+        result := 1
+    else
+        result := x * fact(x - 1)
+end;
+
+begin
+    n := readInteger();
+    writeString("The factorial of ");
+    writeInteger(n);
+    writeString(" is ");
+    writeInteger(fact(n));
+    writeString("\n")
+end.
