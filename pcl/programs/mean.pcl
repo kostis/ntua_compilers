@@ -4,9 +4,9 @@ program mean;
        sum           : real;
 
 begin
-   writeString(”Give n: ”);
+   writeString("Give n: ");
    n := readInteger();
-   writeString(”Give k: ”);
+   writeString("Give k: ");
    k := readInteger();
 
    i := 0;
@@ -21,8 +21,8 @@ begin
 
    if k > 0 then
    begin
-       writeString(”Mean: ”);
+       writeString("Mean: ");
        writeReal(sum / k);
-       writeString(”\n”)
+       writeString("\n")
    end
 end.

@@ -3,7 +3,7 @@ program reverse;
    function strlen (var s : array of char) : integer;
    begin
       result := 0;
-      while s[result] != ’\0’ do result := result + 1
+      while s[result] != '\0' do result := result + 1
    end;
 
    var r : array [32] of char;
@@ -18,10 +18,10 @@ program reverse;
           r[i] := s[l-i-1];
           i := i+1
        end;
-       r[i] := ’\0’
+       r[i] := '\0'
    end;
 
 begin
-   reverse(”\n!dlrow olleH”);
+   reverse("\n!dlrow olleH");
    writeString(r)
 end.

@@ -62,5 +62,5 @@ begin
    end;
    PrintArray("Initial array: ", x, 16);
    BubbleSort(x, 16);
-   PrintArray("Sorted array: ", x, 16)
+   PrintArray("Sorted  array: ", x, 16)
 end.
