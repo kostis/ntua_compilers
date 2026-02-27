@@ -14,6 +14,9 @@ end;
 
 begin
     n := readInteger();
+    writeString("Fibonacci of ");
+    writeInteger(n);
+    writeString(" is ");
     writeInteger(fib(n));
     writeString("\n")
 end.

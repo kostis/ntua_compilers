@@ -12,6 +12,9 @@ end;
 
 begin
     n := readInteger();
+    writeString("The factorial of ");
+    writeInteger(n);
+    writeString(" is ");
     writeInteger(fact(n));
     writeString("\n")
 end.
