@@ -1,0 +1,26 @@
+program gcd;
+
+var a, b : integer;
+
+function gcd (x, y : integer) : integer;
+begin
+    if y = 0 then
+        result := x
+    else
+        result := gcd(y, x mod y)
+end;
+
+begin
+    writeString("Enter first number: ");
+    a := readInteger();
+    writeString("Enter second number: ");
+    b := readInteger();
+
+    writeString("The GCD of ");
+    writeInteger(a);
+    writeString(" and ");
+    writeInteger(b);
+    writeString(" is ");
+    writeInteger(gcd(a, b));
+    writeString("\n")
+end.
