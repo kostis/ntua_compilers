@@ -79,37 +79,37 @@ begin
 
     n := readInteger();
 
-    if n <= maxSize then
+    if n > maxSize then (* cap at maxSize *)
     begin
-        new [n] arr;
-
-        i := 0;
-        while i < n do
-        begin
-            arr^[i] := readInteger();
-            i := i + 1
-        end;
-
-        (* dereference, since it's passed as reference *)
-        Mergesort(arr^);
-
-        i := 0;
-        while i < n do
-        begin
-            writeInteger(arr^[i]);
-            writeString(" ");
-            i := i + 1
-        end;
-        writeString("\n");
-
-        (* free *)
-        dispose [] arr
-    end
-    else
-    begin
-        writeString("Error: The maximum size of the array is ");
+        writeString("Warning: Input size exceeds program capacity (");
         writeInteger(maxSize);
-        writeString(". Exiting...\n")
-    end
+        writeString(" elements). Processing first ");
+        writeInteger(maxSize);
+        writeString(".\n");
+        n := maxSize
+    end;
 
+    new [n] arr;
+
+    i := 0;
+    while i < n do
+    begin
+        arr^[i] := readInteger();
+        i := i + 1
+    end;
+
+    (* dereference, since it's passed as reference *)
+    Mergesort(arr^);
+
+    i := 0;
+    while i < n do
+    begin
+        writeInteger(arr^[i]);
+        writeString(" ");
+        i := i + 1
+    end;
+    writeString("\n");
+
+    (* free *)
+    dispose [] arr
 end.
