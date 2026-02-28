@@ -1,0 +1,115 @@
+program mergesort;
+
+var maxSize, n, i : integer;
+var arr : ^array of integer;
+
+
+procedure Mergesort (var arr : array of integer);
+    
+    procedure merge (left, mid, right : integer);
+        var i, j, sz : integer;
+        var helper : ^array of integer;
+    begin
+        new [right - left + 1] helper;
+
+        i := left;    (* left half *)
+        j := mid + 1; (* right half *)
+        sz := 0;       (* helper size *)
+
+        while (i <= mid) and (j <= right) do (* both halves have elements *)
+        begin
+            if arr[i] <= arr[j] then
+            begin
+                helper^[sz] := arr[i];
+                i := i + 1
+            end
+            else
+            begin
+                helper^[sz] := arr[j];
+                j := j + 1
+            end;
+            sz := sz + 1
+        end;
+
+        while i <= mid do (* left half *)
+        begin
+            helper^[sz] := arr[i];
+            i := i + 1;
+            sz := sz + 1
+        end;
+
+        while j <= right do (* right half *)
+        begin
+            helper^[sz] := arr[j];
+            j := j + 1;
+            sz := sz + 1
+        end;
+
+        (* copy back *)
+        i := 0;
+        while i < sz do 
+        begin
+            arr[left + i] := helper^[i];
+            i := i + 1
+        end;
+
+        (* free *)
+        dispose [] helper
+    end;
+    
+    procedure Mergesort0 (left, right : integer);
+        var mid : integer;
+    begin
+        if left < right then
+        begin
+            mid := (left + right) div 2;
+            Mergesort0(left, mid);
+            Mergesort0(mid + 1, right);
+            merge(left, mid, right)
+        end
+    end;
+
+begin
+    Mergesort0(0, n - 1)
+end;
+
+begin
+
+    maxSize := 1000;
+
+    n := readInteger();
+
+    if n <= maxSize then
+    begin
+        new [n] arr;
+
+        i := 0;
+        while i < n do
+        begin
+            arr^[i] := readInteger();
+            i := i + 1
+        end;
+
+        (* dereference, since it's passed as reference *)
+        Mergesort(arr^);
+
+        i := 0;
+        while i < n do
+        begin
+            writeInteger(arr^[i]);
+            writeString(" ");
+            i := i + 1
+        end;
+        writeString("\n");
+
+        (* free *)
+        dispose [] arr
+    end
+    else
+    begin
+        writeString("Error: The maximum size of the array is ");
+        writeInteger(maxSize);
+        writeString(". Exiting...\n")
+    end
+
+end.
