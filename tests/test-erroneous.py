@@ -2,6 +2,7 @@
 
 import argparse
 import os
+import sys
 import subprocess
 
 class bcolors:
@@ -12,11 +13,17 @@ class bcolors:
     FAIL = '\033[91m'
     ENDC = '\033[0m'
 
+def colored(text: str, color: str) -> str:
+    """Return colored text if terminal supports it"""
+    if sys.stdout.isatty():
+        return f"{color}{text}{bcolors.ENDC}"
+    return text
+
 def print_ok(format):
-    print(bcolors.OKGREEN + format + bcolors.ENDC)
+    print(colored(format, bcolors.OKGREEN))
 
 def print_fail(format):
-    print(bcolors.FAIL + format + bcolors.ENDC)
+    print(colored(format, bcolors.FAIL))
 
 def extension(lang):
     if lang == "alan":
@@ -27,6 +34,8 @@ def extension(lang):
         return '.grc'
     elif lang == "llama":
         return '.lla'
+    elif lang == "pcl":
+        return '.pcl'
 
 def run_test(language, compiler_path, test_dir):
     total = 0
@@ -46,19 +55,19 @@ def run_test(language, compiler_path, test_dir):
             # Check if the compilation returned an error
             if compile_process.returncode != 0:
                 ok += 1
-                print_ok("Error (OK)")
+                print_ok("Error (✓ OK)")
                 # print(compile_process.stderr)
             else:
                 failed += 1
-                print_fail("FAILED to detect the error")
+                print_fail("✗ FAILED to detect the error")
 
-    print(bcolors.OKBLUE + f"\nTotal tested: {total} ({ok} correct and {failed} failed)" + bcolors.ENDC)
+    print(colored(f"\nTotal tested: {total} ({ok} correct and {failed} failed)", bcolors.OKBLUE))
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Tests a Compiler for a Language by compiling all test programs in a Directory.'
                                      ' Compiler should be an executable that takes as input a program for the language.')
-    parser.add_argument('language', help='Currently one of: \'alan\', \'grace\' or \'llama\'.')
+    parser.add_argument('language', help='Currently one of: \'alan\', \'grace\', \'llama\' or \'pcl\'.')
     parser.add_argument('compiler_path', help='The path to the compiler executable.')
     parser.add_argument('test_dir', help='The directory containing the erroneous programs for the language.')
     args = parser.parse_args()
