@@ -1,0 +1,23 @@
+program digits_sum;
+
+var num, sum, temp : integer;
+
+begin
+    writeString("Enter a positive integer: \n");
+    num := readInteger();
+
+    sum := 0;
+    temp := num;
+
+    while temp > 0 do
+    begin
+        sum := sum + (temp mod 10);
+        temp := temp div 10
+    end;
+
+    writeString("The sum of the digits of ");
+    writeInteger(num);
+    writeString(" is ");
+    writeInteger(sum);
+    writeString("\n")
+end.

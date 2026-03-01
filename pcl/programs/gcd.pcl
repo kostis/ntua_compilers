@@ -1,0 +1,20 @@
+program gcd;
+
+var a, b : integer;
+
+function gcd (x, y : integer) : integer;
+begin
+    if y = 0 then
+        result := x
+    else
+        result := gcd(y, x mod y)
+end;
+
+begin
+    writeString("Give me two positive integers: \n");
+    a := readInteger();
+    b := readInteger();
+    writeString("\nTheir GCD is: ");
+    writeInteger(gcd(a, b));
+    writeString("\n")
+end.
