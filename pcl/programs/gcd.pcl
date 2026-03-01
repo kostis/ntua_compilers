@@ -11,16 +11,10 @@ begin
 end;
 
 begin
-    writeString("Enter first number: ");
+    writeString("Give me two positive integers: \n");
     a := readInteger();
-    writeString("Enter second number: ");
     b := readInteger();
-
-    writeString("The GCD of ");
-    writeInteger(a);
-    writeString(" and ");
-    writeInteger(b);
-    writeString(" is ");
+    writeString("\nTheir GCD is: ");
     writeInteger(gcd(a, b));
     writeString("\n")
 end.

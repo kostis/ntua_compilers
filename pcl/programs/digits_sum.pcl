@@ -3,7 +3,7 @@ program digits_sum;
 var num, sum, temp : integer;
 
 begin
-    writeString("Enter a positive integer: ");
+    writeString("Enter a positive integer: \n");
     num := readInteger();
 
     sum := 0;
