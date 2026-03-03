@@ -34,6 +34,8 @@ def extension(lang):
         return '.grc'
     elif lang == "llama":
         return '.lla'
+    elif lang == "minibasic":
+        return '.mba'
     elif lang == "pcl":
         return '.pcl'
 
@@ -67,8 +69,8 @@ def run_test(language, compiler_path, test_dir):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Tests a Compiler for a Language by compiling all test programs in a Directory.'
                                      ' Compiler should be an executable that takes as input a program for the language.')
-    parser.add_argument('language', help='Currently one of: \'alan\', \'grace\', \'llama\' or \'pcl\'.')
-    parser.add_argument('compiler_path', help='The path to the compiler executable.')
+    parser.add_argument('language', help='One of: \'alan\', \'dana\', \'grace\', \'llama\', \'minibasic\' or \'pcl\'.')
+    parser.add_argument('compiler', help='The path to the compiler executable or script to invoke it.')
     parser.add_argument('test_dir', help='The directory containing the erroneous programs for the language.')
     args = parser.parse_args()
 
