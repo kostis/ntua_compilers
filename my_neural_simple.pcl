@@ -4,7 +4,6 @@ program main;
   var b : array[3] of real;
 
   var trainingSet : array[3] of array[2] of real;
-  trainingSet := [[0,0], [0.5,1], [1,0]];
 
   var x_1i : real;
   var x_2i : real;
@@ -123,6 +122,7 @@ end.
 
 
      
+
 
 
 
