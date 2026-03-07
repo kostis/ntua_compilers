@@ -1,0 +1,128 @@
+program main;
+
+  var w : array[4] of real;
+  var b : array[3] of real;
+
+  var trainingSet : array[3] of array[2] of real;
+
+  var x_1i : real;
+  var x_2i : real;
+
+  var y_1i : real;
+  var y_2i : real;
+
+  var pred_i : real;
+
+  var der_SSR_w1 : real;
+  var der_SSR_w2 : real;
+  var der_SSR_w3 : real;
+  var der_SSR_w4 : real;
+
+  var der_SSR_b1 : real;
+  var der_SSR_b2 : real;
+  var der_SSR_b3 : real;
+
+  var i : integer;
+  var k : integer;
+
+  function reLU (x : real) : real;  (* I know that I will have only positive values, so I will just set the derivative always equals 1 because Im bored.*)
+  begin
+    if x < 0.0 then 
+    begin
+      result := 0.0;
+      return
+    end;
+    result := x
+  end;
+
+begin
+
+  i := 0;
+  k := 0;
+
+  w[0] :=  2.74;
+  w[1] := -1.13;
+  w[2] :=  0.36;
+  w[3] :=  0.63;
+
+  b[0] := 0.0;
+  b[1] := 0.0;
+  b[2] := 0.0;
+
+  trainingSet[0][0] := 0.0;  trainingSet[0][1] := 0.0;
+  trainingSet[1][0] := 0.5;  trainingSet[1][1] := 0.5;
+  trainingSet[2][0] := 1.0;  trainingSet[2][1] := 1.0;
+
+  while k <> 10 do
+  begin
+
+    der_SSR_w1 := 0.0;
+    der_SSR_w2 := 0.0;
+    der_SSR_w3 := 0.0;
+    der_SSR_w4 := 0.0;
+    der_SSR_b1 := 0.0;
+    der_SSR_b2 := 0.0;
+    der_SSR_b3 := 0.0;
+
+    while i <> 3 do
+    begin
+       x_1i := trainingSet[i][0] * w[0] + b[0];
+       x_2i := trainingSet[i][0] * w[1] + b[1];
+
+       y_1i := reLU(x_1i);
+       y_2i := reLU(x_2i);
+
+       pred_i := y_1i*w[2] + y_2i*w[3] + b[2];
+
+       der_SSR_w1 := der_SSR_w1 + (-2 * (trainingSet[i][1] - pred_i) * w[2] * 1 * trainingSet[i][0]);
+       der_SSR_b1 := der_SSR_b1 + (-2 * (trainingSet[i][1] - pred_i) * w[2] * 1 * 1);
+       der_SSR_w2 := der_SSR_w2 + (-2 * (trainingSet[i][1] - pred_i) * w[3] * 1 * trainingSet[i][0]);
+       der_SSR_b2 := der_SSR_b2 + (-2 * (trainingSet[i][1] - pred_i) * w[3] * 1 * 1);
+       der_SSR_w3 := der_SSR_w3 + (-2 * (trainingSet[i][1] - pred_i) * y_1i);
+       der_SSR_w4 := der_SSR_w4 + (-2 * (trainingSet[i][1] - pred_i) * y_2i);
+       der_SSR_b3 := der_SSR_b3 + (-2 * (trainingSet[i][1] - pred_i) * 1);
+
+       i := i + 1;
+    end;
+
+    w[0] := w[0] - der_SSR_w1 * 0.1;
+    b[0] := b[0] - der_SSR_b1 * 0.1;
+    w[1] := w[1] - der_SSR_w2 * 0.1;
+    b[1] := b[1] - der_SSR_b2 * 0.1;
+    w[2] := w[2] - der_SSR_w3 * 0.1;
+    w[3] := w[3] - der_SSR_w4 * 0.1;
+    b[2] := b[2] - der_SSR_b3 * 0.1;
+
+    i := 0;
+    k := k + 1;
+  end;
+
+  writeString("\nThe trained parameters were calculated.");
+  writeString("\nw_1 = "); writeReal(w[0]);
+  writeString("\nw_2 = "); writeReal(w[1]);
+  writeString("\nw_3 = "); writeReal(w[2]);
+  writeString("\nw_4 = "); writeReal(w[3]);
+  writeString("\nb_1 = "); writeReal(b[0]);
+  writeString("\nb_2 = "); writeReal(b[1]);
+  writeString("\nb_3 = "); writeReal(b[2]);
+  writeString("\n")
+
+end.
+
+
+
+    
+
+
+
+
+
+
+
+
+
+     
+
+
+
+
