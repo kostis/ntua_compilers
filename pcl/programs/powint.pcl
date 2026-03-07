@@ -1,0 +1,25 @@
+(* Integer power: compute base^exp iteratively for exp >= 0. *)
+
+program powint;
+
+var base, exp : integer;
+
+function power (b, e : integer) : integer;
+    var acc, i : integer;
+begin
+    acc := 1;
+    i := 0;
+    while i < e do
+    begin
+        acc := acc * b;
+        i := i + 1
+    end;
+    result := acc
+end;
+
+begin
+    base := readInteger();
+    exp  := readInteger();
+    writeInteger(power(base, exp));
+    writeString("\n")
+end.

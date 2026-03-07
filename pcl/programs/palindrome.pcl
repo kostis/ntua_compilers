@@ -1,0 +1,41 @@
+(* Palindrome check: reads a string and reports whether it is a palindrome.
+   A palindrome reads the same forwards and backwards (e.g. "racecar"). *)
+
+program palindrome;
+
+var input : array [101] of char;
+var l : integer;
+
+(* Returns the length of a null-terminated char array (excluding the '\0'). *)
+function strlen (var s : array of char) : integer;
+begin
+    result := 0;
+    while s[result] <> '\0' do
+        result := result + 1
+end;
+
+(* Recursively checks if s[i..len-i-1] is a palindrome. *)
+function isPal (var s : array of char; i, len : integer) : boolean;
+begin
+    if i >= len div 2 then
+        result := true
+    else if s[i] <> s[len - i - 1] then
+        result := false
+    else
+        result := isPal(s, i + 1, len)
+end;
+
+begin
+    readString(101, input);
+    l := strlen(input);
+    if isPal(input, 0, l) then
+    begin
+        writeString(input);
+        writeString(" is a palindrome\n")
+    end
+    else
+    begin
+        writeString(input);
+        writeString(" is not a palindrome\n")
+    end
+end.
