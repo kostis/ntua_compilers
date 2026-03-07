@@ -1,0 +1,23 @@
+(* FizzBuzz: for each number from 1 to 100, print "Fizz" if divisible by 3,
+   "Buzz" if divisible by 5, "FizzBuzz" if divisible by both, otherwise the number. *)
+
+program fizzbuzz;
+
+var i : integer;
+
+begin
+    i := 1;
+    while i <= 100 do
+    begin
+        if (i mod 3 = 0) and (i mod 5 = 0) then
+            writeString("FizzBuzz")
+        else if i mod 3 = 0 then
+            writeString("Fizz")
+        else if i mod 5 = 0 then
+            writeString("Buzz")
+        else
+            writeInteger(i);
+        writeString("\n");
+        i := i + 1
+    end
+end.

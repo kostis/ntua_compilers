@@ -1,0 +1,48 @@
+(* Sieve of Eratosthenes: find and print all prime numbers up to 100. *)
+
+program sieve;
+
+var n, i, j : integer;
+var primes : array [101] of boolean;
+
+begin
+    n := 100;
+
+    (* 0 and 1 are not prime; mark 2..n as prime candidates *)
+    primes[0] := false;
+    primes[1] := false;
+    i := 2;
+    while i <= n do
+    begin
+        primes[i] := true;
+        i := i + 1
+    end;
+
+    (* for each remaining prime p, mark all multiples p*p, p*p+p, ... as composite *)
+    i := 2;
+    while i * i <= n do
+    begin
+        if primes[i] then
+        begin
+            j := i * i;
+            while j <= n do
+            begin
+                primes[j] := false;
+                j := j + i
+            end
+        end;
+        i := i + 1
+    end;
+
+    (* print all primes *)
+    i := 2;
+    while i <= n do
+    begin
+        if primes[i] then
+        begin
+            writeInteger(i);
+            writeString("\n")
+        end;
+        i := i + 1
+    end
+end.
