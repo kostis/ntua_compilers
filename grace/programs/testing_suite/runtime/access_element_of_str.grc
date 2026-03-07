@@ -1,0 +1,19 @@
+fun main(): nothing
+
+    fun f(ref str: char[]): nothing
+        var i: int;
+        var c: char;
+    { $ 
+        i <- 0;
+        while i < strlen(str) do
+        {
+            c <- "Hello world"[i];
+            $writeChar(c);
+            writeChar(str[i]);
+            i <- i+1;
+        }
+    } $ f
+
+{ $ main
+    f("Hello world\n");
+} $ main

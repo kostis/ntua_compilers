@@ -1,0 +1,5 @@
+fun writeString(): nothing
+{
+    $ writeString is now shadowed by the entry function
+    writeString("Hello world");
+}

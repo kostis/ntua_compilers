@@ -1,0 +1,11 @@
+fun main(): nothing
+    
+    fun f() : char 
+        { $ f
+            return 'a';
+        } $ f
+
+{
+    if f() < 'b' then 
+    writeString("True");
+}

@@ -1,0 +1,9 @@
+fun main () : nothing 
+
+var f : char[20];
+var i : char;
+
+{
+    i <- 'a';
+    f <- i;
+}
