@@ -1,2 +1,3 @@
 *.beam
 progs/
+.DS_Store
