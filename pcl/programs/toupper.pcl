@@ -1,0 +1,23 @@
+(* ToUpper: read a string and print it with all lowercase letters converted to uppercase.
+   Uses ord/chr to perform the ASCII conversion. *)
+
+program toupper;
+
+var s : array [101] of char;
+var i : integer;
+var c : char;
+
+begin
+    readString(101, s);
+    i := 0;
+    while s[i] <> '\0' do
+    begin
+        c := s[i];
+        if (ord(c) >= ord('a')) and (ord(c) <= ord('z')) then
+            writeChar(chr(ord(c) - ord('a') + ord('A')))
+        else
+            writeChar(c);
+        i := i + 1
+    end;
+    writeString("\n")
+end.

@@ -1,0 +1,30 @@
+(* Prime factorization: read a positive integer and print all its prime factors
+   in ascending order, each separated by a space. *)
+
+program factors;
+
+var n, i : integer;
+
+begin
+    n := readInteger();
+    writeString("Prime factors of ");
+    writeInteger(n);
+    writeString(": ");
+    i := 2;
+    while i * i <= n do
+    begin
+        while n mod i = 0 do
+        begin
+            writeInteger(i);
+            writeString(" ");
+            n := n div i
+        end;
+        i := i + 1
+    end;
+    if n > 1 then
+    begin
+        writeInteger(n);
+        writeString(" ")
+    end;
+    writeString("\n")
+end.
