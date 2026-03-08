@@ -1,0 +1,75 @@
+program quicksort;
+
+var nums : array [100] of integer;
+var N    : integer;
+
+(* Swap two elements by index in an open array *)
+procedure swap (var arr : array of integer; i, j : integer);
+var tmp : integer;
+begin
+    tmp      := arr[i];
+    arr[i]   := arr[j];
+    arr[j]   := tmp
+end;
+
+(* Lomuto partition: places pivot (arr[high]) in its sorted position *)
+function partition (var arr : array of integer; low, high : integer) : integer;
+var pivot, i, j : integer;
+begin
+    pivot := arr[high];
+    i     := low - 1;
+    j     := low;
+    while j < high do
+    begin
+        if arr[j] < pivot then
+        begin
+            i := i + 1;
+            swap(arr, i, j)
+        end;
+        j := j + 1
+    end;
+    swap(arr, i + 1, high);
+    result := i + 1
+end;
+
+(* Recursive quicksort *)
+procedure qsort (var arr : array of integer; low, high : integer);
+var pi : integer;
+begin
+    if low < high then
+    begin
+        pi := partition(arr, low, high);
+        qsort(arr, low, pi - 1);
+        qsort(arr, pi + 1, high)
+    end
+end;
+
+var k : integer;
+begin
+    writeString("Enter number of elements (max 100): ");
+    N := readInteger();
+
+    (* Read N elements *)
+    k := 0;
+    while k < N do
+    begin
+        writeString("Enter element ");
+        writeInteger(k + 1);
+        writeString(": ");
+        nums[k] := readInteger();
+        k := k + 1
+    end;
+
+    qsort(nums, 0, N - 1);
+
+    (* Print sorted array *)
+    writeString("Sorted array: ");
+    k := 0;
+    while k < N do
+    begin
+        if k > 0 then writeString(", ");
+        writeInteger(nums[k]);
+        k := k + 1
+    end;
+    writeString("\n")
+end.
