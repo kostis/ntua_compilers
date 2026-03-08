@@ -1,0 +1,45 @@
+program Palindrome;
+
+var inputStr : array of char;
+
+function strlen (var s : array of char) : integer;
+begin
+    result := 0;
+    while s[result] <> '\0' do 
+        result := result + 1
+end;
+
+function isPalindrome (var s : array of char) : integer;
+    var i, l : integer;
+begin
+    l := strlen(s);
+    i := 0;
+    
+    result := 1; 
+
+    while i < l div 2 do
+    begin
+        if s[i] <> s[l - i - 1] then
+        begin
+            result := 0;
+        end;
+        
+        i := i + 1
+    end;
+end;
+
+begin
+    writeString("Give a string with maximum length 30: ");
+    readString(31, inputStr);
+    
+    if isPalindrome(inputStr) = 1 then
+    begin
+        writeString(inputStr);
+        writeString(" ... is palindrome\n")
+    end
+    else
+    begin
+        writeString(inputStr);
+        writeString(" ... is not palindrome\n")
+    end
+end.
