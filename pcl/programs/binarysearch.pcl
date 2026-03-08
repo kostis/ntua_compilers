@@ -1,0 +1,84 @@
+program binarysearch;
+
+    var myarr : array [100] of integer;
+    var size, k, find : integer;
+
+    procedure swap (var a, b : integer);
+        var c : integer;
+    begin
+        c := a;
+        a := b;
+        b := c
+    end
+
+    function partition (high, low : integer; var arr : array of integer) : integer;
+        var pivot, i, j : integer;
+    begin
+        pivot := arr[high];
+        i := low - 1;
+        j := low;
+        while j < high do
+        begin
+            if arr[j] < pivot then
+            begin
+                i := i + 1;
+                swap(arr[i], arr[j])
+            end;
+            j := j + 1
+        end;
+        swap(arr[i+1], arr[high]);
+
+        result := i+1
+    end;
+
+    procedure quicksort (high, low : integer; var arr : array of integer);
+        var pivot : integer;
+    begin
+        if low < high then
+        begin
+            pivot := partition(high, low, arr);
+            quicksort(pivot-1, low, arr);
+            quicksort(high, pivot+1, arr)
+        end;
+    end;
+
+    function binarysearch(target, high, low : integer; var arr : array of integer) : integer;
+        var mid : integer;
+    begin
+        while low <= high do
+        begin
+            mid := low + (high - low) div 2;
+            if arr[mid] = target then
+            begin
+                result := mid;
+                return
+            end;
+            if arr[mid] < target then
+                low := mid + 1
+            else
+                high := mid - 1
+        end;
+    result := -1
+    end;
+
+    begin
+        k := 0;
+
+        (* writeString("Give size of array: "); *)
+        size := readInteger();
+        (* writeString("Give the numbers of the array: "); *)
+
+        while k < size do
+        begin
+            myarr[k] := readInteger();
+            k := k + 1
+        end;
+
+        quicksort(size-1, 0, myarr);
+        (* writeString("Array is now sorted\n"); *)
+        (* writeString("Which value should i search for? "); *)
+        find := readInteger();
+        writeString("Value is: ");
+        writeInteger(binarysearch(find, size-1, 0, myarr));
+        writeString("\n")
+   end.
