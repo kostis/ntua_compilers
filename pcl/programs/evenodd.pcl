@@ -1,0 +1,26 @@
+program evenodd;
+    var n : integer;
+
+    forward function is_odd(n : integer) : boolean;
+
+    function is_even(n : integer) : boolean;
+    begin
+        if n = 0 then result := true
+        else result := is_odd(n - 1)
+    end;
+
+    function is_odd(n : integer) : boolean;
+    begin
+        if n = 0 then result := false
+        else result := is_even(n - 1)
+    end;
+
+begin
+    writeString("Please, give an integer: ");
+    n := readInteger();
+    if n < 0 then n := -n;
+    if is_odd(n) then
+        writeString("odd\n")
+    else
+        writeString("even\n")
+end.
