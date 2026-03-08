@@ -9,7 +9,7 @@ program binarysearch;
         c := a;
         a := b;
         b := c
-    end
+    end;
 
     function partition (high, low : integer; var arr : array of integer) : integer;
         var pivot, i, j : integer;
@@ -39,7 +39,7 @@ program binarysearch;
             pivot := partition(high, low, arr);
             quicksort(pivot-1, low, arr);
             quicksort(high, pivot+1, arr)
-        end;
+        end
     end;
 
     function binarysearch(target, high, low : integer; var arr : array of integer) : integer;
