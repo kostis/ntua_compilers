@@ -1,0 +1,76 @@
+program mat_mult;
+    (* Square matrix multiplication: C = A * B *)
+
+    var n, i, j : integer;
+        A, B, C : array [100] of integer;
+
+    procedure multiply (var A, B, C : array of integer; n : integer);
+        var i, j, k, sum : integer;
+    begin
+        i := 0;
+        while i < n do
+        begin
+            j := 0;
+            while j < n do
+            begin
+                sum := 0;
+                k := 0;
+                while k < n do
+                begin
+                    sum := sum + A[i * n + k] * B[k * n + j];
+                    k := k + 1
+                end;
+                C[i * n + j] := sum;
+                j := j + 1
+            end;
+            i := i + 1
+        end
+    end;
+
+begin
+    n := readInteger();
+
+    (* Read matrix A *)
+    i := 0;
+    while i < n do
+    begin
+        j := 0;
+        while j < n do
+        begin
+            A[i * n + j] := readInteger();
+            j := j + 1
+        end;
+        i := i + 1
+    end;
+
+    (* Read matrix B *)
+    i := 0;
+    while i < n do
+    begin
+        j := 0;
+        while j < n do
+        begin
+            B[i * n + j] := readInteger();
+            j := j + 1
+        end;
+        i := i + 1
+    end;
+
+    (* Multiply A and B into C *)
+    multiply(A, B, C, n);
+
+    (* Print matrix C *)
+    i := 0;
+    while i < n do
+    begin
+        j := 0;
+        while j < n do
+        begin
+            writeInteger(C[i * n + j]);
+            if j < n - 1 then writeChar(' ');
+            j := j + 1
+        end;
+        writeChar('\n');
+        i := i + 1
+    end
+end.
