@@ -5,7 +5,7 @@ var seed, amount, c, m, a : integer;
 
 function getnext (tseed : integer; tc:integer ; tm: integer; ta :integer) : integer;
 begin
-    result := (ta*(tseed mod tm) mod tm + tc mod tm)mod tm;    
+    result := (ta*(tseed mod tm) mod tm + tc mod tm)mod tm
 end;
 
 begin
@@ -22,8 +22,7 @@ begin
         writeString("Next random number is ");
         writeInteger(seed);
         writeString("\n");
-        amount := amount - 1;
-    end;
+        amount := amount - 1
+    end
 end.
 (*More fun*)
-
