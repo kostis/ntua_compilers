@@ -1,0 +1,82 @@
+
+(*
+	given two strings, we want to find the minimum 
+	amount of operations to make the strings equal
+*)
+
+program edit_distance;
+
+	var n,m,i,j	: integer;
+	var s1, s2	: array [256] of char;
+	var dist 	: array of integer;
+
+	function strlen	(var s : array of char) : integer;
+	begin
+		result := 0;
+		while (s[result] <> '\0') do result := result + 1
+	end;
+
+	function min (a, b : integer) : integer;
+	begin
+		if 	(a <= b) 
+		then 	result := a
+		else	result := b
+	end;
+
+begin
+	writeString("Welcome to edit distance calculator\n");
+	writeString("Calculate the minimum distance of two words! :)\n");	
+	writeString("Maximum supported string length is 256, please no more!\n");
+
+	writeString("\nEnter the first string:\n");
+	readString(256, s1);
+	writeString("\nEnter the second string:\n");
+	readString(256, s2);
+
+	n := strlen(s1);
+	m := strlen(s2);
+
+	(* distance matrix for lengths of substrings *)
+
+	new [ (n+1)*(m+1) ] dist;
+
+	(* edge cases, one string is empty, difference is length of other string *)
+
+	i := 0;
+	while (i <= n) do
+	begin
+		dist[i*m] := i;
+		i := i + 1
+	end;
+
+	j := 0;
+	while (j <= m) do
+	begin
+		dist[j] := j;
+		j := j + 1
+	end;
+
+	(* fill table *)
+
+	i := 1;
+	while (i <= n) do
+	begin
+		j := 1;
+
+		while (j <= m) do
+		begin
+			dist[i*m + j] := min (dist[(i-1)*m + j], min (dist[i*m + (j-1)], dist[(i-1)*m + (j-1)]) );
+			j := j + 1
+		end;
+		
+		i := i + 1;		
+	end;
+
+	writeString("\n\nEdit Distance is: ");
+	writeInteger(dist[n*m + m]);
+	writeString("\n");
+
+	dispose [] dist
+end
+.
+
