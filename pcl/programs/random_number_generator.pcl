@@ -1,0 +1,29 @@
+program random_number_generator;  (*Comments are
+fun*)
+
+var seed, amount, c, m, a : integer;
+
+function getnext (tseed : integer, tc:integer , tm: integer, ta :integer) : integer;
+begin
+    result := (ta*(tseed mod tm) mod tm + tc mod tm)mod tm;    
+end;
+
+begin
+    writeString("Give me two positive integers for (seed, numbers_to_generate) \n");
+    seed := readInteger();
+    amount := readInteger();
+    c := 0;
+    m := 2147483647;
+    a := 16807;
+    
+    while amount > 0 do
+    begin
+        seed := getnext(seed,c,m,a);
+        writeString("Next random number is ");
+        writeInteger(seed);
+        writeString("\n");
+        amount := amount - 1;
+    end;
+end.
+(*More fun*)
+
