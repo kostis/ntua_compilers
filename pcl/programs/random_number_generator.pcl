@@ -3,7 +3,7 @@ fun*)
 
 var seed, amount, c, m, a : integer;
 
-function getnext (tseed : integer, tc:integer , tm: integer, ta :integer) : integer;
+function getnext (tseed : integer; tc:integer ; tm: integer; ta :integer) : integer;
 begin
     result := (ta*(tseed mod tm) mod tm + tc mod tm)mod tm;    
 end;
