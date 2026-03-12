@@ -1,0 +1,57 @@
+program caesar;
+
+(*
+The Caesar cipher is used for encrypting messages.
+The process works by replacing each letter of the alphabet with another letter, based on a number of positions determined by the key.
+For example, with a key of 3, the plaintext "Life is like a box of chocolates" becomes "OLIH LV OLNH D ERA RI FKRFRODWHV" in the ciphertext.
+*)
+
+var key, i : integer;
+var plaintext, ciphertext : array [1024] of char;
+var ch : char;
+var valid_key : boolean;
+
+function shift(c : char; k : integer) : char;
+begin
+    if (c >= 'A') and (c <= 'Z') then
+        shift := chr(((ord(c) - ord('A') + k) mod 26) + ord('A'))
+    else if (c >= 'a') and (c <= 'z') then
+        shift := chr(((ord(c) - 32 - ord('A') + k) mod 26) + ord('A'))
+    else
+        shift := c;
+end;
+
+begin
+    writeString("Give key (number between 1 and 25): ");
+    key := readInteger();
+    writeString("\n");
+
+    if key < 1 or key > 25 then
+    begin
+        writeString("Invalid key! Key must be a number between 1 and 25!!\n");
+        valid_key := false;
+    end
+    else
+        valid_key := true;
+
+    if valid_key then
+    begin
+        writeString("Give text (EQUAL or SMALLER than 1024 characters): ");
+        readString(1024, plaintext);
+        writeString("\n");
+
+        i := 0;
+        while plaintext[i] <> '\0' do
+        begin
+            ch := plaintext[i];
+            ciphertext[i] := shift(ch, key);
+            i := i + 1;
+        end;
+
+        ciphertext[i] := '\0';
+
+        writeString("Ciphertext: ");
+        writeString(ciphertext);
+        writeString("\n");
+    end;
+end.
