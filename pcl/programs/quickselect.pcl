@@ -1,0 +1,79 @@
+program quickselect;
+    var n, k, i, res : integer;
+    var arr : array[100] of integer;
+
+
+    procedure swap(var x, y: integer);
+        var temp : integer;
+    begin
+        temp := x;
+        x := y;
+        y := temp
+    end;
+
+    function partition (high, low : integer; var arr : array of integer) : integer;
+        var pivot, i, j : integer;
+    begin
+        pivot := arr[high];
+        i := low - 1;
+        j := low;
+        while j < high do
+        begin
+            if arr[j] < pivot then
+            begin
+                i := i + 1;
+                swap(arr[i], arr[j])
+            end;
+            j := j + 1
+        end;
+        swap(arr[i+1], arr[high]);
+
+        result := i+1
+    end;
+
+    function quickSelect(k, high, low : integer; var arr : array of integer) : integer;
+        var pivotIndex : integer;
+    begin
+        if low <= high then
+        begin
+            pivotIndex := partition(high, low, arr);
+
+            if pivotIndex = k then
+            begin
+                result := arr[pivotIndex];
+                return 
+            end;
+
+            if pivotIndex > k then
+            begin
+                result := quickSelect(k, pivotIndex - 1, low, arr);
+                return 
+            end
+            else
+            begin
+                result := quickSelect(k, high, pivotIndex + 1, arr);
+                return
+            end
+        end;
+
+        result := -1
+    end;
+
+    begin
+        i := 0;
+        n := readInteger();
+
+        while i < n do
+        begin
+            arr[i] := readInteger();
+            i := i + 1
+        end;
+
+        k := readInteger();
+        
+        res := quickSelect(k, n-1, 0, arr);
+
+        writeString("Value is: ");
+        writeInteger(res);
+        writeString("\n")
+    end.

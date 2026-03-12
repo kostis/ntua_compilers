@@ -1,0 +1,44 @@
+program mandelbrot;
+
+    var x, y, iteration, max_iteration : integer;
+    var x0, y0, a, b, a_new, b_new : real;
+
+    begin
+        max_iteration := 100;
+
+        y := -15;
+
+        while y <= 15 do
+        begin
+            x := -30;
+            while x <= 15 do
+            begin
+                x0 := x / 15.0;
+                y0 := y / 15.0;
+
+                a := 0.0;
+                b := 0.0;
+                iteration := 0;
+
+                while (a * a + b * b <= 4.0) and (iteration < max_iteration) do
+                begin
+                    a_new := a * a - b * b + x0;
+                    b_new := 2.0 * a * b + y0;
+
+                    a := a_new;
+                    b := b_new;
+                    iteration := iteration + 1
+                end;
+
+                if iteration = max_iteration then
+                    writeChar('*')
+                else
+                    writeChar(' ');
+
+                x := x + 1
+            end;
+
+            writeChar('\n');
+            y := y + 1
+        end
+    end.
