@@ -1,0 +1,55 @@
+program lis;
+
+    var dp, P : array [1000] of integer;
+    var i, j, size : integer;
+
+    function findMaxElement(sz : integer; arr : array of integer) : integer;
+        var max : integer;
+    begin 
+        i := 0;
+        max := -1;
+
+        while i < sz do
+        begin
+            if arr[i] > max then
+                max := arr[i];
+            i := i+1
+        end;
+
+        result := max
+    end;
+
+    begin
+        i := 0;
+        j := 0;
+
+        (* writeString("Give array size: "); *)
+        size := readInteger();
+
+        (* writeString("Give array: "); *)
+
+        while i < size do
+        begin
+            P[i] := readInteger();
+            dp[i] := 1;
+            i := i+1
+        end;
+
+        i := 1;
+        while i < size do
+        begin
+            j := 0;
+            while j < i do
+            begin 
+                if P[j] < P[i] then
+                    dp[i] := dp[j] + 1;
+                j := j+1
+            end;
+            i := i+1
+        end;
+
+        writeString("longest increasing subsequence has length: ");
+        writeInteger(findMaxElement(size, dp));
+        writeString("\n")
+
+    end.
