@@ -1,0 +1,106 @@
+program knightstour;
+
+(* Simple knight's tour program on a fixed 5x5 chessboard.
+   Input starting coordinates.
+   Should fail when starting on specific squares (X + Y is odd) due to parity.
+   It should find a valid tour (all squares visited exactly once and valid knight L moves only) otherwise.
+*)
+
+var board : array [25] of integer;
+var dx : array [8] of integer;
+var dy : array [8] of integer;
+
+procedure printBoard ();
+var i, j : integer;
+begin
+    i := 0;
+    while i < 5 do
+    begin
+        j := 0;
+        while j < 5 do
+        begin
+            writeInteger(board[i*5+j]);
+            writeString("\t");
+            j := j+1
+        end;
+        writeString("\n");
+        i := i+1
+    end
+end;
+
+function solve (x, y, movei : integer) : boolean;
+var k, next_x, next_y : integer;
+begin
+    if movei = 25 then
+    begin
+        result := true;
+        return
+    end;
+
+    k := 0;
+    result := false;
+    while (k<8) and  (not result) do
+    begin
+        next_x := x + dx[k];
+        next_y := y + dy[k];
+        if (next_x >= 0) and (next_x < 5) and (next_y >= 0) and (next_y < 5) then 
+        begin
+            if board[next_x * 5 + next_y] = -1 then
+            begin
+                board[next_x * 5 + next_y] := movei;
+                if solve(next_x, next_y, movei + 1) then 
+                begin
+                    result := true;
+                    return
+                end
+                else
+                begin
+                    board[next_x * 5 + next_y] := -1
+                end
+            end
+        end;
+        k := k + 1
+    end
+end;
+
+var startX, startY, i : integer;
+
+begin
+    writeString("Enter starting X in range 0-4 : ");
+    startX := readInteger();
+    writeString("Enter starting Y in range 0-4 : ");
+    startY := readInteger();
+
+    if (startX < 0) or (startX > 4) or (startY < 0) or (startY > 4) then
+    begin
+        writeString("Error : Starting coordinates out of bounds!\n");
+        return
+    end;
+
+    dx[0] := 2; dy[0] := 1;
+    dx[1] := 1; dy[1] := 2;
+    dx[2] := -1; dy[2] := 2;
+    dx[3] := -2; dy[3] := 1;
+    dx[4] := -2; dy[4] := -1;
+    dx[5] := -1; dy[5] := -2;
+    dx[6] := 1; dy[6] := -2;
+    dx[7] := 2; dy[7] := -1;
+
+    i := 0;
+    while i < 25 do
+    begin
+        board[i] := -1;
+        i := i + 1
+    end;
+
+    board[startX * 5 + startY] := 0;
+    if solve(startX, startY, 1) then
+    begin
+        writeString("Tour found:\n\n");
+        printBoard()
+    end
+    else
+    begin
+        writeString("No tour exists.\n")
+    end
+end.
