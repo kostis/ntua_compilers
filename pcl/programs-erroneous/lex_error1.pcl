@@ -1,0 +1,5 @@
+program lex_error1;
+begin
+   (* This program contains a lexical error in the line below *)
+   result := 17 $ 25
+end.
