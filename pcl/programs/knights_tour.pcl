@@ -1,4 +1,4 @@
-program knightstour;
+program knights_tour;
 
 (* Simple knight's tour program on a fixed 5x5 chessboard.
    Input starting coordinates.

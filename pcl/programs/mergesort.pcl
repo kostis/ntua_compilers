@@ -3,7 +3,6 @@ program mergesort;
 var maxSize, n, i : integer;
 var arr : ^array of integer;
 
-
 procedure Mergesort (var arr : array of integer);
     
     procedure merge (left, mid, right : integer);
@@ -14,7 +13,7 @@ procedure Mergesort (var arr : array of integer);
 
         i := left;    (* left half *)
         j := mid + 1; (* right half *)
-        sz := 0;       (* helper size *)
+        sz := 0;      (* helper size *)
 
         while (i <= mid) and (j <= right) do (* both halves have elements *)
         begin
@@ -74,7 +73,6 @@ begin
 end;
 
 begin
-
     maxSize := 1000;
 
     n := readInteger();
