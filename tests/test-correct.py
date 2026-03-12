@@ -110,4 +110,4 @@ if __name__ == "__main__":
     parser.add_argument('test_dir', help='The directory containing the test programs, .result outputs expected for each program and .input files to be used as stdin for each program if needed.')
     args = parser.parse_args()
 
-    run_test(args.language, args.compiler_path, args.test_dir)
+    run_test(args.language, args.compiler, args.test_dir)

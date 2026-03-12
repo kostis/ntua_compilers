@@ -74,4 +74,4 @@ if __name__ == "__main__":
     parser.add_argument('test_dir', help='The directory containing the erroneous programs for the language.')
     args = parser.parse_args()
 
-    run_test(args.language, args.compiler_path, args.test_dir)
+    run_test(args.language, args.compiler, args.test_dir)
