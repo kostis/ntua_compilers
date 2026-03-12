@@ -72,35 +72,32 @@ begin
     startY := readInteger();
 
     if (startX < 0) or (startX > 4) or (startY < 0) or (startY > 4) then
-    begin
-        writeString("Error : Starting coordinates out of bounds!\n");
-        return
-    end;
-
-    dx[0] := 2; dy[0] := 1;
-    dx[1] := 1; dy[1] := 2;
-    dx[2] := -1; dy[2] := 2;
-    dx[3] := -2; dy[3] := 1;
-    dx[4] := -2; dy[4] := -1;
-    dx[5] := -1; dy[5] := -2;
-    dx[6] := 1; dy[6] := -2;
-    dx[7] := 2; dy[7] := -1;
-
-    i := 0;
-    while i < 25 do
-    begin
-        board[i] := -1;
-        i := i + 1
-    end;
-
-    board[startX * 5 + startY] := 0;
-    if solve(startX, startY, 1) then
-    begin
-        writeString("Tour found:\n\n");
-        printBoard()
-    end
+        writeString("Error: Starting coordinates out of bounds!\n")
     else
     begin
-        writeString("No tour exists.\n")
+        dx[0] :=  2;  dy[0] :=  1;
+        dx[1] :=  1;  dy[1] :=  2;
+        dx[2] := -1;  dy[2] :=  2;
+        dx[3] := -2;  dy[3] :=  1;
+        dx[4] := -2;  dy[4] := -1;
+        dx[5] := -1;  dy[5] := -2;
+        dx[6] :=  1;  dy[6] := -2;
+        dx[7] :=  2;  dy[7] := -1;
+
+        i := 0;
+        while i < 25 do
+        begin
+            board[i] := -1;
+            i := i + 1
+        end;
+
+        board[startX * 5 + startY] := 0;
+        if solve(startX, startY, 1) then
+        begin
+            writeString("Tour found:\n\n");
+            printBoard()
+        end
+        else
+            writeString("No tour exists.\n")
     end
 end.
