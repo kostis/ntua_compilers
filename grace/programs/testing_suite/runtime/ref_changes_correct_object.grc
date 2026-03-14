@@ -1,0 +1,17 @@
+fun main() : nothing
+    var c : char[10];
+
+    fun f(ref s : char[]) : nothing
+    {
+        s[0] <- 'b';
+    }
+
+{ $ main
+    c[0] <- 'a';
+    $ f(c) is expected to change the actual value of array c
+    f(c);
+    if c[0] = 'b' then 
+        writeString("Correct");
+    else
+        writeString("Error");
+} $ main

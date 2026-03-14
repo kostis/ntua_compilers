@@ -1,0 +1,8 @@
+fun hello () : nothing
+{
+   writeString('-');
+   a = 91234;
+   ab_0_a__ = 12;
+   _adf = 12;
+
+}
