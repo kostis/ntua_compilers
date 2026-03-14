@@ -1,0 +1,107 @@
+program knapsack;
+(* ============================================================
+   0/1 Knapsack Problem — Dynamic Programming solution
+
+   Input:
+     N B         : number of items, knapsack capacity
+     p1 p2 … pN  : profits
+     w1 w2 … wN  : weights
+
+   Output:
+     Maximum value achievable within capacity B
+   ============================================================ *)
+
+var
+  N, B          : integer;
+  weight, value : ^array of integer;
+  dp            : ^array of integer;
+  i, j          : integer;
+  w, v          : integer;
+  take, skip    : integer;
+
+(* Compute max of two integers *)
+function max (a, b : integer) : integer;
+begin
+    if a > b then
+        result := a
+    else
+        result := b
+end;
+
+(* Get dp[i][j] from the 1D dp table *)
+function dpGet (i, j : integer) : integer;
+begin
+    result := dp^[i * (B + 1) + j]
+end;
+
+(* Set dp[i][j] in the 1D dp table *)
+procedure dpSet (i, j, val : integer);
+begin
+    dp^[i * (B + 1) + j] := val
+end;
+
+begin
+    N := readInteger();
+    B := readInteger();
+
+    new [N] weight;
+    new [N] value;
+    new [(N + 1) * (B + 1)] dp;
+
+    (* Read all profits *)
+    i := 0;
+    while i < N do
+    begin
+        value^[i] := readInteger();
+        i := i + 1
+    end;
+
+    (* Read all weights *)
+    i := 0;
+    while i < N do
+    begin
+        weight^[i] := readInteger();
+        i := i + 1
+    end;
+
+    (* Base case: dp[0][j] = 0 for all j *)
+    j := 0;
+    while j <= B do
+    begin
+        dpSet(0, j, 0);
+        j := j + 1
+    end;
+
+    i := 1;
+    while i <= N do
+    begin
+        w := weight^[i - 1];
+        v := value^[i - 1];
+
+        j := 0;
+        while j <= B do
+        begin
+            (* don't take item i *)
+            skip := dpGet(i - 1, j);
+
+            (* case weight[i-1] > j: dp[i][j] = dp[i-1][j] *)
+            if w > j then
+                dpSet(i, j, skip)
+            else
+            begin
+                (* take item i *)
+                take := dpGet(i - 1, j - w) + v;
+                dpSet(i, j, max(take, skip))
+            end;
+            j := j + 1
+        end;
+        i := i + 1
+    end;
+
+    writeInteger(dpGet(N, B));
+    writeChar("\n");
+
+    dispose [] weight;
+    dispose [] value;
+    dispose [] dp
+end.
