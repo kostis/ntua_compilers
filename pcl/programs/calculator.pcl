@@ -1,0 +1,121 @@
+program calculator;
+
+function is_digit (c : char) : boolean;
+begin
+  result := ('0' <= c) and (c <= '9')
+end;
+
+function is_operator (c : char) : boolean;
+begin
+  result := (c = '+') or (c = '-') or (c = '*') or (c = '/')
+end;
+
+function string_to_int (var s : array of char; from, upto : integer) : integer;
+var i, res, pow : integer;
+begin
+  res := 0;
+  pow := 1;
+  i := upto - 1;
+  while i >= from do
+  begin
+    res := res + pow * (ord(s[i]) - ord('0'));
+    pow := pow * 10;
+    i := i - 1
+  end;
+  result := res
+end;
+
+function strlen (var s : array of char) : integer;
+begin
+  result := 0;
+  while s[result] <> '\0' do result := result + 1
+end;
+
+function process_line (var s : array of char) : boolean;
+var i, ln, st, en, na, nb : integer;
+    nop : char;
+begin
+  ln := strlen(s);
+  i := 0;
+
+  while (i < ln) and (not is_digit(s[i])) do
+    i := i + 1;
+  if i = ln then
+  begin
+    result := false;
+    return
+  end;
+
+  st := i;
+  while (i < ln) and is_digit(s[i]) do
+    i := i + 1;
+  en := i;
+  na := string_to_int(s, st, en);
+
+  while (i < ln) and (not is_operator(s[i])) do
+    i := i + 1;
+  if i = ln then
+  begin
+    result := false;
+    return
+  end;
+  nop := s[i];
+  i := i + 1;
+
+  while (i < ln) and (not is_digit(s[i])) do
+    i := i + 1;
+  if i = ln then
+  begin
+    result := false;
+    return
+  end;
+
+  st := i;
+  while (i < ln) and is_digit(s[i]) do
+    i := i + 1;
+  en := i;
+  if st = en then
+  begin
+    result := false;
+    return
+  end;
+  nb := string_to_int(s, st, en);
+
+  if nop = '+' then
+    writeInteger(na + nb)
+  else if nop = '-' then
+    writeInteger(na - nb)
+  else if nop = '*' then
+    writeInteger(na * nb)
+  else if nop = '/' then
+  begin
+    if nb = 0 then
+    begin
+      result := false;
+      return
+    end;
+    writeInteger(na / nb)
+  end
+  else
+  begin
+    result := false;
+    return
+  end;
+
+  result := true
+end;
+
+var buf : array [256] of char;
+
+begin
+  buf[0] := '\0';
+  readString(256, buf);
+  while strlen(buf) > 0 do
+  begin
+    if not process_line(buf) then
+      writeString("Invalid");
+    writeString("\n");
+    buf[0] := '\0';
+    readString(256, buf)
+  end
+end.
