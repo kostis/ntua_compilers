@@ -1,0 +1,22 @@
+program powint;
+
+var base, exp, m, res, i : integer;
+
+begin
+    base := readInteger();
+    exp := readInteger();
+    m := readInteger();
+
+    res := 1;
+    base := base mod m;
+    i := 0;
+
+    while i < exp do
+    begin
+        res := (res * base) mod m;
+        i := i + 1
+    end;
+
+    writeInteger(res);
+    writeChar('\n')
+end.
