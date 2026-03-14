@@ -1,0 +1,6 @@
+program lex_error3;
+    (* This program contains a lexical error in the line below *)
+    var num$2 : integer;
+begin
+    result := 42
+end.

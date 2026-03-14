@@ -1,0 +1,6 @@
+program syntax_error2;
+    (* This program contains a syntax error in the line below *)
+    var program : integer;
+begin
+    result := 42
+end.
