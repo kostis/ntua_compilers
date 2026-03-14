@@ -1,0 +1,7 @@
+program lex_error2;
+    var a : real;
+begin
+    (* This program contains a lexical error in the line below *)
+    a := 1.10.20;
+    result := a * 2
+end.

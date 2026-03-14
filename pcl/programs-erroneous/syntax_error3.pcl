@@ -1,0 +1,13 @@
+program syntax_error3;
+    var a : boolean;
+begin
+    a := 42;
+    if a < 12 then
+    begin
+        result := true
+    end
+    else
+    begin
+        result := false
+    (* This program contains a syntax error in the line below *)
+end.
