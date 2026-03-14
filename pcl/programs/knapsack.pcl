@@ -1,36 +1,23 @@
 program knapsack;
 (* ============================================================
-0/1 Knapsack Problem — Dynamic Programming solution
+   0/1 Knapsack Problem — Dynamic Programming solution
 
-Input:
-N : number of items
-B : knapsack capacity
-For each item i: weight[i] and value[i]
+   Input:
+     N B         : number of items, knapsack capacity
+     p1 p2 … pN  : profits
+     w1 w2 … wN  : weights
 
-Output:
-Maximum value achievable within capacity B
-============================================================ *)
+   Output:
+     Maximum value achievable within capacity B
+   ============================================================ *)
 
 var
-N, B          : integer;
-weight, value : ^array of integer;
-dp            : ^array of integer;
-i, j          : integer;
-w, v          : integer;
-take, skip    : integer;
-
-(* Read a positive integer from the user *)
-function readPositive () : integer;
-var x : integer;
-begin
-    x := readInteger();
-    while x <= 0 do
-    begin
-        writeString("Please enter a positive integer: ");
-        x := readInteger()
-    end;
-    result := x
-end;
+  N, B          : integer;
+  weight, value : ^array of integer;
+  dp            : ^array of integer;
+  i, j          : integer;
+  w, v          : integer;
+  take, skip    : integer;
 
 (* Compute max of two integers *)
 function max (a, b : integer) : integer;
@@ -54,31 +41,30 @@ begin
 end;
 
 begin
-    writeString("Enter number of items: ");
-    N := readPositive();
-    writeString("Enter knapsack capacity: ");
-    B := readPositive();
+    N := readInteger();
+    B := readInteger();
 
     new [N] weight;
     new [N] value;
     new [(N + 1) * (B + 1)] dp;
 
-    writeString("Enter weight and value for each item.\n");
+    (* Read all profits *)
     i := 0;
     while i < N do
     begin
-        writeString("Item #");
-        writeInteger(i + 1);
-        writeString(" weight: ");
-        weight^[i] := readInteger();
-        writeString("Item #");
-        writeInteger(i + 1);
-        writeString(" value: ");
         value^[i] := readInteger();
         i := i + 1
     end;
 
-    (* case: dp[0][j] = 0 for all j *)
+    (* Read all weights *)
+    i := 0;
+    while i < N do
+    begin
+        weight^[i] := readInteger();
+        i := i + 1
+    end;
+
+    (* Base case: dp[0][j] = 0 for all j *)
     j := 0;
     while j <= B do
     begin
@@ -96,15 +82,15 @@ begin
         while j <= B do
         begin
             (* don't take item i *)
-            skip := dpGet(i - 1, j);           
+            skip := dpGet(i - 1, j);
 
             (* case weight[i-1] > j: dp[i][j] = dp[i-1][j] *)
             if w > j then
-                dpSet(i, j, skip)               
+                dpSet(i, j, skip)
             else
             begin
                 (* take item i *)
-                take := dpGet(i - 1, j - w) + v; 
+                take := dpGet(i - 1, j - w) + v;
                 dpSet(i, j, max(take, skip))
             end;
             j := j + 1
@@ -112,12 +98,9 @@ begin
         i := i + 1
     end;
 
-    (* Output result *)
-    writeString("Maximum knapsack value: ");
     writeInteger(dpGet(N, B));
-    writeString("\n");
+    writeChar("\n");
 
-    (* Free dynamically allocated memory *)
     dispose [] weight;
     dispose [] value;
     dispose [] dp
