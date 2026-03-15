@@ -1,0 +1,54 @@
+program guess_the_number;
+
+var lower, upper, guess, attempts, target, seed : integer;
+
+begin
+    writeString("--GUESS THE NUMBER--\n");
+    writeString("Enter lower boundary:\n");
+    lower := readInteger();
+    writeString("Enter upper boundary:\n");
+    upper := readInteger();
+
+    if lower >= upper then
+    begin
+        writeString("Lower must be strictly less than upper!\n");
+        return
+    end;
+
+    writeString("Enter a random seed:\n");
+    seed := readInteger();
+    
+    (* Generate pseudo random integer between <lower> and <upper> *)
+    seed := (seed * 137 + 221) mod (upper - lower + 1);
+
+    (* Add <lower> to shift the range from [0 - (upper-higher)] to [lower - higher] *)
+    target := lower + seed;
+
+    writeString("I have picked a number between ");
+    writeInteger(lower);
+    writeString(" and ");
+    writeInteger(upper);
+    writeString(".\nStart guessing!\n\n");
+
+    guess := lower - 1;
+    attempts := 0;
+
+    while guess <> target do
+    begin
+        writeString("Your guess:\n");
+        guess := readInteger();
+        attempts := attempts + 1;
+
+        if guess > target then
+            writeString("Smaller!\n")
+        else if guess < target then
+            writeString("Greater!\n")
+        else
+        begin
+            writeString("\n***CORRECT***\n");
+            writeString("You guessed the correct number in ");
+            writeInteger(attempts);
+            writeString(" attempts!\n")
+        end
+    end
+end.
