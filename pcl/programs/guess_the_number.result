@@ -1,0 +1,15 @@
+--GUESS THE NUMBER--
+Enter lower boundary:
+Enter upper boundary:
+Enter a random seed:
+I have picked a number between 1 and 10.
+Start guessing!
+
+Your guess:
+Greater!
+Your guess:
+Smaller!
+Your guess:
+
+***CORRECT***
+You guessed the correct number in 3 attempts!
