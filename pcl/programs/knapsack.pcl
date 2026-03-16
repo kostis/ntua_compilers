@@ -99,7 +99,7 @@ begin
     end;
 
     writeInteger(dpGet(N, B));
-    writeChar("\n");
+    writeChar('\n');
 
     dispose [] weight;
     dispose [] value;

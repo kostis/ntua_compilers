@@ -12,7 +12,7 @@ begin
     if lower >= upper then
     begin
         writeString("Lower must be strictly less than upper!\n");
-        return
+        return   (* XXX: There is a semantic error here *)
     end;
 
     writeString("Enter a random seed:\n");
