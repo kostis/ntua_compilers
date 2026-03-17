@@ -26,7 +26,7 @@ begin
     key := readInteger();
     writeString("\n");
 
-    if key < 1 or key > 25 then
+    if (key < 1) or (key > 25) then
     begin
         writeString("Invalid key! Key must be a number between 1 and 25!!\n");
         valid_key := false;
