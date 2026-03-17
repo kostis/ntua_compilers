@@ -18,7 +18,7 @@ begin
     else if (c >= 'a') and (c <= 'z') then
         shift := chr(((ord(c) - 32 - ord('A') + k) mod 26) + ord('A'))
     else
-        shift := c;
+        shift := c
 end;
 
 begin
@@ -29,7 +29,7 @@ begin
     if (key < 1) or (key > 25) then
     begin
         writeString("Invalid key! Key must be a number between 1 and 25!!\n");
-        valid_key := false;
+        valid_key := false
     end
     else
         valid_key := true;
@@ -45,13 +45,13 @@ begin
         begin
             ch := plaintext[i];
             ciphertext[i] := shift(ch, key);
-            i := i + 1;
+            i := i + 1
         end;
 
         ciphertext[i] := '\0';
 
         writeString("Ciphertext: ");
         writeString(ciphertext);
-        writeString("\n");
-    end;
+        writeString("\n")
+    end
 end.

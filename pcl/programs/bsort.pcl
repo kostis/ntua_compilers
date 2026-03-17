@@ -44,7 +44,7 @@ program bsort;
          writeInteger(x[i]);
          i := i+1
       end;
-      writeString("\n");
+      writeString("\n")
    end;
 
    var i    : integer;
