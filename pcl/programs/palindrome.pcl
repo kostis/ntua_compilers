@@ -21,11 +21,11 @@ begin
     begin
         if s[i] <> s[l - i - 1] then
         begin
-            result := 0;
+            result := 0
         end;
         
         i := i + 1
-    end;
+    end
 end;
 
 begin
