@@ -1,5 +1,5 @@
 program syntax_error1;
 begin
    (* This program contains a syntax error in the line below *)
-   result := 17 + 25;  (* there should not be ';' before end *)
+   result := 17 + 25+
 end.
