@@ -1,0 +1,48 @@
+(* given a string, it counts how many times each character appears *)
+
+program frequency;
+
+   var
+      i, code : integer;
+      s : array [128] of char;
+      freq : array [256] of integer;
+
+   function strlen (var x : array of char) : integer;
+   begin
+      result := 0;
+      while x[result] <> '\0' do
+         result := result + 1
+   end;
+
+begin
+   i := 0;
+   while i < 256 do
+   begin
+      freq[i] := 0;
+      i := i + 1
+   end;
+
+   writeString("Gimme a string: ");
+   readString(128, s);
+
+   i := 0;
+   while s[i] <> '\0' do
+   begin
+      code := ord(s[i]);
+      freq[code] := freq[code] + 1;
+      i := i + 1
+   end;
+
+   i := 0;
+   while i < 256 do
+   begin
+      if freq[i] > 0 then
+      begin
+         writeChar(chr(i));
+         writeString(": ");
+         writeInteger(freq[i]);
+         writeString("\n")
+      end;
+      i := i + 1
+   end
+end.
