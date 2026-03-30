@@ -1,0 +1,42 @@
+(* takes a string and removes the duplicates *)
+
+
+program remove_duplicates;
+
+   var
+      i, j, code : integer;
+      s : array [128] of char;
+      r : array [128] of char;
+      used : array [256] of boolean;
+
+begin
+   i := 0;
+   while i < 256 do
+   begin
+      used[i] := false;
+      i := i + 1
+   end;
+
+   writeString("Gimme a string: ");
+   readString(128, s);
+
+   i := 0;
+   j := 0;
+   while s[i] <> '\0' do
+   begin
+      code := ord(s[i]);
+      if not used[code] then
+      begin
+         used[code] := true;
+         r[j] := s[i];
+         j := j + 1
+      end;
+      i := i + 1
+   end;
+
+   r[j] := '\0';
+
+   writeString("Free of duplicates: ");
+   writeString(r);
+   writeString("\n")
+end.
