@@ -1,5 +1,5 @@
 program undefined_label;
-    label loop_start, done;
+    label loop_start;
     var a, b, temp : integer;
 begin
     writeString("Enter a: ");
