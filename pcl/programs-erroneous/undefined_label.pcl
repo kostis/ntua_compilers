@@ -1,0 +1,24 @@
+program undefined_label;
+    label loop_start;
+    var a, b, temp : integer;
+begin
+    writeString("Enter a: ");
+    a := readInteger();
+    writeString("Enter b: ");
+    b := readInteger();
+
+    loop_start:
+    if b = 0 then
+        goto finished;  (* label 'finished' is not declared *)
+
+    temp := b;
+    b := a mod b;
+    a := temp;
+
+    goto loop_start;
+
+    done:
+    writeString("GCD is: ");
+    writeInteger(a);
+    writeString("\n")
+end.
