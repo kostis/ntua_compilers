@@ -13,5 +13,6 @@ Each of these directories contains:
 
 Optionally, it may also contain: 
  - Generator of random syntactically correct programs (sub-directory `syntax_gen`).
+ - Support for syntax highlighting when using Emacs (sub-directory `emacs`).
  - Support for syntax highlighting when using Vim/NeoVim (sub-directory `vim`).
  - Support for syntax highlighting when using VS Code (sub-directory `vscode`).
