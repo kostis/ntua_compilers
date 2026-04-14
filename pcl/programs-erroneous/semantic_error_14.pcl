@@ -1,0 +1,8 @@
+program sem_error_while_not_bool;
+(* Error: 'while' condition must be boolean; integer expression given *)
+var i : integer;
+begin
+    i := 10;
+    while i do
+        i := i - 1
+end.

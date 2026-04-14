@@ -1,0 +1,9 @@
+program sem_error_wrong_args;
+(* Error: Wrong number of arguments: function 'foo' expects 1 argument but 2 were given *)
+function foo(x : integer) : integer;
+begin
+    result := x + 1
+end;
+begin
+    writeInteger(foo(1, 2))
+end.

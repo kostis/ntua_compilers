@@ -1,0 +1,6 @@
+program sem_error_index_not_int;
+(* Error: Array index must be an integer; boolean value used as index *)
+var a : array [10] of integer;
+begin
+    a[true] := 5
+end.

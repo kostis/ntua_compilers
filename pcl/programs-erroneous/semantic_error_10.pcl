@@ -1,0 +1,10 @@
+program sem_error_scope_inner_var;
+(* Error: Variable 'x' is declared in an inner scope and is not accessible in the outer scope *)
+procedure foo();
+    var x : integer;
+begin
+    x := 42
+end;
+begin
+    x := 10
+end.

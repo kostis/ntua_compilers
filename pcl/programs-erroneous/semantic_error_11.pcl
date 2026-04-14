@@ -1,0 +1,6 @@
+program sem_error_type_mismatch;
+(* Error: Type mismatch: boolean value assigned to integer variable *)
+var x : integer;
+begin
+    x := true
+end.

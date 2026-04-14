@@ -1,0 +1,9 @@
+program sem_error_arg_type_mismatch;
+(* Error: Argument type mismatch: boolean passed where integer is expected *)
+function add(a, b : integer) : integer;
+begin
+    result := a + b
+end;
+begin
+    writeInteger(add(1, true))
+end.

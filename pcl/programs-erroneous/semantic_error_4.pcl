@@ -1,0 +1,7 @@
+program sem_error_duplicate_var;
+(* Error: Duplicate variable declaration: 'x' is declared more than once *)
+var x : integer;
+var x : integer;
+begin
+    x := 1
+end.
