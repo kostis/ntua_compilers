@@ -1,0 +1,6 @@
+program sem_error_unary_minus_bool;
+(* Error: Unary minus (-) cannot be applied to boolean type *)
+var x : boolean;
+begin
+    x := -true
+end.

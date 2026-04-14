@@ -1,0 +1,5 @@
+program sem_error_undeclared;
+(* Error: Use of undeclared variable 'x' *)
+begin
+    x := 42
+end.

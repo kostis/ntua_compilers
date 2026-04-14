@@ -1,0 +1,6 @@
+program sem_error_real_to_int;
+(* Error: Type mismatch: cannot assign a real literal to an integer variable *)
+var x : integer;
+begin
+    x := 3.14
+end.

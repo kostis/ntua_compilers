@@ -1,0 +1,7 @@
+program sem_error_label_duplicate_def;
+(* Error: Label 'done' is defined more than once in the same block *)
+label done;
+begin
+    done : writeString("first\n");
+    done : writeString("second\n")
+end.

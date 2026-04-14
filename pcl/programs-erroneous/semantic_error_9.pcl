@@ -1,0 +1,6 @@
+program sem_error_relational_bool;
+(* Error: Relational operator < cannot be applied to boolean operands *)
+begin
+    if true < false then
+        writeString("wrong\n")
+end.

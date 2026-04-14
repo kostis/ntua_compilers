@@ -1,0 +1,10 @@
+program sem_error_compare_diff_types;
+(* Error: Cannot compare values of different types (integer and boolean) *)
+var x : integer;
+var y : boolean;
+begin
+    x := 5;
+    y := true;
+    if x = y then
+        writeString("wrong\n")
+end.
