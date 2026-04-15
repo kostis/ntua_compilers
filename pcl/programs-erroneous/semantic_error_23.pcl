@@ -1,0 +1,11 @@
+program sem_error_var_param_requires_lvalue_const;
+(* Error: 'var' (by reference) parameter requires an lvalue; constant passed *)
+
+procedure inc(var x : integer);
+begin
+    x := x + 1
+end;
+
+begin
+    inc(1)
+end.

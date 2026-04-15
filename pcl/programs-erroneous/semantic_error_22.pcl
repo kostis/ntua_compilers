@@ -1,0 +1,5 @@
+program sem_error_deref_nil;
+(* Error: Dereferencing nil *)
+begin
+    writeInteger(nil^)
+end.

@@ -1,0 +1,14 @@
+program sem_error_var_param_requires_lvalue_expr;
+(* Error: 'var' (by reference) parameter requires an lvalue; expression passed *)
+
+var a : integer;
+
+procedure inc(var x : integer);
+begin
+    x := x + 1
+end;
+
+begin
+    a := 10;
+    inc(a + 1)
+end.

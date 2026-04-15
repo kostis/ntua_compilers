@@ -1,0 +1,6 @@
+program sem_error_result_in_main;
+(* Error: 'result' is used in the main program body (result exists only inside functions) *)
+
+begin
+    result := 1
+end.

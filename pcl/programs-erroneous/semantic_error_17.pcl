@@ -1,0 +1,9 @@
+program sem_error_goto_label_not_defined;
+(* Error: 'goto' targets a label that is declared but never defined in any body *)
+
+label missing;
+
+begin
+    goto missing;
+    writeString("error")
+end.
