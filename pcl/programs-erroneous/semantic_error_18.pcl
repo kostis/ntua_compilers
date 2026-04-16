@@ -1,0 +1,11 @@
+program sem_error_result_in_procedure;
+(* Error: 'result' is used inside a procedure (procedures do not return values) *)
+
+procedure p();
+begin
+    result := 1
+end;
+
+begin
+    p()
+end.

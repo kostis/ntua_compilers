@@ -1,0 +1,14 @@
+program sem_error_illegal_cross_scope_jump;
+(* Error: Illegal cross-scope jump: label declared in the main block but used by goto inside a nested procedure *)
+
+label outside;
+
+procedure inner();
+begin
+    goto outside
+end;
+
+begin
+    inner();
+    outside : writeString("outside")
+end.

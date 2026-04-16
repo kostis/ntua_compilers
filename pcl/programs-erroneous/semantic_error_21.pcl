@@ -1,0 +1,13 @@
+program sem_error_assignment_from_procedure_call;
+(* Error: No assignment from procedure calls (only functions can return values) *)
+
+var x : integer;
+
+procedure p();
+begin
+    writeString("hello")
+end;
+
+begin
+    x := p()
+end.
