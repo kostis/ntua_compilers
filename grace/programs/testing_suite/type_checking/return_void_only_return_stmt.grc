@@ -1,0 +1,9 @@
+fun main(): nothing
+
+    fun f(): nothing
+    {
+        return;
+    }
+{
+    f();
+}

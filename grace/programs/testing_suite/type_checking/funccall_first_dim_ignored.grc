@@ -1,0 +1,12 @@
+fun main () : nothing
+    var a : int[10][12];
+    
+    fun f (ref s : int[][12]) : nothing
+    {
+        
+    }
+
+{ $ main
+   f(a);
+} $ main
+

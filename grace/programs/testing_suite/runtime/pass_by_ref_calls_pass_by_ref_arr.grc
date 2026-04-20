@@ -1,0 +1,18 @@
+fun p(): nothing
+    fun g(ref c : int[]) : nothing
+    {
+        writeInteger(c[3]);
+        writeChar('\n');
+    }
+    fun f(ref b : int[]) : nothing
+    {
+        g(b);
+    }
+
+    var a : int[12];
+{
+    a[3] <- 155;
+    f(a);
+}
+
+$ 155

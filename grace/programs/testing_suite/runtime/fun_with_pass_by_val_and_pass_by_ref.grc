@@ -1,0 +1,29 @@
+fun p(): nothing
+    fun f(x : int; ref y : int) : nothing
+    {
+        x <- 100;
+        y <- 200;
+        writeInteger(x);
+        writeChar('\n');
+        writeInteger(y);
+        writeChar('\n');        
+    } 
+    var i, j : int;
+{
+    i <- 4;
+    j <- 5;
+
+    writeInteger(i);
+    writeChar('\n');
+    writeInteger(j);
+    writeChar('\n');
+
+    f(i,j);
+
+    writeInteger(i);
+    writeChar('\n');
+    writeInteger(j);
+    writeChar('\n');
+}
+
+$ 4,5, 100, 200, 4, 200

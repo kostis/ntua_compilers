@@ -1,0 +1,12 @@
+fun main(): nothing
+    fun writeString(a : int): nothing 
+    {
+        writeInteger(a);
+    }
+
+{
+    $ This call should produce an error because we are expected to use the overaloaded version defined above 
+    writeString("Hello");
+}
+
+$ Throws an error

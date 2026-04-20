@@ -1,0 +1,15 @@
+fun main(): nothing
+    fun f(): int
+
+    var x: int;
+    {
+        x <- 3;
+        return x;
+    }
+
+{
+    if f() = 3 then
+        writeString("Correct");
+    else
+        writeString("Error");
+}
