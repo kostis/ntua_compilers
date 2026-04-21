@@ -1,0 +1,76 @@
+program ode;
+    (*
+    Solve numerically a First-Order Autonomous Polynomial differential equation with the form:
+
+    dy/dt = a_0 + a_1 y + a_2 y^2 + ... + a_{n-1} y^{n-1}
+
+    Using simple Euler integration
+
+    y(t+dt) = y(t) + dy/dt(t) * dt
+    y(0) = y_0
+    t \in [0, T]
+
+    Takes an input:
+    T dt n y0
+    a0 a1 ... a{n-1}
+
+    Returns
+
+    y(0) y(dt) y(2dt) ... y(T)
+    *)
+
+    var T, dt, y0, y_pow, t, y : real;
+    var n, i, j: integer;
+    var coeffs : ^array of real;
+
+    function calc_ydot(y: real) : real;
+    begin
+        y_pow := 1;
+        result := 0;
+        j := 0;
+
+        while j < n do
+        begin
+            result := result + y_pow * (coeffs^)[j];
+            y_pow := y_pow * y;
+            j := j + 1
+        end        
+    end;
+
+    procedure Solve();
+    begin
+        t := 0;
+        y := y0;
+        writeReal(y0);
+
+        while t < (T - (dt / 2.0)) do
+        begin
+            y := y + dt * calc_ydot(y);
+            t := t + dt;
+            writeReal(y);
+            writeString(" ")
+        end;
+
+        writeString("\n")
+    end;
+
+    begin
+        (* Parse Input *)
+        T := readReal();
+        dt := readReal();
+        n := readInteger();
+        y0 := readReal();
+
+        new [n] coeffs;
+
+        i := 0;
+        while i < n do
+        begin
+            coeffs^[i] := readReal();
+            i := i + 1
+        end;
+
+        Solve();
+
+        dispose [] coeffs        
+    end.
