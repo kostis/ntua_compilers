@@ -47,8 +47,8 @@ program ode;
         begin
             y := y + dt * calc_ydot(y);
             t := t + dt;
-            writeReal(y);
-            writeString(" ")
+            writeString(" ");
+            writeReal(y)
         end;
 
         writeString("\n")
