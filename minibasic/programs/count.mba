@@ -1,3 +1,4 @@
+var x : int
 let x = 0
 for 42 do   ' count up to 42
   begin

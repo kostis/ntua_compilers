@@ -1,7 +1,15 @@
+'
+' Program that prints the first 17 Fibonnacci numbers
+'
+var a : int
+var b : int
+let a = 0
 let b = 1
-print 1
-for 10 do
+
+print a + b  ' this is the first number
+for 16 do
 begin
+  var c : int
   let c = a + b
   print c
   let a = b

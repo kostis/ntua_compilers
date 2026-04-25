@@ -1,7 +1,8 @@
+var x : int
 let x = 0
 for 42 do   ' count up to 42
   begin
     let x = x + 1
-    if x % 2 then
+    if x % 2 > 0 then
       print x
   end
