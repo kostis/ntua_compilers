@@ -6,8 +6,10 @@ program mean;
 begin
    writeString("Give n: ");
    n := readInteger();
+   writeString("\n");
    writeString("Give k: ");
    k := readInteger();
+   writeString("\n");
 
    i := 0;
    sum := 0.0;
