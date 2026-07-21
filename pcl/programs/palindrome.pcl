@@ -1,6 +1,6 @@
 program palindrome;
 
-var inputStr : array of char;
+var inputStr : array [32] of char;
 
 function strlen (var s : array of char) : integer;
 begin
