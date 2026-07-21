@@ -46,16 +46,18 @@ end;
 
 var k : integer;
 begin
-    writeString("Enter number of elements (max 100): ");
+    (* writeString("Enter number of elements (max 100): "); *)
     N := readInteger();
 
     (* Read N elements *)
     k := 0;
     while k < N do
     begin
+      (*
         writeString("Enter element ");
         writeInteger(k + 1);
         writeString(": ");
+       *)
         nums[k] := readInteger();
         k := k + 1
     end;
