@@ -2,7 +2,6 @@ program quickselect;
     var n, k, i, res : integer;
     var arr : array[100] of integer;
 
-
     procedure swap(var x, y: integer);
         var temp : integer;
     begin

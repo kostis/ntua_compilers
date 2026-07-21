@@ -3,8 +3,6 @@ Calculate the minimum distance of two words! :)
 Maximum supported string length is 256, please no more!
 
 Enter the first string:
-
 Enter the second string:
 
 Edit Distance is: 3
-

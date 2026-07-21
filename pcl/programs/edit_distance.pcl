@@ -28,9 +28,9 @@ begin
 	writeString("Calculate the minimum distance of two words! :)\n");	
 	writeString("Maximum supported string length is 256, please no more!\n");
 
-	writeString("\nEnter the first string:\n");
+	writeString("\nEnter the first string: ");
 	readString(256, s1);
-	writeString("\nEnter the second string:\n");
+	writeString("\nEnter the second string: ");
 	readString(256, s2);
 
 	n := strlen(s1);

@@ -48,7 +48,7 @@ program lis;
             i := i+1
         end;
 
-        writeString("longest increasing subsequence has length: ");
+        writeString("longest increasing subsequence has length ");
         writeInteger(findMaxElement(size, dp));
         writeString("\n")
 
