@@ -1,0 +1,15 @@
+program readstring_resume;
+
+var a : array [4] of char;
+var b : array [4] of char;
+
+begin
+    readString(4, a);
+    readString(4, b);
+
+    writeString("[");
+    writeString(a);
+    writeString("][");
+    writeString(b);
+    writeString("]\n")
+end.

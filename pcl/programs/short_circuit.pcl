@@ -1,0 +1,39 @@
+program short_circuit;
+
+var x : integer;
+
+function bumpTrue() : boolean;
+begin
+    x := x + 1;
+    result := true;
+    return
+end;
+
+function bumpFalse() : boolean;
+begin
+    x := x + 1;
+    result := false;
+    return
+end;
+
+begin
+    x := 41;
+
+    if false and bumpTrue() then
+        x := 0
+    else
+        x := x + 1;
+
+    writeInteger(x);
+    writeString("\n");
+
+    x := 41;
+
+    if true or bumpFalse() then
+        x := x + 1
+    else
+        x := 0;
+
+    writeInteger(x);
+    writeString("\n")
+end.
