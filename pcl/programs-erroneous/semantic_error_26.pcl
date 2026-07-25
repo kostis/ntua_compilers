@@ -1,0 +1,9 @@
+program sem_error_integer_literal_oob;
+    (* Error: Integer constant is out-of-bounds for 32-bit or 64-bit integer. *)
+    (* Valid 32-bit signed integer range is -2,147,483,648 to 2,147,483,647 *)
+    (* Valid 64-bit signed integer range is -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 *)
+    (* However, this program is perfectly semantically valid if integer is implemented as BigInt, or as a 459+ bit integer *)
+    var a : integer;
+begin
+    a := 676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767676767
+end.
