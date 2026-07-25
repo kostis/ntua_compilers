@@ -1,0 +1,5 @@
+fun main() : nothing
+{
+    if not 1 then
+        writeString("Error");
+}

@@ -1,0 +1,9 @@
+fun main () : nothing
+    fun f () : char 
+    {
+        return 'a';
+    }
+{ $ main
+    if (f() > 1) then
+        writeString("a");
+} $ main

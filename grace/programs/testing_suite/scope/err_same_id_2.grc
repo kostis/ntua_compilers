@@ -1,0 +1,4 @@
+fun main(): nothing
+    var x: int;
+    var x: char;
+{}

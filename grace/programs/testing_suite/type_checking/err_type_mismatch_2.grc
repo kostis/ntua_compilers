@@ -1,0 +1,7 @@
+fun main() : nothing 
+var a : int;
+var b : char;
+{
+    b <- 'b';
+    a <- b;
+}

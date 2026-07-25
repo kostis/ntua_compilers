@@ -1,0 +1,11 @@
+fun hello () : nothing
+   var i : int;
+{
+   i <- 10;
+
+   while i > 0 do
+   {
+      writeString("Hello world!\n");
+      i <- i - 1;
+   }
+}

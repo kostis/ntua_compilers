@@ -1,0 +1,11 @@
+fun main(): nothing
+    fun f(x: int): nothing;
+
+    fun f(x:int): int
+    {
+        return 1;
+    }
+
+{
+
+}

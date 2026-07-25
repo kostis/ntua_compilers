@@ -1,0 +1,9 @@
+fun main () : nothing
+    var x : int;
+
+    fun f (ref i : int) : nothing 
+    {}
+
+{ $ main
+   f(x);
+} $ main

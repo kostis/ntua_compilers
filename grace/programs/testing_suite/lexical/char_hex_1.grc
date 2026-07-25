@@ -1,0 +1,4 @@
+fun hello () : nothing
+{
+   writeString('\x3e');
+}

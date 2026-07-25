@@ -1,0 +1,8 @@
+fun main(): nothing
+    var a: char;
+{
+    a <- chr(99);
+    writeChar(a);
+}
+
+$ c

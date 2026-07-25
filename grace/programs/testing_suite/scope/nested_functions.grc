@@ -1,0 +1,20 @@
+fun main(): nothing
+    fun f(): nothing
+
+        fun g(): nothing
+    
+            fun f(): nothing
+            { $ f
+                writeString("new f");
+            } $ f
+    
+        { $ g
+            f();
+        } $ g
+    { $ f
+        g();
+    } $ f
+
+{ $ main
+    f();
+} $ main

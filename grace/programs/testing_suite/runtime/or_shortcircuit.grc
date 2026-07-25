@@ -1,0 +1,16 @@
+fun main() : nothing 
+
+    fun f() : int
+        { $ f
+            writeString("Should not be printed\n");
+            return 0;
+        } $ f
+
+    var a,b : int;
+
+{ $ main
+    a <-2;
+    b <-1;
+    if (a > b) or (b > f())
+    then writeString("");
+}

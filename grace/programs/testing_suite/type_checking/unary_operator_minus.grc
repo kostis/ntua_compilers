@@ -1,0 +1,8 @@
+fun main () : nothing
+
+var i, c : int;
+
+{ $ main
+    i <- 1;
+    c <- -i;
+} $ main

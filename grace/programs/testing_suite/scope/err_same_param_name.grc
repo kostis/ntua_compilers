@@ -1,0 +1,6 @@
+fun main(): nothing
+    fun f(x: int; x: char): nothing
+    {
+    }
+{
+}

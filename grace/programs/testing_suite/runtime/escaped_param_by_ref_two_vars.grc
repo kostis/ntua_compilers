@@ -1,0 +1,41 @@
+fun p(): nothing
+    var a : int;
+    var b : int;
+
+    fun h(ref y,x : int) : nothing
+        fun f() : nothing
+            fun g() : nothing
+            {
+                writeInteger(x);
+                writeString(" - I am g!\n");
+                x <- x - 1;
+                if x > 0 then f();
+            }     
+        {
+            writeInteger(x);
+            writeString(" - I am f!\n");
+            x <- x - 1;
+            if x > 0 then g();
+        } 
+    {
+        f();
+    }
+{
+    a <- 10;
+    b <- 34; 
+    h(b,a);
+    writeInteger(a);
+    writeChar('\n');
+}
+
+$ 10 - I am f!
+$ 9 - I am g!
+$ 8 - I am f!
+$ 7 - I am g!
+$ 6 - I am f!
+$ 5 - I am g!
+$ 4 - I am f!
+$ 3 - I am g!
+$ 2 - I am f!
+$ 1 - I am g
+$ 0

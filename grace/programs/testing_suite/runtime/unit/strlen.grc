@@ -1,0 +1,8 @@
+fun main(): nothing
+    var a: int;
+{
+    a <- strlen("hello");
+    writeInteger(a);
+}
+
+$ 5

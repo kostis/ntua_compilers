@@ -1,0 +1,27 @@
+fun p(): nothing
+    fun f(ref b : int[][17] ; ref c : int[5][17]) : nothing
+    {
+        b[2][14] <- 20;
+        c[3][14] <- 30;
+    }
+
+    var a : int[5][17];
+{
+    a[1][14] <- 10;
+    a[2][14] <- 10;
+    a[3][14] <- 10;
+
+    writeInteger(a[1][14]);
+    writeInteger(a[2][14]);
+    writeInteger(a[3][14]);
+    writeChar('\n');
+
+    f(a, a);
+
+    writeInteger(a[1][14]);
+    writeInteger(a[2][14]);
+    writeInteger(a[3][14]);
+    writeChar('\n');
+}
+
+$ 10, 10, 10, 10, 20, 30

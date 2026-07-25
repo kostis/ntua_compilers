@@ -1,0 +1,88 @@
+$$
+
+A solution to https://leetcode.com/problems/keyboard-row/
+
+Given an array of strings words, return the words that can be typed using letters of the alphabet on only one row of American keyboard like the image below.
+
+In the American keyboard:
+
+    the first row consists of the characters "qwertyuiop",
+    the second row consists of the characters "asdfghjkl", and
+    the third row consists of the characters "zxcvbnm".
+
+For this solution we assume all letters are lowercase
+
+The solution is for one string only, instead of a vector of strings
+
+$$
+
+
+fun main(): nothing
+
+
+    fun solve(ref str: char[]): int
+    $ Returns 1 if the str can be written using letters from one row, 0 otherwise
+    
+
+        fun get_row_of_letter(c: char): int
+            fun exists(ref arr: char[]; c: char): int
+                var i: int;
+            { $ exists
+                i <- 0;
+                while i < strlen(arr) do 
+                {
+                    if arr[i] = c then 
+                        return 1;
+                    i <- i + 1;
+                }
+                return 0;
+            } $ exists
+        
+        $ Returns one of 0, 1, 2 depending on which keyboard row the letter belongs to  
+        { $ get_row_of_letter
+            if exists("qwertyuiop", c) = 1 then
+                return 0;
+            if exists("asdfghjkl", c) = 1 then
+                return 1;
+            if exists("zxcvbnm", c) = 1 then
+                return 2;
+        } $ get_row_of_letter
+
+
+        var i, first_letter_row: int;
+
+    { $ solve
+        if strlen(str) = 0 or strlen(str) = 1 then 
+            return 1;
+        i <- 1;
+        while i < strlen(str) do 
+        {
+            if get_row_of_letter(str[i]) # get_row_of_letter(str[i-1]) then
+                return 0;
+            i <- i + 1;
+        }
+        return 1;
+    } $ solve
+
+    fun assert(ref str: char[]; expected_res: int): nothing
+    { $ assert
+        if solve(str) = expected_res then
+            writeString("PASS\n");
+        else
+            writeString("FAIL\n");
+    } $ assert
+
+{ $ main
+    assert("q", 1);
+    assert("", 1);
+    assert("omk", 0);
+    assert("ab", 0);
+    assert("alaska", 1);
+    assert("peace", 0);
+} $ main
+
+$$
+
+Should only print PASS
+
+$$

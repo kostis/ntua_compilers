@@ -1,0 +1,28 @@
+fun p(): nothing
+    fun f(x : int) : nothing
+        fun g(x : int) : nothing
+        {
+            writeInteger(x);
+            writeString(" - I am g!\n");
+            if x > 0 then f(x-1);
+        }     
+    {
+        writeInteger(x);
+        writeString(" - I am f!\n");
+        if x > 0 then g(x-1);
+    } 
+{
+    f(10);
+}
+
+10 - I am f!
+9 - I am g!
+8 - I am f!
+7 - I am g!
+6 - I am f!
+5 - I am g!
+4 - I am f!
+3 - I am g!
+2 - I am f!
+1 - I am g!
+0 - I am f!

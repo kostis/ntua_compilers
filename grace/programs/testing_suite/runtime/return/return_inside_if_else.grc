@@ -1,0 +1,18 @@
+fun p(): nothing
+
+    fun f(x : int) : int
+    {
+        if x > 0 then return 2;
+        else return 1;
+
+        writeString("Hello");
+    }
+
+{
+    writeInteger(f(1));  $ 2
+    writeChar('\n');
+    writeInteger(f(-1)); $ 1
+    writeChar('\n');
+}
+
+$ 2, 1

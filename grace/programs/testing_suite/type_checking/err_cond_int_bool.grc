@@ -1,0 +1,7 @@
+fun main(): nothing
+var x, y: int;
+{
+    x <- 0;
+    y <- 1;
+    if x + (y > 0) then ;
+}

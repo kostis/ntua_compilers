@@ -1,0 +1,16 @@
+fun p(): nothing
+    fun g() : nothing
+    {
+        writeString("I am g!\n");
+    }     
+    fun f() : nothing
+    {
+        g();
+        writeString("I am f!\n");
+    } 
+{
+    f();
+}
+
+$ I am g!
+$ I am f!

@@ -1,0 +1,12 @@
+fun main () : nothing
+
+    fun f() : int 
+        { $ f
+            return 1;
+        } $ f
+
+    var c : int;
+
+{ $ main
+    c <- -f();
+} $ main

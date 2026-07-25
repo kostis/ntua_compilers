@@ -1,0 +1,14 @@
+fun main(): nothing
+    var x: int;
+    
+    fun f(): int
+        var a : int;
+    {
+        a <- 1;
+        if a > 0 then return 88;
+        else writeChar('c');
+    }
+
+{
+    x <- f();
+}

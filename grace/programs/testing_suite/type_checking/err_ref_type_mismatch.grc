@@ -1,0 +1,8 @@
+fun main(): nothing
+    var x: char;
+    fun f(ref x: int): nothing
+    {}
+
+{ $ main
+    f(x);
+} $ main

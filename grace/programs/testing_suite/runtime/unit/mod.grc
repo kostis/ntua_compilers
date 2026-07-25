@@ -1,0 +1,6 @@
+fun main(): nothing
+{
+    writeInteger(3 mod 2);
+}
+
+$ 1

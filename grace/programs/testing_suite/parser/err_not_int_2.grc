@@ -1,0 +1,11 @@
+fun main() : nothing
+
+    fun f() : int
+    { $ f
+        return 0;
+    } $ f
+
+{
+    if not f() then
+        writeString("Error");
+}

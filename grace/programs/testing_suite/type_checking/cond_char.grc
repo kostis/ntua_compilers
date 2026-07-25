@@ -1,0 +1,5 @@
+fun main(): nothing
+{
+    if 'a' < 'b' then 
+    writeString("True");
+}

@@ -1,0 +1,22 @@
+fun p(): nothing
+    fun f(ref n : int[3][5]) : nothing
+    {
+        writeInteger(n[1][2]);
+        writeChar('\n');
+
+        n[1][2] <- 888;
+    }
+    var a : int[3][5];
+{
+    a[1][2] <- 777;
+
+    writeInteger(a[1][2]);
+    writeChar('\n');
+
+    f(a);
+    
+    writeInteger(a[1][2]);
+    writeChar('\n');
+}
+
+$ 777, 777, 888 

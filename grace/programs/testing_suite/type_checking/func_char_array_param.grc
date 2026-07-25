@@ -1,0 +1,10 @@
+fun main(): nothing
+    fun f(ref x: char[6]): nothing
+    { $ f
+        writeString(x);
+        writeChar('\n');
+    } $ f 
+{ $ main
+    f("Hello");
+
+} $ main

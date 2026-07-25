@@ -1,0 +1,10 @@
+fun main(): nothing 
+    fun f(): nothing 
+        var x : int;
+    { $ f
+    } $ f
+
+{ $ main
+    $ x is undeclared inside main
+    x <- 42;
+} $ main

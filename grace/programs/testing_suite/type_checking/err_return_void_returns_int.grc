@@ -1,0 +1,10 @@
+fun main(): nothing
+
+    fun f(): nothing
+    {
+        $ This should fail because f is void
+        return 1;
+    }
+{
+    f();
+}

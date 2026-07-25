@@ -1,0 +1,11 @@
+fun main(): nothing
+    var a: int[10];
+    var i: int;
+
+{ $ main
+    i <- 0;
+    a[0] <- 1;
+    a[1] <- 2;
+    $ Should write 2
+    writeInteger(a[a[i]]);
+} $ main

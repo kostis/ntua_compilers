@@ -1,0 +1,17 @@
+fun main(): nothing
+    var x: int;
+
+    fun f(x: int): nothing
+    { $ f
+        $ This is the typical param, it only exists in the scope of f 
+        x <- 42;
+    } $ f
+
+{ $ main
+    x <- 17;
+    f(42);
+    if x = 17 then
+        writeString("Success\n");
+    else 
+        writeString("Error\n");
+} $ main

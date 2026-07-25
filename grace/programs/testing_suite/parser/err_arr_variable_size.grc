@@ -1,0 +1,9 @@
+fun main () : nothing
+   
+   $ The following should be illegal because the size of the array is not an int const
+   var x : int;
+   var r : char[x];
+
+{ $ main
+
+} $ main

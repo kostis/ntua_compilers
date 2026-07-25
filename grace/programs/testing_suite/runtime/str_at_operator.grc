@@ -1,0 +1,9 @@
+fun main(): nothing
+    var x: char;
+{
+    x <- "hello"[1];
+    writeChar(x);
+    writeChar('\n');
+}
+
+$ e

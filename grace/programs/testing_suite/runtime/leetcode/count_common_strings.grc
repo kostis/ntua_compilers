@@ -1,0 +1,194 @@
+$$
+
+A modification of https://leetcode.com/problems/minimum-index-sum-of-two-lists/description/
+
+Given two arrays of strings list1 and list2, find and count the common strings.
+A common string is a string that appeared in both list1 and list2.
+Return the number of common strings.
+
+Max length of lists: 50
+Max length of string: 50
+ 
+Example 1:
+
+    Input: list1 = ["Shogun","Tapioca","Burger King","KFC"], list2 = ["Piatti","The Grill","Hungry Hunter Steakhouse","Shogun"]
+    Output: 1
+    Explanation: The only common string is "Shogun".
+
+
+Example 2:
+
+    Input: list1 = ["happy","sad","good"], list2 = ["sad","happy","good"]
+    Output: 3
+    Explanation: The common strings are "happy","sad","good".
+
+$$
+
+fun main(): nothing
+    var list1, list2: char[50][50];
+    var tmp: char[50];
+    var len1, len2: int[50];
+    var count1, count2, res: int;
+
+    fun solve(): int;
+
+    fun assert(ref str1, str2:char[]; expected_res: int): nothing
+
+        fun generate_testcase(ref str1, str2:char[]): nothing
+
+            fun populate_list_one(ref str: char[]): nothing
+            $ We deliberately do not pass a ref to the array we want to populate to test nested variables
+                var i, start, end, number_of_elmnts, current_len: int;
+            
+            {  $ populate_list_one
+                i <- 0;
+                count1 <- 1;
+                current_len <- 0;
+                number_of_elmnts <- 0;
+                start <- 0;
+                end <- 0;
+                while i < strlen(str) do 
+                {   
+                    if str[i] = ',' then
+                    {
+                        tmp[current_len] <- '\0';
+                        strcpy(list1[number_of_elmnts], tmp);
+                        len1[number_of_elmnts] <- current_len;
+                        number_of_elmnts <- number_of_elmnts + 1;
+                        count1 <- count1  + 1;
+                        start <- i+1;
+                        current_len <- 0;
+                    }
+                    else
+                    {
+                        tmp[current_len] <- str[i];
+                        current_len <- current_len + 1;
+                    }
+                    i <- i + 1;
+                }
+                tmp[current_len] <- '\0';
+                len1[number_of_elmnts] <- current_len;
+                strcpy(list1[number_of_elmnts], tmp);
+            }  $ populate_list_one
+
+            fun populate_list_two(ref str: char[]): nothing
+                var i, start, end, number_of_elmnts, current_len: int;
+
+            {  $ populate_list_two
+                i <- 0;
+                count2 <- 1;
+                current_len <- 0;
+                number_of_elmnts <- 0;
+                start <- 0;
+                end <- 0;
+                while i < strlen(str) do 
+                {   
+                    if str[i] = ',' then
+                    {
+                        tmp[current_len] <- '\0';
+                        strcpy(list2[number_of_elmnts], tmp);
+                        len2[number_of_elmnts] <- current_len;
+                        number_of_elmnts <- number_of_elmnts + 1;
+                        count2 <- count2 + 1;
+                        start <- i+1;
+                        current_len <- 0;
+                    }
+                    else
+                    {
+                        tmp[current_len] <- str[i];
+                        current_len <- current_len + 1;
+                    }
+                    i <- i + 1;
+                }
+                tmp[current_len] <- '\0';
+                len2[number_of_elmnts] <- current_len;
+                strcpy(list2[number_of_elmnts], tmp);
+            }  $ populate_list_one
+
+
+            fun print_list1(): nothing
+                var i: int;
+            {  $ print_list1
+                i <- 0;
+                writeString("Count1: ");
+                writeInteger(count1);
+                writeChar('\n');
+                while i < count1 do 
+                {
+                    writeString(list1[i]);
+                    writeChar('\n');
+                    i <- i + 1;
+                }
+            }  $ print_list1
+
+            fun print_len1(): nothing
+                var i: int;
+            {  $ print_len1
+                i <- 0;
+                writeString("\nLen1: ");
+                writeInteger(count1);
+                writeChar('\n');
+                while i < count1 do 
+                {
+                    writeInteger(len1[i]);
+                    writeChar('\n');
+                    i <- i + 1;
+                }
+            }  $ print_len1
+
+        {  $ generate_testcase
+            populate_list_one(str1);
+            populate_list_two(str2);
+        }  $ generate_testcase
+
+    {  $ assert
+        generate_testcase(str1, str2);
+        if solve() = expected_res then
+            writeString("PASS\n");
+        else
+            writeString("FAIL\n");
+    }  $ assert
+
+    fun solve(): int
+        fun search_in_list_two(ref str: char[]): int
+            var i: int;
+        {  $ search_in_list_two
+            i <- 0;
+            while i < count2 do 
+            {
+                if strcmp(str, list2[i]) = 0 then
+                    return 1;
+                i <- i + 1;
+            }
+            return 0;
+        } $ search_in_list_two
+
+        var i, res: int;
+    
+    {  $ solve
+        i <- 0;
+        res <- 0;
+        while i < count1 do
+        {
+            if search_in_list_two(list1[i]) = 1 then
+                res <- res + 1;
+            i <- i + 1;
+        }
+        return res;
+    }  $ solve
+
+
+{ $ main
+    assert("hello,its,me", "me,its,hello,asdfasdfadfasdf,asdfa1", 3);
+    assert("hello,its,me", "me1,its1,he llo", 0);
+    assert("a,b,c", "c,b,a", 3);
+    assert("Abc, bcA", "ABc, bca", 0);
+    assert("Shogun,Tapioca,Burger King,KFC", "Piatti,The Grill,Hungry Hunter Steakhouse,Shogun", 1);
+    assert("happy,sad,good", "sad,happy,good", 3);
+} $ main
+
+$$
+
+Should only print PASS
+
+$$

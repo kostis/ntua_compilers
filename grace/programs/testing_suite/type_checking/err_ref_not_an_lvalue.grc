@@ -1,0 +1,9 @@
+fun main () : nothing
+  
+   fun f (ref i : int) : nothing 
+   {}
+
+{ $ main
+   $ The following is a semantic error because objects passed by ref must be l-values
+   f(1);
+} $ main

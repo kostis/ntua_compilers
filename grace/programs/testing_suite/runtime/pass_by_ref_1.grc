@@ -1,0 +1,29 @@
+fun p(): nothing
+    fun f(x : int) : nothing
+    {
+        writeInteger(x);
+        writeChar('\n');        
+        x <- 5;
+        writeInteger(x);
+        writeChar('\n');        
+    } 
+    fun g(ref x : int) : nothing
+    {
+        writeInteger(x);
+        writeChar('\n');
+        x <- 6;
+        writeInteger(x);
+        writeChar('\n');
+        x <- x + 1;
+    } 
+    var i : int;
+
+{
+    i <- 4;
+    f(i);
+    g(i);
+    writeInteger(i);
+    writeChar('\n');
+}
+
+$ 4, 5, 4, 6, 7

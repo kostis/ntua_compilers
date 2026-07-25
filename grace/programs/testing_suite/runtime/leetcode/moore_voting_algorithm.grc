@@ -1,0 +1,87 @@
+$$
+
+A solution to https://leetcode.com/problems/majority-element/description/
+
+Given an array nums of size n, return the majority element.
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+
+This solution uses Boyer-Moore's voting algorithm https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm
+
+Assume n <= 1000
+
+$$
+
+fun main(): nothing
+    var i, n: int;
+    var nums: int[1000];
+
+    fun assert(ref arr_str: char[]; expected_res: int): nothing
+        var i, number_of_elmnts, tmp, res, count, candidate: int;
+        fun init(): nothing;
+        fun solve(): nothing;
+
+        fun init(): nothing
+        $ We deliberately do not pass a ref to the array we want to populate to test nested variables 
+
+        { $ init
+            i <- 0;
+            count <- 0;
+            candidate <- 0;
+            res <- -1;
+            number_of_elmnts <- 0;
+            tmp <- 0;
+            while i < strlen(arr_str) do 
+            {   
+                if arr_str[i] = ',' then
+                {
+                    nums[number_of_elmnts] <- tmp;
+                    number_of_elmnts <- number_of_elmnts + 1;
+                    tmp <- 0;
+                }
+                else
+                {
+                    tmp <- tmp * 10 + ascii(arr_str[i]) - ascii('0');
+                }
+                i <- i + 1;
+            }
+            nums[number_of_elmnts] <- tmp;
+            n <- number_of_elmnts + 1;
+        } $ init
+
+        fun solve(): nothing
+        { $ solve
+            i <- 0;
+            while i < n do
+            {
+                if count = 0 then
+                    candidate <- nums[i];
+                if nums[i] = candidate then
+                    count <- count + 1;
+                else
+                    count <- count - 1;
+                i <- i + 1;
+            }
+            res <- candidate;
+        } $ solve
+
+    { $ assert
+        init();
+        solve();
+        if res = expected_res then
+            writeString("PASS\n");
+        else
+            writeString("FAIL\n");
+    } $ assert
+
+{ $ main
+    assert("2,2,1,1,1,2,2", 2);
+    assert("3,2,3", 3);
+    assert("1,2,3,1,3,4,56,1,1,1,1,1,3,4,5,6,7,7,1,1,1,1,1", 1);
+    assert("2,2,2,2,2,1,2,3,1,3,4,56,1,1,1,1,1,3,4,5,6,7,7,1,1,1,1,1,1,1,1,1,1,1,1", 1);
+} $ main
+
+$$
+
+Should only print PASS
+
+$$

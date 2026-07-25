@@ -1,0 +1,5 @@
+fun main () : nothing 
+var r : char[20];
+{
+    r <- "Hello\n";
+}

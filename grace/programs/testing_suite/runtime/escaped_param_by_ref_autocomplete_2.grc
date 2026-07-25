@@ -1,0 +1,39 @@
+fun p(): nothing
+    var a : int[100][100];
+
+    fun h(ref x : int[][100]) : nothing
+        fun f() : nothing
+            fun g() : nothing
+            {
+                writeInteger(x[7][43]);
+                writeString(" - I am g!\n");
+                x[7][43] <- x[7][43] - 1;
+                if x[7][43] > 0 then f();
+            }     
+        {
+            writeInteger(x[7][43]);
+            writeString(" - I am f!\n");
+            x[7][43] <- x[7][43] - 1;
+            if x[7][43] > 0 then g();
+        } 
+    {
+        f();
+    }
+{
+    a[7][43] <- 10;   
+    h(a);
+    writeInteger(a[7][43]);
+    writeChar('\n');
+}
+
+$ 10 - I am f!
+$ 9 - I am g!
+$ 8 - I am f!
+$ 7 - I am g!
+$ 6 - I am f!
+$ 5 - I am g!
+$ 4 - I am f!
+$ 3 - I am g!
+$ 2 - I am f!
+$ 1 - I am g
+$ 0

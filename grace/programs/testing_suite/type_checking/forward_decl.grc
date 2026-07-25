@@ -1,0 +1,12 @@
+fun main(): nothing
+    var x: int;
+    fun f(x, y: int): int;
+
+    fun f(x, y: int): int
+    {
+        return x+y;
+    }
+
+{
+    x <- f(1,1);
+}

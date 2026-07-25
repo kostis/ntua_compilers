@@ -1,0 +1,9 @@
+fun main () : nothing
+
+var c : int;
+var i : int[20];
+
+{ $ main
+    i[0] <- 1;
+    c <- -i[0];
+} $ main

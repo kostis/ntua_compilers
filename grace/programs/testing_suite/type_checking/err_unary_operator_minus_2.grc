@@ -1,0 +1,9 @@
+fun main () : nothing
+
+var c : char;
+var i : char[20];
+
+{ $ main
+    i[0] <- 'a';
+    c <- -i[0];
+} $ main

@@ -1,0 +1,13 @@
+fun main () : nothing
+
+    fun f() : char 
+        { $ f
+            return 'a';
+        } $ f
+
+    var i: int;
+
+
+{ $ main
+    i <- f() + 1;
+} $ main

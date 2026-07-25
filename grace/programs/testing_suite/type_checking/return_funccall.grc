@@ -1,0 +1,17 @@
+fun main(): nothing
+    fun f(): int
+    { $ f
+        return 1;
+
+    } $ f
+
+    fun g(): int
+    { $ g 
+        return f();
+    } $ g
+
+    var x: int;
+
+{ $ main
+    x <- g();
+} $ main

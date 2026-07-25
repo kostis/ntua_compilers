@@ -1,0 +1,12 @@
+fun main(): nothing
+    fun f(): int
+    {
+        return 1+2;
+    }
+
+{
+    if f() = 3 then
+        writeString("Correct");
+    else
+        writeString("Error");
+}

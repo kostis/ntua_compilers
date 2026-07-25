@@ -1,0 +1,19 @@
+fun p(): nothing
+    fun g(ref c : int[12]) : nothing
+    {
+        writeInteger(c[3]);
+        writeChar('\n');
+    }
+    fun f(ref b : int[]) : nothing
+    {
+        g(b);
+    }
+
+    var a : int[12];
+{
+    a[3] <- 155;
+    f(a);
+}
+
+$ This test currently fails until we decide how the compiler should handle this
+$ 155
