@@ -2,5 +2,5 @@ program syntax_error4;
 (* Error: Cannot capture address of non-lvalue *)
 var a : ^integer;
 begin
-    a := @47
+    a := @67
 end.
