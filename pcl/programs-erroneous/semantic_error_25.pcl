@@ -1,0 +1,10 @@
+program sem_error_if_not_bool;
+(* Error: 'if' condition must be boolean; integer expression given *)
+var i : integer;
+begin
+    i := 10;
+    if i then
+    begin
+        writeString("Hi\n")
+    end
+end.

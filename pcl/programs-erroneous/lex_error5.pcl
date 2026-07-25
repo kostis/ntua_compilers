@@ -1,0 +1,5 @@
+program lex_error5;
+    (* This program contains a string literal with an invalid escape sequence *)
+begin
+    writeString("Hello world\a")
+end.

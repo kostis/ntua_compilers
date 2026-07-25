@@ -1,0 +1,5 @@
+program lex_error4;
+    (* This program contains a character literal with an invalid escape sequence *)
+begin
+    writeChar('\a')
+end.
