@@ -1,0 +1,104 @@
+program fir;
+
+var
+    (* Filter parameters *)
+    filter_h : ^array of integer;
+    tap_number : integer;
+
+    (* User input*)
+    x_input : ^array of integer;
+    input_length : integer;
+    User_input : integer;
+
+    (* while to for loop varible *)
+    i : integer;
+    
+    (* Filter output*)
+    y_out : integer;
+
+(* x[0] is the oldest and x[4] is the newest *)
+procedure input_shift(input : integer; var x : array of integer; taps : integer);
+    var i : integer;
+begin
+    i := 0;
+    while i < taps - 1 do
+    begin
+        x[i] := x[i + 1];
+        i := i + 1;
+    end;
+    x[taps - 1] := input;
+end;
+
+(* x[0] is the oldest and x[4] is the newest *)
+function convolution(var h : array of integer; var x : array of integer; taps : integer):integer;
+var 
+    i : integer;
+    acc : integer;
+begin
+    acc := 0;
+    i := 0;
+    while i < taps do
+    begin
+        acc := acc + h[i] * x[(taps - 1) - i];
+        i := i + 1;
+    end;
+    result := acc;
+end;
+
+begin
+    y_out := 0;
+
+    writeString("Enter the tap number (up to 10):\n");
+    tap_number := readInteger();
+
+    while (tap_number > 10) or (tap_number < 1) do
+    begin
+        writeString("Invalid Number\n");
+        tap_number := readInteger();
+    end;
+
+    new [tap_number] filter_h;
+    new [tap_number] x_input;
+
+    i := 0;
+    while i < tap_number do
+    begin 
+        x_input^[i] := 0;
+        i := i + 1;
+    end;
+
+    writeString("Enter the ");
+    writeInteger(tap_number);
+    writeString(" filter coefficients:\n");
+    i := 0;
+    while i < tap_number do
+    begin
+        filter_h^[i] := readInteger();
+        i := i + 1;
+    end;
+
+    writeString("Enter the number of samples to process: ");
+    input_length := readInteger();
+
+    i := 0;
+    while i < input_length do
+    begin
+        writeString("Enter the next sample: ");
+        User_input := readInteger();
+
+        input_shift(User_input, x_input^, tap_number);
+        y_out := convolution(filter_h^, x_input^, tap_number);
+
+        writeString("Current sample is ");
+        writeInteger(User_input);
+        writeString(" and current output: ");
+        writeInteger(y_out);
+        writeString("\n");
+
+        i := i + 1;
+    end;
+
+    dispose [] filter_h;
+    dispose [] x_input;
+
+end.
