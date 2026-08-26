@@ -1,7 +1,5 @@
 program lex_error2;
-    var a : real;
+    (* This program contains a string literal with an invalid escape sequence *)
 begin
-    (* This program contains a lexical error in the line below *)
-    a := 1.10.20;
-    result := a * 2
+    writeString("Hello world\a")
 end.

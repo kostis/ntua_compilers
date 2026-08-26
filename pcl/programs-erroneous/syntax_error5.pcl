@@ -1,0 +1,7 @@
+program syntax_error5;
+    var a : real;
+begin
+    (* This program contains a syntax error in the line below *)
+    a := 1.10.20;
+    result := a * 2
+end.
