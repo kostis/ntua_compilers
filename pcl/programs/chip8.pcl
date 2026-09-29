@@ -34,7 +34,7 @@ program chip8_emulator;
     forward procedure initScreen();
     forward procedure clearScreen();
 
-    forward function getPixelIdx(x, y : integer) : integer;
+    forward function getpixel_Idx(x, y : integer) : integer;
 
     var instructionCount, frameCount : integer;
     var totalFrames : integer;
@@ -300,7 +300,7 @@ program chip8_emulator;
         writeChar('\n');
     end;
 
-    function getPixelIdx(x, y : integer) : integer;
+    function getpixel_Idx(x, y : integer) : integer;
     begin
         (* Account for the 1 extra newline character at the end of each row of pixels *)
         result := y * (screenWidth + 1) + x;
@@ -465,7 +465,7 @@ program chip8_emulator;
     var sprite : integer;
     var col, row : integer;
     var vx, vy, dxyn_n : integer;
-    var pixelX, pixelY, pixelIdx, bit : integer;
+    var pixel_X, pixel_Y, pixel_Idx, bit : integer;
 
     var currentGame    : integer;
     var selectedGame   : boolean;
@@ -607,18 +607,18 @@ begin
 
                         if bit = 1 then begin
                             (* Pixel coordinates, wrapping if we go over an edge *)
-                            pixelX := (vx + col) mod screenWidth;
-                            pixelY := (vy + row) mod screenHeight;
-                            pixelIdx := getPixelIdx(pixelX, pixelY);
+                            pixel_X := (vx + col) mod screenWidth;
+                            pixel_Y := (vy + row) mod screenHeight;
+                            pixel_Idx := getpixel_Idx(pixel_X, pixel_Y);
 
                             (* xor pixel on the screen with 1 *)
                             (* If pixel was already set, then we've got a collision, so set vf to 1 *)
-                            if screen^[pixelIdx] = whiteChar then begin
-                                screen^[pixelIdx] := blackChar;
+                            if screen^[pixel_Idx] = whiteChar then begin
+                                screen^[pixel_Idx] := blackChar;
                             end
 
                             else begin
-                                screen^[pixelIdx] := whiteChar;
+                                screen^[pixel_Idx] := whiteChar;
                                 regs[15] := 1;
                             end;
                         end;
