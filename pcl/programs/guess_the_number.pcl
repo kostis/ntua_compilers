@@ -13,7 +13,7 @@ begin
     if lower >= upper then
     begin
         writeString("Lower must be strictly less than upper!\n");
-        goto end_program;
+        goto end_program
     end;
 
     writeString("Enter a random seed:\n");
