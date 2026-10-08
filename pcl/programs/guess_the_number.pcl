@@ -52,5 +52,5 @@ begin
             writeString(" attempts!\n")
         end
     end;
-    end_program:
+  end_program:
 end.

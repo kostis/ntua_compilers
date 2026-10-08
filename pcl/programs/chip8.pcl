@@ -1,4 +1,5 @@
 program chip8_emulator;
+    label end_program;
     (*
         Chip-8 state:
 
@@ -531,7 +532,7 @@ begin
                 else begin
                     writeString("Unimplemented assembly routine in 0NNN instruction: ");
                     printInt(andFFF(opcode));
-                    return
+                    goto end_program
                 end
             end
 
@@ -643,7 +644,7 @@ begin
             else begin
                 writeString("Unimplemented opcode: ");
                 printInt(opcode);
-                return
+                goto end_program
             end;
 
             instructionCount := instructionCount + 1
@@ -663,5 +664,6 @@ begin
         frameCount := frameCount + 1
     end;
 
+  end_program:
     deinit()
 end.
